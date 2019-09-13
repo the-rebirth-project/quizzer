@@ -6,10 +6,35 @@ import { useTransition } from 'react-spring';
 import { Root, QuestionWrapper, OptionsWrapper, Option } from './styles';
 import he from 'he';
 
-export const Question: React.FC = () => {
+interface RouteParams {
+	qId: string;
+}
+
+export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const dispatch = useDispatch();
 	const router = useSelector((state: RootState) => state.router);
 	const started = useSelector((state: RootState) => state.quizApp.started);
+	const questionNum = parseInt(props.match.params.qId);
+	const questions = useSelector((state: RootState) => state.quizApp.questions);
+	const questionData = questions[questionNum]; // fetches the required question object
+
+	// Durstenfeld Shuffle Algorithm. Maybe move this to a separate helper function file?
+	const shuffleArray = (arr: any[]): any[] => {
+		for (let i = arr.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1));
+			let temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+
+		return arr;
+	};
+
+	const options: string[] = shuffleArray([
+		...questionData.incorrect_answers,
+		questionData.correct_answer
+	]);
+
 	const transitions = useTransition(started, null, {
 		from: {
 			opacity: 0
