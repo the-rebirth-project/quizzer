@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // import { RootState } from '../../types';
 // import uuid from 'uuid/v4';
-// import { fetchQuestionsThunk } from '../../actions';
+import { fetchQuestionsThunk } from '../../actions';
 // import he from 'he';
 import { Root, Title, SubText, Left, Right, Button } from './styles';
 import { Link } from 'react-router-dom';
@@ -10,25 +10,26 @@ import { startQuiz } from '../../actions';
 
 export const QuizApp: React.FC = () => {
 	const dispatch = useDispatch();
-	// const questions = useSelector((state: RootState) => state.quizApp.questions);
 
-	// const onButtonClick = (): void => {
-	// 	fetchQuestionsThunk(dispatch);
-	// };
+	// fetch questions on user entering landing page
+	useEffect(() => {
+		fetchQuestionsThunk(dispatch);
+	}, [dispatch]);
+
+	const onButtonClick = (): void => {
+		dispatch(startQuiz());
+	};
+
 	return (
 		<Root>
 			<Left>
 				<Title>Trivia Quiz</Title>
 				<SubText>An app for designing and participating in quizzes</SubText>
-				{/* <button onClick={onButtonClick}>Fetch Questions</button>
-				{questions.map(q => (
-					<li key={uuid()}>{he.decode(q.question)}</li>
-				))} */}
 			</Left>
 
 			<Right>
-				<Link to="/start/q/1">
-					<Button primary onClick={() => dispatch(startQuiz())}>
+				<Link to="/start/q/0">
+					<Button primary onClick={onButtonClick}>
 						Start
 					</Button>
 				</Link>
