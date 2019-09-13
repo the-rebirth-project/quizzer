@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { Routes } from './Routes';
+import { App } from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import { mainTheme } from './themes';
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -17,7 +18,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body, html {
-    font-size: 62.5% /* 1rem = 10px */
+    height: 100%;
+    font-size: 62.5%; /* 1rem = 10px */
   }
 
   body {
@@ -29,7 +31,9 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
 	<Provider store={store}>
 		<GlobalStyle />
-		<Routes />
+		<ThemeProvider theme={mainTheme}>
+			<App />
+		</ThemeProvider>
 	</Provider>,
 	document.getElementById('root')
 );
