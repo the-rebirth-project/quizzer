@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import { RootState } from '../../types';
-// import uuid from 'uuid/v4';
 import { fetchQuestionsThunk } from '../../actions';
-// import he from 'he';
 import { Root, Title, SubText, Left, Right, Button } from './styles';
 import { Link } from 'react-router-dom';
 import { startQuiz } from '../../actions';
