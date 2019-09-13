@@ -1,8 +1,10 @@
 import React from 'react';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../types';
 import { useTransition } from 'react-spring';
-import { Root, QuestionWrapper, OptionsWrapper } from './styles';
+import { Root, QuestionWrapper, OptionsWrapper, Option } from './styles';
+import he from 'he';
 
 export const Question: React.FC = () => {
 	const dispatch = useDispatch();
@@ -18,15 +20,29 @@ export const Question: React.FC = () => {
 		config: { tension: 100 }
 	});
 
+	const renderQuestion = (): JSX.Element => {
+		// question is returned in encoded format (HTML encoding). we have to decode it before returning
+		return (
+			<div>
+				{questionNum + 1}. {he.decode(questionData.question)}
+			</div>
+		);
+	};
+
+	const renderOptions = (): JSX.Element[] => {
+		return options.map(option => (
+			<Option>
+				<Link to={`/start/q/${questionNum + 1}`}>{option}</Link>
+			</Option>
+		));
+	};
+
 	return (
 		<div>
 			{transitions.map(({ props }) => (
 				<Root style={props}>
-					<QuestionWrapper>
-						Which former Coronation Street actress was once a hostess on the
-						British Game Show "Double Your Money"?
-					</QuestionWrapper>
-					<OptionsWrapper>Option here</OptionsWrapper>
+					<QuestionWrapper>{renderQuestion()}</QuestionWrapper>
+					<OptionsWrapper>{renderOptions()}</OptionsWrapper>
 					{console.log(router, dispatch)}
 				</Root>
 			))}

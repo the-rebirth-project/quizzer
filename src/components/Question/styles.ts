@@ -8,12 +8,10 @@ const delayAppearTop = keyframes`
   from {
     background-color: rgba(38, 188, 99, 0);
     box-shadow: 0.4rem 0.5rem 0.6rem rgba(38, 188, 99, 0);
-    border-bottom: 2px solid #202020;
   }
 
   to {
     background-color: rgba(38, 188, 99, 1);
-    border-bottom: 2px solid #202020;
   }
 `;
 
@@ -43,14 +41,13 @@ export const QuestionWrapper = styled.div`
 	height: 50vh;
 	width: 100vw;
 	animation: ${delayAppearTop} 7s;
-	box-shadow: 0rem 0.4rem 0.6rem rgba(38, 188, 99, 0.3);
+	box-shadow: 0rem 0.4rem 0.6rem rgba(0, 0, 0, 0.3);
 	padding: 0rem 2rem;
 	font-size: 5rem;
 	font-weight: 300;
 	text-transform: uppercase;
 	display: flex;
 	align-items: center;
-	border-bottom: 2px solid #202020;
 `;
 
 export const OptionsWrapper = styled.div`
@@ -59,4 +56,22 @@ export const OptionsWrapper = styled.div`
 	height: 50vh;
 	width: 100vw;
 	animation: ${delayAppearBottom} 7s;
+	padding: 4rem 2rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 `;
+
+OptionsWrapper.displayName = 'OptionsWrapper';
+
+export const Option = styled.div`
+	padding: 2rem;
+	font-size: 3rem;
+	display: flex;
+	align-items: center;
+	height: 70%;
+	background-color: ${props => props.theme.colors.primary};
+	color: ${props => props.theme.colors.secondary};
+`;
+
+Option.displayName = 'Options';

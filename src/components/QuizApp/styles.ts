@@ -89,7 +89,7 @@ export const Button = styled.button<ButtonProps>`
 	}
 
 	:active {
-		transform: translateY(0px);
+		transform: translateY(-1px);
 		box-shadow: 3px 2px 6px rgba(var(--primary-rgb-color), 0.2);
 	}
 `;
