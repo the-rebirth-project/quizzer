@@ -8,6 +8,5 @@ export const rootReducer = (history: any) =>
 		quizApp: quizAppReducer
 	});
 
+// CENTRAL EXPORTS
 export * from './quizAppReducers';
-
-// https://github.com/SKP-000/Quiz-App.git

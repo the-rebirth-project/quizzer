@@ -1,27 +1,22 @@
 import { createReducer } from 'typesafe-actions';
-import { fetchQuestions } from '../actions';
-
-export interface Question {
-	category: string;
-	correct_answer: string;
-	difficulty: string;
-	incorrect_answers: string[];
-	question: string;
-	type: string;
-}
-
+import { fetchQuestions, startQuiz } from '../actions';
+import { Question } from '../types';
 interface IState {
 	readonly questions: Question[];
+	readonly started: boolean;
 }
 
 const initialState: IState = {
-	questions: []
+	questions: [],
+	started: false
 };
 
-export const quizAppReducer = createReducer(initialState).handleAction(
-	fetchQuestions,
-	(state, action) => ({
+export const quizAppReducer = createReducer(initialState)
+	.handleAction(fetchQuestions, (state, action) => ({
 		...state,
 		questions: [...state.questions, ...action.payload]
-	})
-);
+	}))
+	.handleAction(startQuiz, (state, _) => ({
+		...state,
+		started: true
+	}));
