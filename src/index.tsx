@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     box-sizing: border-box;
 		font-family: "Montserrat", sans-serif, serif;
+    overflow: hidden;
 	}
 `;
 

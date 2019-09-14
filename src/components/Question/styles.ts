@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { animated } from 'react-spring';
+import { Link } from 'react-router-dom';
 
 // kind of a hacky way of doing it but nevertheless this workaround anim is to ensure that our div here gets "hidden" until the background flip animation is finished
 // FIXME: FIND A CLEANER SOLUTION
@@ -64,12 +65,16 @@ export const OptionsWrapper = styled.div`
 
 OptionsWrapper.displayName = 'OptionsWrapper';
 
-export const Option = styled.div`
+export const Option = styled(Link)`
 	padding: 2rem;
+	text-decoration: none;
+	color: ${props => props.theme.colors.secondary};
 	font-size: 3rem;
 	display: flex;
 	align-items: center;
-	height: 70%;
+	justify-content: center;
+	height: 95%;
+	width: 20%;
 	background-color: ${props => props.theme.colors.primary};
 	color: ${props => props.theme.colors.secondary};
 `;

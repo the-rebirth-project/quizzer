@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../types';
 import { useTransition } from 'react-spring';
@@ -18,31 +18,10 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const questions = useSelector((state: RootState) => state.quizApp.questions);
 	const { question, options } = questions[questionNum];
 
-	// Durstenfeld Shuffle Algorithm. Maybe move this to a separate helper function file?
-	const shuffleArray = (arr: any[]): any[] => {
-		for (let i = arr.length - 1; i > 0; i--) {
-			let j = Math.floor(Math.random() * (i + 1));
-			let temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
-		}
-
-		return arr;
-	};
-
-	const options: string[] = shuffleArray([
-		...questionData.incorrect_answers,
-		questionData.correct_answer
-	]);
-
-	const transitions = useTransition(started, null, {
-		from: {
-			opacity: 0
-		},
-		enter: {
-			opacity: 1
-		},
-		config: { tension: 100 }
+	const transitions = useTransition(questionNum, p => p, {
+		from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+		enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+		leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
 	});
 
 	const renderQuestion = (): JSX.Element => {
@@ -56,16 +35,14 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 	const renderOptions = (): JSX.Element[] => {
 		return options.map(option => (
-			<Option>
-				<Link to={`/start/q/${questionNum + 1}`}>{option}</Link>
-			</Option>
+			<Option to={`/start/q/${questionNum + 1}`}>{he.decode(option)}</Option>
 		));
 	};
 
 	return (
 		<div>
-			{transitions.map(({ props }) => (
-				<Root style={props}>
+			{transitions.map(({ props, key }) => (
+				<Root key={key} style={props}>
 					<QuestionWrapper>{renderQuestion()}</QuestionWrapper>
 					<OptionsWrapper>{renderOptions()}</OptionsWrapper>
 					{console.log(router, dispatch)}
