@@ -1,9 +1,13 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 
 // kind of a hacky way of doing it but nevertheless this workaround anim is to ensure that our div here gets "hidden" until the background flip animation is finished
 // FIXME: FIND A CLEANER SOLUTION
+
+interface StartedProps {
+	started: boolean;
+}
 
 const delayAppearTop = keyframes`
   from {
@@ -34,15 +38,21 @@ export const Root = styled(animated.div)`
 	left: 0;
 `;
 
-export const QuestionWrapper = styled.div`
+export const QuestionWrapper = styled.div<StartedProps>`
 	position: relative;
 	z-index: 10;
 	background-color: ${props => props.theme.colors.primary};
 	color: ${props => props.theme.colors.secondary};
 	height: 50vh;
 	width: 100vw;
-	animation: ${delayAppearTop} 7s;
-	box-shadow: 0rem 0.4rem 0.6rem rgba(0, 0, 0, 0.3);
+	/* Fix the below mess */
+	${props =>
+		!props.started
+			? css`
+					animation: ${delayAppearTop} 7s;
+			  `
+			: ''}
+	box-shadow: 0rem 0.4rem 0.6rem rgba(0, 0, 0, 0.05);
 	padding: 0rem 2rem;
 	font-size: 5rem;
 	font-weight: 300;
@@ -51,12 +61,18 @@ export const QuestionWrapper = styled.div`
 	align-items: center;
 `;
 
-export const OptionsWrapper = styled.div`
+export const OptionsWrapper = styled.div<StartedProps>`
 	position: relative;
 	background-color: ${props => props.theme.colors.secondary};
 	height: 50vh;
 	width: 100vw;
-	animation: ${delayAppearBottom} 7s;
+	/* Fix the below mess */
+	${props =>
+		!props.started
+			? css`
+					animation: ${delayAppearBottom} 7s;
+			  `
+			: ''}
 	padding: 4rem 2rem;
 	display: flex;
 	justify-content: space-around;

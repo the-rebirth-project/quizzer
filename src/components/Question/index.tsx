@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../types';
 import { useTransition } from 'react-spring';
 import { Root, QuestionWrapper, OptionsWrapper, Option } from './styles';
@@ -11,10 +11,9 @@ interface RouteParams {
 }
 
 export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
-	const dispatch = useDispatch();
-	const router = useSelector((state: RootState) => state.router);
 	const questionNum = parseInt(props.match.params.qId);
 	const questions = useSelector((state: RootState) => state.quizApp.questions);
+	const started = useSelector((state: RootState) => state.quizApp.started);
 	const { question, options } = questions[questionNum];
 
 	const transitions = useTransition(questionNum, p => p, {
@@ -42,9 +41,10 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		<div>
 			{transitions.map(({ props, key }) => (
 				<Root key={key} style={props}>
-					<QuestionWrapper>{renderQuestion()}</QuestionWrapper>
-					<OptionsWrapper>{renderOptions()}</OptionsWrapper>
-					{console.log(router, dispatch)}
+					<QuestionWrapper started={started}>
+						{renderQuestion()}
+					</QuestionWrapper>
+					<OptionsWrapper started={started}>{renderOptions()}</OptionsWrapper>
 				</Root>
 			))}
 		</div>
