@@ -13,7 +13,6 @@ interface RouteParams {
 export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const dispatch = useDispatch();
 	const router = useSelector((state: RootState) => state.router);
-	const started = useSelector((state: RootState) => state.quizApp.started);
 	const questionNum = parseInt(props.match.params.qId);
 	const questions = useSelector((state: RootState) => state.quizApp.questions);
 	const { question, options } = questions[questionNum];
