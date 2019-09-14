@@ -16,7 +16,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const started = useSelector((state: RootState) => state.quizApp.started);
 	const questionNum = parseInt(props.match.params.qId);
 	const questions = useSelector((state: RootState) => state.quizApp.questions);
-	const questionData = questions[questionNum]; // fetches the required question object
+	const { question, options } = questions[questionNum];
 
 	// Durstenfeld Shuffle Algorithm. Maybe move this to a separate helper function file?
 	const shuffleArray = (arr: any[]): any[] => {
@@ -49,7 +49,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		// question is returned in encoded format (HTML encoding). we have to decode it before returning
 		return (
 			<div>
-				{questionNum + 1}. {he.decode(questionData.question)}
+				{questionNum + 1}. {he.decode(question)}
 			</div>
 		);
 	};

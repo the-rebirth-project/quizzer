@@ -3,6 +3,7 @@ import { FETCH_QUESTIONS, START_QUIZ } from '../types';
 import { Question } from '../types';
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { shuffleArray } from '../helpers';
 
 export const fetchQuestions = createStandardAction(FETCH_QUESTIONS)<
 	Question[]
@@ -16,7 +17,13 @@ export const fetchQuestionsThunk = async (
 	console.log(response);
 	// passes on response.data.results (an array of Question objects) to fetchQuestions action creator as payload
 	const data: Question[] = response.data.results;
-	dispatch(fetchQuestions(data));
+	const newData = data.map(q => {
+		return {
+			...q,
+			options: shuffleArray([...q.incorrect_answers, q.correct_answer])
+		};
+	});
+	dispatch(fetchQuestions(newData));
 };
 
 export const startQuiz = createStandardAction(START_QUIZ)<undefined>();
