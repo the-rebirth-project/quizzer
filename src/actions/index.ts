@@ -1,2 +1,2 @@
 export * from './quizAppActions';
-export * from '../types/actions';
+export * from './questionActions';
