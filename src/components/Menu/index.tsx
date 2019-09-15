@@ -5,7 +5,7 @@ import { Root, Title, SubText, Left, Right, Button } from './styles';
 import { Link } from 'react-router-dom';
 import { startQuiz } from '../../actions';
 
-export const QuizApp: React.FC = () => {
+export const Menu: React.FC = () => {
 	const dispatch = useDispatch();
 
 	// fetch questions on user entering landing page
@@ -27,9 +27,10 @@ export const QuizApp: React.FC = () => {
 			<Right>
 				<Link to="/start/q/0">
 					<Button primary onClick={onButtonClick}>
-						Start
+						Think
 					</Button>
 				</Link>
+				<Button>Create</Button>
 				<Button>Rules</Button>
 				<Button>About </Button>
 			</Right>

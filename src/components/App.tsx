@@ -12,7 +12,7 @@ const Background = styled(animated.div)`
 export const App: React.FC = () => {
 	// using both location.pathname and the started boolean in order to determine if we should flip the background. maybe there's a better solution?
 	const { location } = useSelector((state: RootState) => state.router);
-	const started = useSelector((state: RootState) => state.quizApp.started);
+	const started = useSelector((state: RootState) => state.menu.started);
 
 	// animates when the Question component renders
 	const animProps = useSpring({

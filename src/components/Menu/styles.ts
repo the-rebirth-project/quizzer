@@ -54,7 +54,7 @@ export const Right = styled.div`
 	margin-top: 3rem;
 	text-transform: uppercase;
 	font-size: 2.5rem;
-	height: 22.7rem;
+	height: 28.4rem;
 `;
 
 Right.displayName = 'Right';
@@ -65,7 +65,8 @@ export const Button = styled.button<ButtonProps>`
 	border: none;
 	font-size: inherit;
 	font-family: inherit;
-	padding: 1.3rem 6.5rem;
+	width: 20.5rem;
+	padding: 1.3rem;
 	background-color: ${props =>
 		props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
 	${props =>
