@@ -1,2 +1,2 @@
-export * from './quizAppActions';
+export * from './menuActions';
 export * from './questionActions';

@@ -11,7 +11,7 @@ const initialState: IState = {
 	started: false
 };
 
-export const quizAppReducer = createReducer(initialState)
+export const menuReducer = createReducer(initialState)
 	.handleAction(fetchQuestions, (state, action) => ({
 		...state,
 		questions: [...state.questions, ...action.payload]
