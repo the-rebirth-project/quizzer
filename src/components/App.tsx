@@ -6,7 +6,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../types';
 
 const Background = styled(animated.div)`
+	--primary-rgb-color: 38, 188, 99; /* rgb version of our primary green color */
 	height: 100vh;
+	position: relative;
+	z-index: 1000;
 `;
 
 export const App: React.FC = () => {
