@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchQuestionsThunk } from '../../actions';
 import { Root, Title, SubText, Left, Right, Button } from './styles';
 import { Link } from 'react-router-dom';
 import { startQuiz } from '../../actions';
@@ -9,9 +8,9 @@ export const Menu: React.FC = () => {
 	const dispatch = useDispatch();
 
 	// fetch questions on user entering landing page
-	useEffect(() => {
-		fetchQuestionsThunk(dispatch);
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	fetchQuestionsThunk(dispatch);
+	// }, [dispatch]);
 
 	const onButtonClick = (): void => {
 		dispatch(startQuiz());
@@ -30,7 +29,9 @@ export const Menu: React.FC = () => {
 						Think
 					</Button>
 				</Link>
-				<Button>Create</Button>
+				<Link to="/create">
+					<Button>Create</Button>
+				</Link>
 				<Button>Rules</Button>
 				<Button>About </Button>
 			</Right>

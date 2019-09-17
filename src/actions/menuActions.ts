@@ -11,9 +11,12 @@ export const fetchQuestions = createStandardAction(FETCH_QUESTIONS)<
 
 // thunk action
 export const fetchQuestionsThunk = async (
-	dispatch: Dispatch
+	dispatch: Dispatch,
+	numOfQuestions: number
 ): Promise<void> => {
-	const response = await axios.get('https://opentdb.com/api.php?amount=50');
+	const response = await axios.get(
+		`https://opentdb.com/api.php?amount=${numOfQuestions}`
+	);
 	console.log(response);
 	// passes on response.data.results (an array of Question objects) to fetchQuestions action creator as payload
 	const data: Question[] = response.data.results;
