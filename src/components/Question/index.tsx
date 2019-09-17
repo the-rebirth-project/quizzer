@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../types';
 import { validateChoice, rehydrateState } from '../../actions';
 import { useTransition } from 'react-spring';
-import { Root, QuestionWrapper, OptionsWrapper, Option } from './styles';
+import { Root, QuestionWrapper, OptionsWrapper, Option, Qnum } from './styles';
 import he from 'he';
 import uuid from 'uuid/v4';
 import { push } from 'connected-react-router';
@@ -39,7 +39,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		// question is returned in encoded format (HTML encoding). we have to decode it before returning
 		return (
 			<div>
-				{questionNum + 1}. {he.decode(question)}
+				<Qnum>{questionNum + 1}.</Qnum> {he.decode(question)}
 			</div>
 		);
 	};

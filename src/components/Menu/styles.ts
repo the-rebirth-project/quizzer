@@ -28,10 +28,12 @@ export const Left = styled.div`
 
 Left.displayName = 'Left'; // For debugging purposes (shows name of component in react dev tools)
 
+// reused styled component. maybe move this to a separate file
 export const Title = styled.h1`
+	color: ${props => props.theme.colors.secondary};
+	text-transform: uppercase;
 	font-size: 10rem;
 	font-weight: 300;
-	align-self: center;
 `;
 
 Title.displayName = 'Title';
