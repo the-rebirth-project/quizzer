@@ -5,7 +5,6 @@ export const Root = styled.div`
 	position: relative;
 	height: 100vh;
 	width: 100vw;
-	padding: 2rem;
 	display: flex;
 `;
 
@@ -15,23 +14,22 @@ export const CreateTitle = styled(Title)`
 	align-self: center;
 	margin-bottom: 9rem;
 	letter-spacing: 15px;
-	margin-left: 6rem;
+	margin-left: 1rem;
 	padding: 1rem 0rem;
+	font-size: 8rem;
 	margin-right: auto;
 	/* Give a bg color of a shade of red*/
 `;
 
 export const ConfigContainer = styled.div`
-	height: 80%;
-	width: 30%;
-	margin-right: 3rem;
 	justify-self: flex-end;
 	font-size: 3rem;
-	border-radius: 10px;
-	box-shadow: 3px 5px 6px rgba(46, 46, 46, 0.2);
+	box-shadow: -5px 0px 6px rgba(46, 46, 46, 0.2);
 	padding: 2rem;
 	color: ${props => props.theme.colors.secondary};
 	align-self: center;
 	background-color: ${props => props.theme.colors.grey};
 	overflow-y: scroll;
+	height: 100vh;
+	width: 75vw;
 `;
