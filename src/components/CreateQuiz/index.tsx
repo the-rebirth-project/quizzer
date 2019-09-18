@@ -1,32 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../types';
-import { fetchQuestionsThunk } from '../../actions';
-import { MiniQuestion } from './MiniQuestion';
+import { arrayMove } from '../../helpers';
+import { SortEnd } from 'react-sortable-hoc';
+import { MiniQuestions } from './MiniQuestions';
 import { Root, CreateTitle, ConfigContainer } from './styles';
+import { sortQuestion } from '../../actions/createQuizActions';
 
 export const CreateQuiz: React.FC = () => {
 	const dispatch = useDispatch();
-	const [clickedFetchBtn, setClickedFetchBtn] = useState(false);
-	let randQuestions = useSelector((state: RootState) => state.menu.questions);
+	const questions = useSelector((state: RootState) => state.menu.questions);
 
-	const onButtonClick = (): void => {
-		const fetchRandomQuestions = async () => {
-			await fetchQuestionsThunk(dispatch, 1);
-			setClickedFetchBtn(true);
-		};
-		fetchRandomQuestions();
+	const handleOnSortEnd = ({ oldIndex, newIndex }: SortEnd): void => {
+		const sortedQuestions = arrayMove(oldIndex, newIndex, questions);
+		dispatch(sortQuestion(sortedQuestions));
 	};
 
 	return (
 		<Root>
 			<CreateTitle>Create</CreateTitle>
 			<ConfigContainer>
-				<button onClick={onButtonClick}>Fetch a random question</button>
-				<div>
-					{clickedFetchBtn &&
-						randQuestions.map(q => <MiniQuestion question={q} type="random" />)}
-				</div>
+				<MiniQuestions axis="y" onSortEnd={handleOnSortEnd} />
 			</ConfigContainer>
 		</Root>
 	);

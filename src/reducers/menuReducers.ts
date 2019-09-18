@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { fetchQuestions, startQuiz } from '../actions';
+import { fetchQuestions, startQuiz, sortQuestion } from '../actions';
 import { Question } from '../types';
 interface IState {
 	readonly questions: Question[];
@@ -19,4 +19,8 @@ export const menuReducer = createReducer(initialState)
 	.handleAction(startQuiz, (state, _) => ({
 		...state,
 		started: true
+	}))
+	.handleAction(sortQuestion, (state, action) => ({
+		...state,
+		questions: action.payload
 	}));
