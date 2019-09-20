@@ -3,7 +3,7 @@ import { validateChoice, rehydrateState } from '../actions';
 
 // if chosen option is correct, then choiceValid is true, else false.
 interface IState {
-	choiceValid: boolean | null;
+	readonly choiceValid: boolean | null;
 }
 
 // will be null before the user has made their choice
