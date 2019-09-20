@@ -20,7 +20,7 @@ export const CreateQuiz: React.FC = () => {
 		<Root>
 			<CreateTitle>Create</CreateTitle>
 			<ConfigContainer>
-				<MiniQuestions axis="y" onSortEnd={handleOnSortEnd} />
+				<MiniQuestions distance={3} axis="y" onSortEnd={handleOnSortEnd} />
 			</ConfigContainer>
 		</Root>
 	);
