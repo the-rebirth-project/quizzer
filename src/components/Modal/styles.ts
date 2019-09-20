@@ -12,15 +12,14 @@ export const Root = styled.div<RootProps>`
 	top: 0;
 	left: 0;
 	height: 100vh;
+	z-index: 10000;
 	width: 100vw;
-	background-color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, 0.4);
 	visibility: ${props => (props.open ? 'visible' : 'hidden')};
 	opacity: ${props => (props.open ? 1 : 0)};
 `;
 
 export const Content = styled.div`
-	position: relative;
-	z-index: 100;
 	background-color: ${props => props.theme.colors.secondary};
 	min-width: 50%;
 	height: 70%;
