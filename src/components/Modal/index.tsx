@@ -1,26 +1,19 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { openModal } from '../../actions';
+import { RootState } from '../../types';
 import { Root, Content } from './styles';
 
-type setOpen = {
-	(): void;
-};
+export const Modal: React.FC = ({ children }) => {
+	const dispatch = useDispatch();
+	const open = useSelector((state: RootState) => state.modal.open);
 
-interface ModalProps {
-	modalOpen: boolean;
-	setOpen: setOpen;
-}
-
-export const Modal: React.FC<ModalProps> = ({
-	children,
-	modalOpen,
-	setOpen
-}) => {
-	const onClickAway = (): void => {
-		setOpen();
+	const onClickOutside = (): void => {
+		dispatch(openModal());
 	};
 
 	return (
-		<Root open={modalOpen} onClick={onClickAway}>
+		<Root open={open} onClick={onClickOutside}>
 			<Content>{children}</Content>
 		</Root>
 	);
