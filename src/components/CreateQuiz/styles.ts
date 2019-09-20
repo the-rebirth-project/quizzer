@@ -18,7 +18,6 @@ export const CreateTitle = styled(Title)`
 	padding: 1rem 0rem;
 	font-size: 8rem;
 	margin-right: auto;
-	/* Give a bg color of a shade of red*/
 `;
 
 export const ConfigContainer = styled.div`
@@ -29,7 +28,10 @@ export const ConfigContainer = styled.div`
 	color: ${props => props.theme.colors.secondary};
 	align-self: center;
 	background-color: ${props => props.theme.colors.grey};
-	overflow-y: scroll;
 	height: 100vh;
 	width: 75vw;
+	display: flex;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-height: fit-content;
 `;

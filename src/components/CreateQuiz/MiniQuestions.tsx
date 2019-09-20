@@ -4,7 +4,7 @@ import { fetchQuestionsThunk } from '../../actions';
 import { SortableContainer } from 'react-sortable-hoc';
 import { QuestionItem } from './QuestionItem';
 import { RootState } from '../../types';
-import { Root } from './miniQuestionStyles';
+import { Root } from './miniQuestionsStyles';
 
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
