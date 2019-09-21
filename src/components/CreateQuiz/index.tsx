@@ -4,7 +4,13 @@ import { RootState } from '../../types';
 import { arrayMove } from '../../helpers';
 import { SortEnd } from 'react-sortable-hoc';
 import { MiniQuestions } from './MiniQuestions';
-import { Root, CreateTitle, ConfigContainer } from './styles';
+import {
+	GlobalStyle,
+	Root,
+	TitleContainer,
+	CreateTitle,
+	ConfigContainer
+} from './styles';
 import { sortQuestion } from '../../actions/createQuizActions';
 
 export const CreateQuiz: React.FC = () => {
@@ -17,11 +23,21 @@ export const CreateQuiz: React.FC = () => {
 	};
 
 	return (
-		<Root>
-			<CreateTitle>Create</CreateTitle>
-			<ConfigContainer>
-				<MiniQuestions distance={3} axis="y" onSortEnd={handleOnSortEnd} />
-			</ConfigContainer>
-		</Root>
+		<>
+			<GlobalStyle />
+			<Root>
+				<TitleContainer>
+					<CreateTitle>Create</CreateTitle>
+				</TitleContainer>
+				<ConfigContainer>
+					<MiniQuestions
+						distance={3}
+						axis="y"
+						lockAxis="y"
+						onSortEnd={handleOnSortEnd}
+					/>
+				</ConfigContainer>
+			</Root>
+		</>
 	);
 };
