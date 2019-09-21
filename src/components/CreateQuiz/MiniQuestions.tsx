@@ -9,10 +9,13 @@ import { Root } from './miniQuestionsStyles';
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.menu.questions);
+	const modalOpen = useSelector((state: RootState) => state.modal.open);
 
 	const renderMiniQuestions = (): JSX.Element[] => {
 		// type hardcoded as random for now
-		return questions.map((q, i) => <QuestionItem type="random" index={i} />);
+		return questions.map((q, i) => (
+			<QuestionItem disabled={modalOpen} type="random" index={i} />
+		));
 	};
 
 	const onButtonClick = (): void => {
