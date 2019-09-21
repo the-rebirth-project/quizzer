@@ -1,5 +1,15 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Title } from '../Menu/styles';
+
+export const GlobalStyle = createGlobalStyle`
+	body {
+		overflow-y: scroll;
+	}
+
+	::-webkit-scrollbar {
+		width: 0 !important;
+	}
+`;
 
 export const Root = styled.div`
 	position: relative;
@@ -8,9 +18,20 @@ export const Root = styled.div`
 	display: flex;
 `;
 
+export const TitleContainer = styled.div`
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: ${props => props.theme.colors.primary};
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	justify-self: flex-start;
+`;
+
 /* The parent flex container (Root) is behaving a bit weird here. had to resort to using margins*/
 export const CreateTitle = styled(Title)`
-	justify-self: flex-start;
 	align-self: center;
 	margin-bottom: 9rem;
 	letter-spacing: 15px;
@@ -21,17 +42,15 @@ export const CreateTitle = styled(Title)`
 `;
 
 export const ConfigContainer = styled.div`
-	justify-self: flex-end;
 	font-size: 3rem;
 	box-shadow: -5px 0px 6px rgba(46, 46, 46, 0.2);
-	padding: 2rem;
+	padding: 1rem;
 	color: ${props => props.theme.colors.secondary};
-	align-self: center;
 	background-color: ${props => props.theme.colors.grey};
 	height: 100vh;
-	width: 75vw;
+	width: 69vw;
+	position: absolute;
+	top: 0;
+	right: 0;
 	display: flex;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	max-height: fit-content;
 `;

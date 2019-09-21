@@ -5,4 +5,5 @@ export const Root = styled.div`
 	height: fit-content;
 	color: ${props => props.theme.colors.grey};
 	padding: 2rem;
+	z-index: 100;
 `;
