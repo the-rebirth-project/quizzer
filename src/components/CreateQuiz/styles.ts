@@ -44,7 +44,6 @@ export const CreateTitle = styled(Title)`
 export const ConfigContainer = styled.div`
 	font-size: 3rem;
 	box-shadow: -5px 0px 6px rgba(46, 46, 46, 0.2);
-	padding: 1rem;
 	color: ${props => props.theme.colors.secondary};
 	background-color: ${props => props.theme.colors.grey};
 	height: 100vh;
@@ -53,4 +52,6 @@ export const ConfigContainer = styled.div`
 	top: 0;
 	right: 0;
 	display: flex;
+	justify-content: center;
+	overflow-y: scroll;
 `;
