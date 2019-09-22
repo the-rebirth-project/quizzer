@@ -1,4 +1,4 @@
-export * from './menuActions';
+export * from './quizActions';
 export * from './questionActions';
 export * from './createQuizActions';
 export * from './modalActions';
