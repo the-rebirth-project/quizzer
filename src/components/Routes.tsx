@@ -9,20 +9,20 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../types';
 
 export const Routes: React.FC = () => {
-	const started = useSelector((state: RootState) => state.menu.started);
+	const started = useSelector((state: RootState) => state.quiz.started);
 
 	return (
 		<ConnectedRouter history={history}>
 			<Switch>
-				<Route exact path='/' render={() => <Menu />} />
+				<Route exact path="/" render={() => <Menu />} />
 				{started && (
 					<Route
 						exact
-						path='/start/q/:qId'
+						path="/start/q/:qId"
 						render={routeProps => <Question {...routeProps} />}
 					/>
 				)}
-				<Route exact path='/create' render={() => <CreateQuiz />}/>
+				<Route exact path="/create" render={() => <CreateQuiz />} />
 			</Switch>
 		</ConnectedRouter>
 	);

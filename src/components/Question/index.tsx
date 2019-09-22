@@ -19,8 +19,8 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		(state: RootState) => state.question.choiceValid
 	);
 	const questionNum = parseInt(props.match.params.qId);
-	const questions = useSelector((state: RootState) => state.menu.questions);
-	const started = useSelector((state: RootState) => state.menu.started);
+	const questions = useSelector((state: RootState) => state.quiz.questions);
+	const started = useSelector((state: RootState) => state.quiz.started);
 	const qData = questions[questionNum];
 	const { question, options } = qData;
 

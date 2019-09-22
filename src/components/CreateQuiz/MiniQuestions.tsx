@@ -8,7 +8,7 @@ import { Root } from './miniQuestionsStyles';
 
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
-	const questions = useSelector((state: RootState) => state.menu.questions);
+	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const modalOpen = useSelector((state: RootState) => state.modal.open);
 
 	const renderMiniQuestions = (): JSX.Element[] => {

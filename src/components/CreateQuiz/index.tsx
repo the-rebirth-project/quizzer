@@ -15,7 +15,7 @@ import { sortQuestion } from '../../actions/createQuizActions';
 
 export const CreateQuiz: React.FC = () => {
 	const dispatch = useDispatch();
-	const questions = useSelector((state: RootState) => state.menu.questions);
+	const questions = useSelector((state: RootState) => state.quiz.questions);
 
 	const handleOnSortEnd = ({ oldIndex, newIndex }: SortEnd): void => {
 		const sortedQuestions = arrayMove(oldIndex, newIndex, questions);
