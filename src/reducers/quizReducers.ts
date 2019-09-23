@@ -14,14 +14,14 @@ const initialState: IState = {
 
 export const quizReducer = createReducer(initialState)
 	.handleAction(fetchQuestions, (state, action) => {
-		const payloadWithId = action.payload.map(q => ({
+		const newPayload = action.payload.map(q => ({
 			qId: uuid(),
 			...q
 		}));
 
 		return {
 			...state,
-			questions: [...state.questions, ...payloadWithId]
+			questions: [...state.questions, ...newPayload]
 		};
 	})
 	.handleAction(startQuiz, (state, _) => ({
