@@ -1,5 +1,4 @@
 import { createReducer } from 'typesafe-actions';
-import uuid from 'uuid/v4';
 import { fetchQuestions, startQuiz, sortQuestion } from '../actions';
 import { Question } from '../types';
 interface IState {
@@ -13,17 +12,10 @@ const initialState: IState = {
 };
 
 export const quizReducer = createReducer(initialState)
-	.handleAction(fetchQuestions, (state, action) => {
-		const payloadWithId = action.payload.map(q => ({
-			qId: uuid(),
-			...q
-		}));
-
-		return {
-			...state,
-			questions: [...state.questions, ...payloadWithId]
-		};
-	})
+	.handleAction(fetchQuestions, (state, action) => ({
+		...state,
+		questions: [...state.questions, ...action.payload]
+	}))
 	.handleAction(startQuiz, (state, _) => ({
 		...state,
 		started: true
