@@ -2,6 +2,7 @@ import { createReducer } from 'typesafe-actions';
 import uuid from 'uuid/v4';
 import { fetchQuestions, startQuiz, sortQuestion } from '../actions';
 import { Question } from '../types';
+
 interface IState {
 	readonly questions: Question[];
 	readonly started: boolean;
