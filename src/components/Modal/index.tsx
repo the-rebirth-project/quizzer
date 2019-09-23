@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal } from '../../actions';
 import { RootState } from '../../types';
-import { Root, Content } from './styles';
+import { Root, Background, Content } from './styles';
 
 export const Modal: React.FC = ({ children }) => {
 	const dispatch = useDispatch();
@@ -13,7 +13,8 @@ export const Modal: React.FC = ({ children }) => {
 	};
 
 	return (
-		<Root open={open} onClick={onClickOutside}>
+		<Root open={open}>
+			<Background onClick={onClickOutside} />
 			<Content>{children}</Content>
 		</Root>
 	);
