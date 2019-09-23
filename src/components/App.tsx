@@ -20,13 +20,13 @@ export const App: React.FC = () => {
 	const animProps = useSpring({
 		from: {
 			backgroundImage:
-				'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fafbed 50%)'
+				'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)'
 		},
 		to: {
 			backgroundImage:
 				location.pathname.includes('/start/q/') && started
-					? 'linear-gradient(180deg, #2ac46a 0%, #2ac46a 50%, #fafbed 50%)'
-					: 'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fafbed 50%)'
+					? 'linear-gradient(180deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)'
+					: 'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)'
 		}
 	});
 
