@@ -4,7 +4,8 @@ export const mainTheme: DefaultTheme = {
 	colors: {
 		primary: '#2ac46a',
 		primaryDark: '#00A896',
-		secondary: '#fafbed',
+		//secondaryMedium: '#fafbed',
+		secondary: '#fcfcf3',
 		tertiary: '#028090',
 		tertiaryDark: '#05668D',
 		grey: '#333',
