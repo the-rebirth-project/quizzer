@@ -1,4 +1,5 @@
 import { createStandardAction } from 'typesafe-actions';
+import he from 'he';
 import { FETCH_QUESTIONS, START_QUIZ } from '../types';
 import { Question } from '../types';
 import axios from 'axios';
@@ -23,7 +24,12 @@ export const fetchQuestionsThunk = async (
 	const newData = data.map(q => {
 		return {
 			...q,
-			options: shuffleArray([...q.incorrect_answers, q.correct_answer])
+			question: he.decode(q.question),
+			category: he.decode(q.category),
+			options: shuffleArray([
+				...q.incorrect_answers.map(incAns => he.decode(incAns)),
+				he.decode(q.correct_answer)
+			])
 		};
 	});
 	dispatch(fetchQuestions(newData));

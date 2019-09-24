@@ -5,7 +5,6 @@ import { RootState } from '../../types';
 import { validateChoice, rehydrateState } from '../../actions';
 import { useTransition } from 'react-spring';
 import { Root, QuestionWrapper, OptionsWrapper, Option, Qnum } from './styles';
-import he from 'he';
 import uuid from 'uuid/v4';
 import { push } from 'connected-react-router';
 
@@ -39,7 +38,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		// question is returned in encoded format (HTML encoding). we have to decode it before returning
 		return (
 			<div>
-				<Qnum>{questionNum + 1}.</Qnum> {he.decode(question)}
+				<Qnum>{questionNum + 1}.</Qnum> {question}
 			</div>
 		);
 	};
@@ -62,7 +61,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 				key={uuid()}
 				onClick={() => onOptionClick(option)}
 			>
-				{he.decode(option)}
+				{option}
 			</Option>
 		));
 	};
