@@ -18,8 +18,7 @@ const WrappedComponent: React.FC<{ type: string }> = ({ type }) => {
 			{type === 'custom' && <h3>Custom</h3>}
 			<button onClick={onButtonClick}>Click me to Open Modal!</button>
 			<Modal aria-labelledby="modal-label" aria-describedby="model-desc">
-				<h1 id="modal-label">I'm a Modal!</h1>
-				<p id="modal-desc">I'm a non-animated Modal!</p>
+				<EditForm />
 			</Modal>
 		</Root>
 	);

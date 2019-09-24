@@ -1,13 +1,35 @@
 import React from 'react';
+import { Form, Field } from 'react-final-form';
 
-interface EditQuestionProps {
-	qId: string;
-}
+export const EditForm: React.FC = () => {
+	interface Values {
+		question: string;
+	}
 
-export const EditQuestion: React.FC<EditQuestionProps> = props => {
+	const onFormSubmit = (values: Values) => {
+		console.log(values);
+	};
+
 	return (
-		<div>
-			<h1>Edit the question!</h1>
-		</div>
+		<Form
+			onSubmit={onFormSubmit}
+			render={({ handleSubmit, form, submitting, values }) => (
+				<form onSubmit={handleSubmit}>
+					<Field name="question">
+						{({ input, meta }) => (
+							<div>
+								<label>Question: </label>
+								<input
+									{...input}
+									type="text"
+									placeholder="Enter New Question"
+								/>
+							</div>
+						)}
+					</Field>
+					<button type="submit">Save!</button>
+				</form>
+			)}
+		/>
 	);
 };

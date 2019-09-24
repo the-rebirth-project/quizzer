@@ -14,7 +14,7 @@ export const WrappedComponent: React.FC = () => {
 	const renderMiniQuestions = (): JSX.Element[] => {
 		// type hardcoded as random for now
 		return questions.map((q, i) => (
-			<QuestionItem disabled={modalOpen} type="random" index={i} />
+			<QuestionItem disabled={modalOpen} question={q} type="random" index={i} />
 		));
 	};
 
