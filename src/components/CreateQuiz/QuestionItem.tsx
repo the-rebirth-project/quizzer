@@ -1,11 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../actions';
-import { Modal } from '../Modal';
 import { SortableElement } from 'react-sortable-hoc';
+import { useDispatch } from 'react-redux';
+import { Modal } from '../Modal';
+import { EditForm } from './EditForm';
+import { openModal } from '../../actions';
+import { Question } from '../../types';
 import { Root } from './questionItemStyles';
 
-const WrappedComponent: React.FC<{ type: string }> = ({ type }) => {
+interface QuestionItemProps {
+	question: Question;
+	type: string;
+}
+
+const WrappedComponent: React.FC<QuestionItemProps> = ({ type }) => {
 	const dispatch = useDispatch();
 
 	const onButtonClick = (): void => {
