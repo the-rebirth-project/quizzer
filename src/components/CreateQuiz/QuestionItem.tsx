@@ -12,7 +12,7 @@ interface QuestionItemProps {
 	type: string;
 }
 
-const WrappedComponent: React.FC<QuestionItemProps> = ({ type }) => {
+const WrappedComponent: React.FC<QuestionItemProps> = ({ type, question }) => {
 	const dispatch = useDispatch();
 
 	const onButtonClick = (): void => {
@@ -25,7 +25,7 @@ const WrappedComponent: React.FC<QuestionItemProps> = ({ type }) => {
 			{type === 'custom' && <h3>Custom</h3>}
 			<button onClick={onButtonClick}>Click me to Open Modal!</button>
 			<Modal aria-labelledby="modal-label" aria-describedby="model-desc">
-				<EditForm />
+				<EditForm question={question} />
 			</Modal>
 		</Root>
 	);
