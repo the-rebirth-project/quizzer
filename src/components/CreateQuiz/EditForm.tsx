@@ -1,6 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
-import { FormApi } from 'final-form';
+import { saveEditedQuestion, openModal } from '../../actions';
 import { Question } from '../../types';
 
 interface EditFormProps {
@@ -13,14 +14,21 @@ export const EditForm: React.FC<EditFormProps> = props => {
 		difficulty: string;
 	}
 
+	const { question } = props;
+	const dispatch = useDispatch();
+
 	const initialValues = {
 		question: props.question.question,
 		difficulty: props.question.difficulty
 	};
 
-	const onFormSubmit = (values: Values, form: FormApi<Values>) => {
-		console.log(values);
-		setTimeout(form.reset);
+	const onFormSubmit = (values: Values) => {
+		const newQuestion = {
+			...question,
+			...values
+		};
+		dispatch(saveEditedQuestion(newQuestion));
+		dispatch(openModal());
 	};
 
 	return (
@@ -37,6 +45,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 									{...input}
 									type="text"
 									placeholder="Enter New Question"
+									required
 								/>
 							</div>
 						)}
