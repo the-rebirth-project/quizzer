@@ -1,5 +1,5 @@
 export interface Question {
-	qId: string;
+	qId?: string;
 	category: string;
 	difficulty: string;
 	question: string;
