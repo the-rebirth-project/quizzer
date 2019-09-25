@@ -1,20 +1,32 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchQuestionsThunk } from '../../actions';
+import { fetchQuestionsThunk, openCreateModal } from '../../actions';
 import { SortableContainer } from 'react-sortable-hoc';
 import { QuestionItem } from './QuestionItem';
+import { CreateForm } from './CreateForm';
+import { Modal } from '../Modal';
 import { RootState } from '../../types';
 import { Root } from './miniQuestionsStyles';
 
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.quiz.questions);
-	const modalOpen = useSelector((state: RootState) => state.modal.open);
+	const createModalOpen = useSelector(
+		(state: RootState) => state.modal.createModalOpen
+	);
+	const editModalOpen = useSelector(
+		(state: RootState) => state.modal.editModalOpen
+	);
 
 	const renderMiniQuestions = (): JSX.Element[] => {
 		// type hardcoded as random for now
 		return questions.map((q, i) => (
-			<QuestionItem disabled={modalOpen} question={q} type="random" index={i} />
+			<QuestionItem
+				disabled={editModalOpen}
+				question={q}
+				type="random"
+				index={i}
+			/>
 		));
 	};
 
