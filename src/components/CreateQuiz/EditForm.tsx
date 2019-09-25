@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
-import { saveEditedQuestion, openModal } from '../../actions';
+import { openEditModal, saveEditedQuestion } from '../../actions';
 import { Question } from '../../types';
 
 interface EditFormProps {
@@ -28,7 +28,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			...values
 		};
 		dispatch(saveEditedQuestion(newQuestion));
-		dispatch(openModal());
+		dispatch(openEditModal());
 	};
 
 	return (
