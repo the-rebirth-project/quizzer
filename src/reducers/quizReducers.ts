@@ -4,6 +4,7 @@ import {
 	fetchQuestions,
 	startQuiz,
 	sortQuestion,
+	createCustomQuestion,
 	saveEditedQuestion
 } from '../actions';
 import { Question } from '../types';
@@ -37,6 +38,10 @@ export const quizReducer = createReducer(initialState)
 	.handleAction(sortQuestion, (state, action) => ({
 		...state,
 		questions: action.payload
+	}))
+	.handleAction(createCustomQuestion, (state, action) => ({
+		...state,
+		questions: [...state.questions, action.payload]
 	}))
 	.handleAction(saveEditedQuestion, (state, action) => {
 		// filter out the question that was edited

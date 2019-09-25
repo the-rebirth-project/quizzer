@@ -37,9 +37,22 @@ export const WrappedComponent: React.FC = () => {
 		fetchRandomQuestions();
 	};
 
+	const onCreateBtnClick = (): void => {
+		dispatch(openCreateModal());
+	};
+
 	return (
 		<Root>
 			<button onClick={onButtonClick}>Fetch a random question</button>
+			<button onClick={onCreateBtnClick}>Create Question</button>
+			<Modal
+				open={createModalOpen}
+				onModalClose={openCreateModal}
+				aria-label="Create Question"
+				aria-description="Create your own question"
+			>
+				<CreateForm />
+			</Modal>
 			{renderMiniQuestions()}
 		</Root>
 	);
