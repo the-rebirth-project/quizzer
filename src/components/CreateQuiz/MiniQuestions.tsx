@@ -49,7 +49,6 @@ export const WrappedComponent: React.FC = () => {
 				open={createModalOpen}
 				onModalClose={openCreateModal}
 				aria-label="Create Question"
-				aria-description="Create your own question"
 			>
 				<CreateForm />
 			</Modal>
