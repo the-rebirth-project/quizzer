@@ -1,28 +1,66 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
 import uuid from 'uuid/v4';
 import { shuffleArray } from '../../helpers';
 import { createCustomQuestion, openCreateModal } from '../../actions';
-import { Question } from '../../types';
+
+// REFACTOR TO NOT USE FINAL FORM ARRAYS
+// I'm really questioning why I chose to use react-final-form-arrays for this. in the end it simply resulted in messy code
+// pls fix this messy code for the sake of my future self and potentially other devs
+interface FormValues {
+	question: string;
+	difficulty: string;
+	o1: string;
+	o2: string;
+	o3: string;
+	o4: string;
+	checked: string;
+}
 
 export const CreateForm: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const handleOnSubmit = (values: Question) => {
+	const handleOnSubmit = (values: FormValues) => {
+		const options = [values.o1, values.o2, values.o3, values.o4];
+		const determineCorrectAnswer = (): string => {
+			let correct_answer: string;
+
+			// assigns value of correct_answer based on value of formOptions.checked. by default it returns an error string.
+			switch (values.checked) {
+				case 'o1':
+					correct_answer = options[0];
+					break;
+				case 'o2':
+					correct_answer = options[1];
+					break;
+				case 'o3':
+					correct_answer = options[2];
+					break;
+				case 'o4':
+					correct_answer = options[3];
+					break;
+				default:
+					correct_answer = options[0];
+			}
+
+			return correct_answer;
+		};
+
+		const correct_answer = determineCorrectAnswer();
+
 		// lay out initial structure of the custom question
 		const customQuestion = {
 			qId: uuid(),
-			...values,
+			question: values.question,
+			difficulty: values.difficulty,
 			category: 'custom',
 			type: 'multiple_choice',
-			incorrect_answers: values.options.filter(
-				o => o !== values.correct_answer
-			),
-			correct_answer: values.correct_answer
+			incorrect_answers: options.filter(o => o !== correct_answer),
+			correct_answer,
+			options
 		};
-		// add options prop
+		// shuffle options prop
 		customQuestion.options = shuffleArray([
 			...customQuestion.incorrect_answers,
 			customQuestion.correct_answer
@@ -62,78 +100,26 @@ export const CreateForm: React.FC = () => {
 							</div>
 						)}
 					</Field>
-					<FieldArray name="options">
-						{({ fields }) => (
-							<div>
-								{fields.map((name, index) => (
-									<div key={name}>
-										<Field name={`${name}.options`}></Field>
-									</div>
-								))}
-							</div>
-						)}
-					</FieldArray>
-					<Field name="options[0]">
-						{({ input, meta }) => (
-							<div>
-								<label htmlFor="option1">Option 1</label>
-								<input
-									{...input}
-									name="option1"
-									type="text"
-									placeholder="First Option"
-								/>
-							</div>
-						)}
-					</Field>
-					<Field name="options[1]">
-						{({ input, meta }) => (
-							<div>
-								<label htmlFor="option2">Option 2</label>
-								<input
-									{...input}
-									name="option2"
-									type="text"
-									placeholder="Second Option"
-								/>
-							</div>
-						)}
-					</Field>
-					<Field name="options[2]">
-						{({ input, meta }) => (
-							<div>
-								<label htmlFor="option3">Option 3</label>
-								<input
-									{...input}
-									name="option3"
-									type="text"
-									placeholder="Third Option"
-								/>
-							</div>
-						)}
-					</Field>
-					<Field name="options[3]">
-						{({ input, meta }) => (
-							<div>
-								<label htmlFor="option4">Option 4</label>
-								<input
-									{...input}
-									name="option4"
-									type="text"
-									placeholder="Fourth Option"
-								/>
-							</div>
-						)}
-					</Field>
-					<Field name="correct_answer">
-						{({ input, meta }) => (
-							<select>
-								{values.options.map(o => (
-									<option value={o}>{o}</option>
-								))}
-							</select>
-						)}
-					</Field>
+					<div>
+						<label htmlFor="o1">Option 1</label>
+						<Field name="o1" component="input" placeholder="First Option" />
+						<Field name="checked" component="input" type="radio" value="o1" />
+					</div>
+					<div>
+						<label htmlFor="o2">Option 2</label>
+						<Field name="o2" component="input" placeholder="Second Option" />
+						<Field name="checked" component="input" type="radio" value="o2" />
+					</div>
+					<div>
+						<label htmlFor="o3">Option 3</label>
+						<Field name="o3" component="input" placeholder="Third Option" />
+						<Field name="checked" component="input" type="radio" value="o3" />
+					</div>
+					<div>
+						<label htmlFor="o4">Option 4</label>
+						<Field name="o4" component="input" placeholder="Fourth Option" />
+						<Field name="checked" component="input" type="radio" value="o4" />
+					</div>
 					<button type="submit">Add</button>
 				</form>
 			)}
