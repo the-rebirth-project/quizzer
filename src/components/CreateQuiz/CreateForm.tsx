@@ -3,11 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import uuid from 'uuid/v4';
 import { shuffleArray } from '../../helpers';
-import { createCustomQuestion, openCreateModal } from '../../actions';
-
-// REFACTOR TO NOT USE FINAL FORM ARRAYS
-// I'm really questioning why I chose to use react-final-form-arrays for this. in the end it simply resulted in messy code
-// pls fix this messy code for the sake of my future self and potentially other devs
+import { createCustomQuestion } from '../../actions';
 interface FormValues {
 	question: string;
 	difficulty: string;
@@ -18,8 +14,13 @@ interface FormValues {
 	checked: string;
 }
 
-export const CreateForm: React.FC = () => {
+interface CreateFormProps {
+	setCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const CreateForm: React.FC<CreateFormProps> = props => {
 	const dispatch = useDispatch();
+	const { setCreateModalOpen } = props;
 
 	const handleOnSubmit = (values: FormValues) => {
 		const options = [values.o1, values.o2, values.o3, values.o4];
@@ -67,7 +68,7 @@ export const CreateForm: React.FC = () => {
 		]);
 
 		dispatch(createCustomQuestion(customQuestion));
-		dispatch(openCreateModal());
+		setCreateModalOpen(false);
 	};
 
 	return (
