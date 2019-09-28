@@ -56,16 +56,20 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 			question: values.question,
 			difficulty: values.difficulty,
 			category: 'custom',
-			type: 'multiple_choice',
+			type:
+				options.includes('True') || options.includes('False')
+					? 'boolean'
+					: 'multiple',
 			incorrect_answers: options.filter(o => o !== correct_answer),
 			correct_answer,
 			options
 		};
-		// shuffle options prop
-		customQuestion.options = shuffleArray([
-			...customQuestion.incorrect_answers,
-			customQuestion.correct_answer
-		]);
+		// shuffle options prop if type is not boolean (True/False Questions)
+		if (customQuestion.type !== 'boolean')
+			customQuestion.options = shuffleArray([
+				...customQuestion.incorrect_answers,
+				customQuestion.correct_answer
+			]);
 
 		dispatch(createCustomQuestion(customQuestion));
 		setCreateModalOpen(false);

@@ -19,17 +19,27 @@ export const EditForm: React.FC<EditFormProps> = props => {
 		o4: string;
 		checked: string;
 	}
+
 	const { question, setEditModalOpen } = props;
 	const dispatch = useDispatch();
 
 	const onFormSubmit = (values: Values) => {
-		const newQuestion = {
+		const newMCQQuestion = {
 			...question,
 			question: values.question,
 			difficulty: values.difficulty,
 			options: [values.o1, values.o2, values.o3, values.o4]
 		};
-		dispatch(saveEditedQuestion(newQuestion));
+		const newBooleanQuestion = {
+			...question,
+			question: values.question,
+			difficulty: values.difficulty,
+			options: [values.o1, values.o2]
+		};
+		// if the question is of MCQ type, then dispatch the action with the appropriate question object
+		question.type === 'multiple'
+			? dispatch(saveEditedQuestion(newMCQQuestion))
+			: dispatch(saveEditedQuestion(newBooleanQuestion));
 		setEditModalOpen(false);
 	};
 
@@ -92,16 +102,30 @@ export const EditForm: React.FC<EditFormProps> = props => {
 						<Field name="o2" component="input" type="text" />
 						<Field name="checked" component="input" type="radio" value="o2" />
 					</div>
-					<div>
-						<label>Option 3</label>
-						<Field name="o3" component="input" type="text" />
-						<Field name="checked" component="input" type="radio" value="o3" />
-					</div>
-					<div>
-						<label>Option 4</label>
-						<Field name="o4" component="input" type="text" />
-						<Field name="checked" component="input" type="radio" value="o4" />
-					</div>
+					{question.type !== 'boolean' && (
+						<>
+							<div>
+								<label>Option 3</label>
+								<Field name="o3" component="input" type="text" />
+								<Field
+									name="checked"
+									component="input"
+									type="radio"
+									value="o3"
+								/>
+							</div>
+							<div>
+								<label>Option 4</label>
+								<Field name="o4" component="input" type="text" />
+								<Field
+									name="checked"
+									component="input"
+									type="radio"
+									value="o4"
+								/>
+							</div>
+						</>
+					)}
 					<button type="submit">Save!</button>
 				</form>
 			)}

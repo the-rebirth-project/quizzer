@@ -26,10 +26,14 @@ export const fetchQuestionsThunk = async (
 			...q,
 			question: he.decode(q.question),
 			category: he.decode(q.category),
-			options: shuffleArray([
-				...q.incorrect_answers.map(incAns => he.decode(incAns)),
-				he.decode(q.correct_answer)
-			])
+			// if type is MCQ, shuffle the array else do not shuffle the array and simply return an array with True and false string literals.
+			options:
+				q.type !== 'boolean'
+					? shuffleArray([
+							...q.incorrect_answers.map(incAns => he.decode(incAns)),
+							he.decode(q.correct_answer)
+					  ])
+					: ['True', 'False']
 		};
 	});
 	dispatch(fetchQuestions(newData));
