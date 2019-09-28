@@ -103,12 +103,22 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 					</Field>
 					<div>
 						<label htmlFor="o1">Option 1</label>
-						<Field name="o1" component="input" placeholder="First Option" />
+						<Field
+							name="o1"
+							component="input"
+							placeholder="First Option"
+							required
+						/>
 						<Field name="checked" component="input" type="radio" value="o1" />
 					</div>
 					<div>
 						<label htmlFor="o2">Option 2</label>
-						<Field name="o2" component="input" placeholder="Second Option" />
+						<Field
+							name="o2"
+							component="input"
+							placeholder="Second Option"
+							required
+						/>
 						<Field name="checked" component="input" type="radio" value="o2" />
 					</div>
 					<div>
