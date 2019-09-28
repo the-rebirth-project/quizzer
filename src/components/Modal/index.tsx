@@ -1,27 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Root, Background, Content } from './styles';
 
 interface ModalProps {
 	open: boolean;
-	onModalClose: () => void;
+	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Modal: React.FC<ModalProps> = ({
 	children,
 	open,
-	onModalClose
+	setModalOpen
 }) => {
-	const dispatch = useDispatch();
 
 	const onClickOutside = (): void => {
-		dispatch(onModalClose());
+		setModalOpen(false);
 	};
 
 	return (
-		<Root open={open}>
-			<Background onClick={onClickOutside} />
-			<Content>{children}</Content>
-		</Root>
+		<div>
+			{open && (
+				<Root open={open}>
+					<Background onClick={onClickOutside} />
+					<Content>{children}</Content>
+				</Root>
+			)}
+		</div>
 	);
 };
