@@ -55,7 +55,6 @@ export const quizReducer = createReducer(initialState)
 			...action.payload
 		};
 
-		// filter out all the questions whose id is not equal to the id of editedQuestion and finally overwrite the selected question with the newQuestion
 		return {
 			...state,
 			questions: state.questions.map(q =>

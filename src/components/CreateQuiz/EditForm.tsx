@@ -36,7 +36,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			difficulty: values.difficulty,
 			options: [values.o1, values.o2]
 		};
-		// if the question is of MCQ type, then dispatch the action with the appropriate question object
+		// if the question is of boolean type, dispatch the action with the altered question object
 		question.type === 'multiple'
 			? dispatch(saveEditedQuestion(newMCQQuestion))
 			: dispatch(saveEditedQuestion(newBooleanQuestion));
