@@ -38,8 +38,8 @@ export const Menu: React.FC = () => {
 						<Link to="/create">
 							<Button>Create</Button>
 						</Link>
-						<Button>Rules</Button>
-						<Button>About </Button>
+						<Button>Explore</Button>
+						<Button>About</Button>
 					</Right>
 				</Root>
 			))}
