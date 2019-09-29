@@ -1,21 +1,31 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../types';
+import { animated, useTransition } from 'react-spring';
 import { arrayMove } from '../../helpers';
 import { SortEnd } from 'react-sortable-hoc';
 import { MiniQuestions } from './MiniQuestions';
+import { sortQuestion } from '../../actions/createQuizActions';
+import { RootState } from '../../types';
 import {
+	GreyBG,
 	GlobalStyle,
 	Root,
 	TitleContainer,
 	CreateTitle,
 	ConfigContainer
 } from './styles';
-import { sortQuestion } from '../../actions/createQuizActions';
 
 export const CreateQuiz: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.quiz.questions);
+	const { location } = useSelector((state: RootState) => state.router);
+	const shouldTransition = location.pathname.includes('create') ? 1 : 0;
+	const transitions = useTransition(shouldTransition, p => p, {
+		from: { transform: 'translate(100%,0)' },
+		enter: { transform: 'translate(0%,0)' },
+		leave: { transform: 'translate(-50%,0)' }
+		// config: { tension: 60, friction: 9 }
+	});
 
 	const handleOnSortEnd = ({ oldIndex, newIndex }: SortEnd): void => {
 		const sortedQuestions = arrayMove(oldIndex, newIndex, questions);
@@ -23,21 +33,25 @@ export const CreateQuiz: React.FC = () => {
 	};
 
 	return (
-		<>
+		<GreyBG>
 			<GlobalStyle />
-			<Root>
-				<TitleContainer>
-					<CreateTitle>Create</CreateTitle>
-				</TitleContainer>
-				<ConfigContainer>
-					<MiniQuestions
-						distance={3}
-						axis="y"
-						lockAxis="y"
-						onSortEnd={handleOnSortEnd}
-					/>
-				</ConfigContainer>
-			</Root>
-		</>
+			{transitions.map(({ props, key }) => (
+				<animated.div key={key} style={props}>
+					<Root>
+						<TitleContainer>
+							<CreateTitle>Create</CreateTitle>
+						</TitleContainer>
+						<ConfigContainer>
+							<MiniQuestions
+								distance={3}
+								axis="y"
+								lockAxis="y"
+								onSortEnd={handleOnSortEnd}
+							/>
+						</ConfigContainer>
+					</Root>
+				</animated.div>
+			))}
+		</GreyBG>
 	);
 };

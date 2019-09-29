@@ -11,6 +11,12 @@ export const GlobalStyle = createGlobalStyle`
 	}
 `;
 
+export const GreyBG = styled.div`
+	height: 100vh;
+	width: 100vw;
+	background-color: #2ac46a;
+`;
+
 export const Root = styled.div`
 	position: relative;
 	height: 100vh;
