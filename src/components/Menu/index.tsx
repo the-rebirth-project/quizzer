@@ -14,7 +14,6 @@ export const Menu: React.FC = () => {
 		from: { opacity: 0, transform: 'translate(100%,0)' },
 		enter: { opacity: 1, transform: 'translate(0%,0)' },
 		leave: { opacity: 0, transform: 'translate(-50%,0)' }
-		// config: { tension: 60, friction: 9 }
 	});
 
 	const onButtonClick = (): void => {

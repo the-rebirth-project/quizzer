@@ -24,7 +24,6 @@ export const CreateQuiz: React.FC = () => {
 		from: { transform: 'translate(100%,0)' },
 		enter: { transform: 'translate(0%,0)' },
 		leave: { transform: 'translate(-50%,0)' }
-		// config: { tension: 60, friction: 9 }
 	});
 
 	const handleOnSortEnd = ({ oldIndex, newIndex }: SortEnd): void => {
