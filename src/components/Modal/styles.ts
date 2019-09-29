@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 
 interface RootProps {
 	open: boolean;
@@ -28,7 +29,7 @@ export const Background = styled.div`
 	left: 0;
 `;
 
-export const Content = styled.div`
+export const Content = styled(animated.div)`
 	position: relative;
 	z-index: 200;
 	background-color: ${props => props.theme.colors.secondary};
