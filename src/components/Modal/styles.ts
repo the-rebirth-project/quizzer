@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
-interface RootProps {
-	open: boolean;
-}
-
-export const Root = styled.div<RootProps>`
+export const Root = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -15,8 +11,6 @@ export const Root = styled.div<RootProps>`
 	height: 100vh;
 	z-index: 100;
 	width: 100vw;
-	visibility: ${props => (props.open ? 'visible' : 'hidden')};
-	opacity: ${props => (props.open ? 1 : 0)};
 `;
 
 export const Background = styled.div`
