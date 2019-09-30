@@ -28,15 +28,13 @@ export const WrappedComponent: React.FC = () => {
 		<Root>
 			<button onClick={onButtonClick}>Fetch a random question</button>
 			<button onClick={onCreateBtnClick}>Create Question</button>
-			{modalOpen && (
-				<Modal
-					open={modalOpen}
-					setModalOpen={setModalOpen}
-					aria-label="Create Question"
-				>
-					<CreateForm setCreateModalOpen={setModalOpen} />
-				</Modal>
-			)}
+			<Modal
+				open={modalOpen}
+				setModalOpen={setModalOpen}
+				aria-label="Create Question"
+			>
+				<CreateForm setCreateModalOpen={setModalOpen} />
+			</Modal>
 			{questions.map((q, i) => (
 				<QuestionItem
 					disabled={modalOpen}

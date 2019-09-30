@@ -22,16 +22,14 @@ const WrappedComponent: React.FC<QuestionItemProps> = ({ type, question }) => {
 		<Root>
 			{question.question}
 			<button onClick={onBtnClick}>Click me to Open Modal!</button>
-			{modalOpen && (
-				<Modal
-					open={modalOpen}
-					setModalOpen={setModalOpen}
-					aria-labelledby="modal-label"
-					aria-describedby="model-desc"
-				>
-					<EditForm question={question} setEditModalOpen={setModalOpen} />
-				</Modal>
-			)}
+			<Modal
+				open={modalOpen}
+				setModalOpen={setModalOpen}
+				aria-labelledby="modal-label"
+				aria-describedby="model-desc"
+			>
+				<EditForm question={question} setEditModalOpen={setModalOpen} />
+			</Modal>
 		</Root>
 	);
 };
