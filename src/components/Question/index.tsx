@@ -54,16 +54,21 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		}, 1500);
 	};
 
-	const renderOptions = (): JSX.Element[] => {
-		return options.map(option => (
-			<Option
-				disabled={choiceValid !== null}
-				key={uuid()}
-				onClick={() => onOptionClick(option)}
-			>
-				{option}
-			</Option>
-		));
+	// If any of the options are undefined, simply return false i.e we don't return anything.
+	// This is to prevent blank options being rendered when the question does not have exactly 4 or 2 options as expected
+	const renderOptions = (): (JSX.Element | false)[] => {
+		return options.map(
+			option =>
+				option !== undefined && (
+					<Option
+						disabled={choiceValid !== null}
+						key={uuid()}
+						onClick={() => onOptionClick(option)}
+					>
+						{option}
+					</Option>
+				)
+		);
 	};
 
 	return (
