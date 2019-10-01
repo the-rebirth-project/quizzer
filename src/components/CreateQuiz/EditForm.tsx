@@ -30,24 +30,14 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			return options[index];
 		};
 
-		const newMCQQuestion = {
+		const newQuestion = {
 			...question,
 			question: values.question,
 			difficulty: values.difficulty,
 			options,
 			correct_answer: getNewCorrectAnswer()
 		};
-		const newBooleanQuestion = {
-			...question,
-			question: values.question,
-			difficulty: values.difficulty,
-			options: [values.o1, values.o2],
-			correct_answer: getNewCorrectAnswer()
-		};
-		// if the question is of boolean type, dispatch the action with the altered question object
-		question.type === 'multiple'
-			? dispatch(saveEditedQuestion(newMCQQuestion))
-			: dispatch(saveEditedQuestion(newBooleanQuestion));
+		dispatch(saveEditedQuestion(newQuestion));
 		setEditModalOpen(false);
 	};
 
