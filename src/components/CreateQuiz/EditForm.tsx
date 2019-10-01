@@ -24,17 +24,25 @@ export const EditForm: React.FC<EditFormProps> = props => {
 	const dispatch = useDispatch();
 
 	const onFormSubmit = (values: Values) => {
+		const options = [values.o1, values.o2, values.o3, values.o4];
+		const getNewCorrectAnswer = (): string => {
+			const index = parseInt(values.checked.slice(1)) - 1;
+			return options[index];
+		};
+
 		const newMCQQuestion = {
 			...question,
 			question: values.question,
 			difficulty: values.difficulty,
-			options: [values.o1, values.o2, values.o3, values.o4]
+			options,
+			correct_answer: getNewCorrectAnswer()
 		};
 		const newBooleanQuestion = {
 			...question,
 			question: values.question,
 			difficulty: values.difficulty,
-			options: [values.o1, values.o2]
+			options: [values.o1, values.o2],
+			correct_answer: getNewCorrectAnswer()
 		};
 		// if the question is of boolean type, dispatch the action with the altered question object
 		question.type === 'multiple'
