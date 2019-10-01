@@ -13,14 +13,16 @@ export const Root = styled.div`
 	width: 100vw;
 `;
 
-export const Background = styled.div`
+export const Background = styled.div<{ open: boolean }>`
 	background-color: rgba(0, 0, 0, 0.4);
+	opacity: ${props => (props.open ? 1 : 0)};
 	height: 100%;
 	width: 100%;
-	z-index: 101;
+	z-index: ${props => (props.open ? 101 : -100)};
 	position: absolute;
 	top: 0;
 	left: 0;
+	transition: all 0.3s;
 `;
 
 export const Content = styled(animated.div)`
