@@ -18,6 +18,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 		o3: string;
 		o4: string;
 		checked: string;
+		timer: number;
 	}
 
 	const { question, setEditModalOpen } = props;
@@ -35,7 +36,8 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			question: values.question,
 			difficulty: values.difficulty,
 			options,
-			correct_answer: getNewCorrectAnswer()
+			correct_answer: getNewCorrectAnswer(),
+			timer: values.timer
 		};
 		dispatch(saveEditedQuestion(newQuestion));
 		setEditModalOpen(false);
@@ -56,7 +58,8 @@ export const EditForm: React.FC<EditFormProps> = props => {
 		o2: question.options[1],
 		o3: question.options[2],
 		o4: question.options[3],
-		checked: getCheckedValue()
+		checked: getCheckedValue(),
+		timer: question.timer
 	};
 
 	return (
@@ -124,6 +127,14 @@ export const EditForm: React.FC<EditFormProps> = props => {
 							</div>
 						</>
 					)}
+					<Field name="timer">
+						{({ input, meta }) => (
+							<div>
+								<label htmlFor="timer">Timer</label>
+								<input {...input} name="timer" type="number" />
+							</div>
+						)}
+					</Field>
 					<button type="submit">Save!</button>
 				</form>
 			)}
