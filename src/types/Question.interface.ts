@@ -7,4 +7,9 @@ export interface Question {
 	incorrect_answers: string[];
 	correct_answer: string;
 	options: string[];
+	timer: number;
+	modifiers: {
+		timed: boolean;
+		rapidfire: boolean;
+	};
 }
