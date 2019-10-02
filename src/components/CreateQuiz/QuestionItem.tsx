@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
+import uuid from 'uuid/v4';
 import { Modal } from '../Modal';
 import { EditForm } from './EditForm';
 import { Question } from '../../types';
@@ -25,6 +26,7 @@ const WrappedComponent: React.FC<QuestionItemProps> = ({ type, question }) => {
 			<Modal
 				open={modalOpen}
 				setModalOpen={setModalOpen}
+				key={uuid()}
 				aria-labelledby="modal-label"
 				aria-describedby="model-desc"
 			>

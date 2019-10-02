@@ -83,9 +83,6 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const onTimeout = (): void => {
 		setTimedOut(true);
 		dispatch(validateChoice({ choice: 'timeout', correctAnswer: '' }));
-		setTimeout(() => {
-			dispatch(push(`/start/q/${questionNum + 1}`));
-		}, 1500);
 	};
 
 	const timerRenderer = ({
@@ -96,9 +93,9 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		completed: boolean;
 	}): JSX.Element => {
 		if (completed) {
-			return <Timer>Time Out!</Timer>;
+			return <h1>Time Out!</h1>;
 		} else {
-			return <Timer>{seconds}</Timer>;
+			return <Timer completed={completed}>{seconds}</Timer>;
 		}
 	};
 
@@ -129,11 +126,13 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 								)}
 							</div>
 						)}
-						<Countdown
-							date={Date.now() + 10000}
-							renderer={timerRenderer}
-							onComplete={onTimeout}
-						/>
+						{qData.modifiers.timed && (
+							<Countdown
+								date={Date.now() + qData.timer * 1000}
+								renderer={timerRenderer}
+								onComplete={onTimeout}
+							/>
+						)}
 					</div>
 				</Root>
 			))}
