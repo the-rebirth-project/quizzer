@@ -80,3 +80,18 @@ export const Qnum = styled.span`
 	display: inline-block;
 	font-weight: 700;
 `;
+
+export const Timer = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 20;
+	border-radius: 10px;
+	background-color: ${props => props.theme.colors.grey};
+	color: ${props => props.theme.colors.secondary};
+	padding: 1rem;
+	font-size: 1.1rem;
+`;
+
+Timer.displayName = 'Timer';
