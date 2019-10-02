@@ -33,7 +33,12 @@ export const fetchQuestionsThunk = async (
 							...q.incorrect_answers.map(incAns => he.decode(incAns)),
 							he.decode(q.correct_answer)
 					  ])
-					: ['True', 'False']
+					: ['True', 'False'],
+			timer: 0,
+			modifiers: {
+				timed: false,
+				rapidfire: false
+			}
 		};
 	});
 	dispatch(fetchQuestions(newData));
