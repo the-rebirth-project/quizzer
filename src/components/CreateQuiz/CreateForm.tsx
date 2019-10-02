@@ -64,7 +64,12 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 					: 'multiple',
 			incorrect_answers: options.filter(o => o !== correct_answer),
 			correct_answer,
-			options
+			options,
+			timer: values.timer,
+			modifiers: {
+				timed: values.timed,
+				rapidfire: false
+			}
 		};
 		// shuffle options prop if type is not boolean (True/False Questions)
 		if (customQuestion.type !== 'boolean')
@@ -137,6 +142,17 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 						<Field name="o4" component="input" placeholder="Fourth Option" />
 						<Field name="checked" component="input" type="radio" value="o4" />
 					</div>
+					<div>
+						<label htmlFor="timer">Timer: </label>
+						<Field
+							name="timer"
+							component="input"
+							type="number"
+							disabled={!values.timed}
+						/>
+						<Field name="timed" component="input" type="checkbox" />
+					</div>
+
 					<button type="submit">Add</button>
 				</form>
 			)}
