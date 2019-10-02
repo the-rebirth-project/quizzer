@@ -5,6 +5,10 @@ interface StartedProps {
 	started: boolean;
 }
 
+interface TimerProps {
+	completed: boolean;
+}
+
 export const Root = styled(animated.div)`
 	height: 100vh;
 	width: 100vw;
@@ -81,7 +85,8 @@ export const Qnum = styled.span`
 	font-weight: 700;
 `;
 
-export const Timer = styled.div`
+export const Timer = styled.div<TimerProps>`
+	opacity: ${props => (props.completed ? 0 : 1)};
 	position: absolute;
 	top: 50%;
 	left: 50%;
