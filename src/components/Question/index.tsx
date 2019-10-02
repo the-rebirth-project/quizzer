@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Countdown from 'react-countdown-now';
 import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../types';
 import { validateChoice, rehydrateState } from '../../actions';
 import { useTransition } from 'react-spring';
-import { Root, QuestionWrapper, OptionsWrapper, Option, Qnum } from './styles';
+import {
+	Root,
+	QuestionWrapper,
+	OptionsWrapper,
+	Option,
+	Qnum,
+	Timer
+} from './styles';
 import uuid from 'uuid/v4';
 import { push } from 'connected-react-router';
 
@@ -14,6 +22,7 @@ interface RouteParams {
 
 export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const dispatch = useDispatch();
+	const [timedOut, setTimedOut] = useState(false);
 	const choiceValid = useSelector(
 		(state: RootState) => state.question.choiceValid
 	);
@@ -71,6 +80,28 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		);
 	};
 
+	const onTimeout = (): void => {
+		setTimedOut(true);
+		dispatch(validateChoice({ choice: 'timeout', correctAnswer: '' }));
+		setTimeout(() => {
+			dispatch(push(`/start/q/${questionNum + 1}`));
+		}, 1500);
+	};
+
+	const timerRenderer = ({
+		seconds,
+		completed
+	}: {
+		seconds: number;
+		completed: boolean;
+	}): JSX.Element => {
+		if (completed) {
+			return <Timer>Time Out!</Timer>;
+		} else {
+			return <Timer>{seconds}</Timer>;
+		}
+	};
+
 	return (
 		<div>
 			{transitions.map(({ props, key }) => (
@@ -88,8 +119,21 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 							zIndex: 20
 						}}
 					>
-						{choiceValid && choiceValid !== null && <h1>Correct Answer!</h1>}
-						{!choiceValid && choiceValid !== null && <h1>Incorrect Answer!</h1>}
+						{!timedOut && (
+							<div>
+								{choiceValid && choiceValid !== null && (
+									<h1>Correct Answer!</h1>
+								)}
+								{!choiceValid && choiceValid !== null && (
+									<h1>Incorrect Answer!</h1>
+								)}
+							</div>
+						)}
+						<Countdown
+							date={Date.now() + 10000}
+							renderer={timerRenderer}
+							onComplete={onTimeout}
+						/>
 					</div>
 				</Root>
 			))}
