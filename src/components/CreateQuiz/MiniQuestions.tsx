@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchQuestionsThunk } from '../../actions';
 import { SortableContainer } from 'react-sortable-hoc';
+import uuid from 'uuid/v4';
+import { fetchQuestionsThunk } from '../../actions';
 import { QuestionItem } from './QuestionItem';
 import { CreateForm } from './CreateForm';
 import { Modal } from '../Modal';
@@ -32,6 +33,7 @@ export const WrappedComponent: React.FC = () => {
 				open={modalOpen}
 				setModalOpen={setModalOpen}
 				aria-label="Create Question"
+				key={uuid()}
 			>
 				<CreateForm setCreateModalOpen={setModalOpen} />
 			</Modal>
@@ -41,6 +43,7 @@ export const WrappedComponent: React.FC = () => {
 					question={q}
 					type="random"
 					index={i}
+					key={q.qId}
 				/>
 			))}
 		</Root>
