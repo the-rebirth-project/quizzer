@@ -12,6 +12,8 @@ interface FormValues {
 	o3: string;
 	o4: string;
 	checked: string;
+	timer: number;
+	timed: boolean;
 }
 
 interface CreateFormProps {
