@@ -11,7 +11,8 @@ import {
 	OptionsWrapper,
 	Option,
 	Qnum,
-	Timer
+	Timer,
+	TimeoutOverlay
 } from './styles';
 import uuid from 'uuid/v4';
 import { push } from 'connected-react-router';
@@ -33,6 +34,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const { question, options } = qData;
 
 	useEffect(() => {
+		setTimedOut(false);
 		dispatch(rehydrateState()); // sets choiceValid back to null after each question
 	}, [dispatch, questionNum]);
 
@@ -51,8 +53,6 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			</div>
 		);
 	};
-
-	// we could have a validateChoice action which validates the chosen option comparing it to the correct answer and based on that update a state in Question state tree and display the appropriate message
 
 	const onOptionClick = (option: string): void => {
 		dispatch(
@@ -82,20 +82,26 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 	const onTimeout = (): void => {
 		setTimedOut(true);
+		// validateChoice would always return false here. kind of a hacky way of doing it
 		dispatch(validateChoice({ choice: 'timeout', correctAnswer: '' }));
+		setTimeout(() => {
+			dispatch(push(`/start/q/${questionNum + 1}`));
+		}, 2000);
 	};
 
 	const timerRenderer = ({
+		minutes,
 		seconds,
 		completed
 	}: {
+		minutes: number;
 		seconds: number;
 		completed: boolean;
 	}): JSX.Element => {
 		if (completed) {
-			return <h1>Time Out!</h1>;
+			return <TimeoutOverlay completed={completed}>Time Out!</TimeoutOverlay>;
 		} else {
-			return <Timer completed={completed}>{seconds}</Timer>;
+			return <Timer>{`${minutes}: ${seconds}`}</Timer>;
 		}
 	};
 
@@ -127,11 +133,18 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 							</div>
 						)}
 						{qData.modifiers.timed && (
-							<Countdown
-								date={Date.now() + qData.timer * 1000}
-								renderer={timerRenderer}
-								onComplete={onTimeout}
-							/>
+							<>
+								<Countdown
+									date={Date.now() + qData.timer * 1000}
+									renderer={timerRenderer}
+									onComplete={onTimeout}
+								/>
+								{timedOut && (
+									<TimeoutOverlay completed={timedOut}>
+										Time out!
+									</TimeoutOverlay>
+								)}
+							</>
 						)}
 					</div>
 				</Root>
