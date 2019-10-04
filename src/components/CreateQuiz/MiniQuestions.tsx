@@ -6,8 +6,9 @@ import { fetchQuestionsThunk } from '../../actions';
 import { QuestionItem } from './QuestionItem';
 import { CreateForm } from './CreateForm';
 import { Modal } from '../Modal';
+import { showModal } from '../../actions';
 import { RootState } from '../../types';
-import { Root } from './miniQuestionsStyles';
+import { Root, ButtonContainer, CreateButton } from './miniQuestionsStyles';
 
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
@@ -23,12 +24,19 @@ export const WrappedComponent: React.FC = () => {
 
 	const onCreateBtnClick = (): void => {
 		setModalOpen(true);
+		dispatch(showModal());
 	};
 
 	return (
 		<Root>
-			<button onClick={onButtonClick}>Fetch a random question</button>
-			<button onClick={onCreateBtnClick}>Create Question</button>
+			<ButtonContainer>
+				<CreateButton onClick={onButtonClick} primary>
+					Fetch Question
+				</CreateButton>
+				<CreateButton onClick={onCreateBtnClick} primary>
+					Create Question
+				</CreateButton>
+			</ButtonContainer>
 			<Modal
 				open={modalOpen}
 				setModalOpen={setModalOpen}
