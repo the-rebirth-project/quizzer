@@ -14,7 +14,10 @@ export const Root = styled.div`
 `;
 
 export const Background = styled.div<{ open: boolean }>`
-	background-color: rgba(0, 0, 0, 0.4);
+	background-image: linear-gradient(
+		rgba(0, 0, 0, 0.4) 0%,
+		rgba(0, 0, 0, 0.4) 100%
+	);
 	opacity: ${props => (props.open ? 1 : 0)};
 	height: 100%;
 	width: 100%;
