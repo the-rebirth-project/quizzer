@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { showModal } from '../../actions';
 import { useTransition } from 'react-spring';
 import { Root, Background, Content } from './styles';
 
@@ -12,8 +14,10 @@ export const Modal: React.FC<ModalProps> = ({
 	open,
 	setModalOpen
 }) => {
+	const dispatch = useDispatch();
 	const onClickOutside = (): void => {
 		setModalOpen(false);
+		dispatch(showModal());
 	};
 
 	const transitions = useTransition(open, null, {
