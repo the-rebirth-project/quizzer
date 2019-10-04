@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../Menu/styles';
 
 export const Root = styled.div`
 	width: 90%;

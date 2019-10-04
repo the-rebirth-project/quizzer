@@ -1,6 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { Title } from '../Menu/styles';
 
+interface BlurBGProps {
+	modalShown: boolean;
+}
+
 export const GlobalStyle = createGlobalStyle`
 	body {
 		overflow-y: scroll;
@@ -26,6 +30,7 @@ export const Root = styled.div`
 
 export const TitleContainer = styled.div`
 	height: 100vh;
+	width: 30vw;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -33,18 +38,15 @@ export const TitleContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	justify-self: flex-start;
 `;
 
 /* The parent flex container (Root) is behaving a bit weird here. had to resort to using margins*/
 export const CreateTitle = styled(Title)`
-	align-self: center;
-	margin-bottom: 9rem;
 	letter-spacing: 15px;
-	margin-left: 1rem;
-	padding: 1rem 0rem;
 	font-size: 8rem;
-	margin-right: auto;
+	width: 30vw;
+	margin-left: 2.3rem;
+	text-align: center;
 `;
 
 export const ConfigContainer = styled.div`
@@ -60,4 +62,15 @@ export const ConfigContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	overflow-y: scroll;
+`;
+
+export const BlurBackground = styled.div<BlurBGProps>`
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background-image: linear-gradient(transparent 0%, transparent 100%);
+	filter: ${props => (props.modalShown ? 'blur(10px)' : '')};
+	z-index: ${props => (props.modalShown ? 200 : 0)};
 `;
