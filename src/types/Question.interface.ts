@@ -10,6 +10,5 @@ export interface Question {
 	timer: number;
 	modifiers: {
 		timed: boolean;
-		rapidfire: boolean;
 	};
 }
