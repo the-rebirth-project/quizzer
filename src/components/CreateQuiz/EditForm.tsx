@@ -41,7 +41,6 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			timer: values.timer,
 			modifiers: {
 				timed: values.timed,
-				rapidfire: false
 			}
 		};
 		dispatch(saveEditedQuestion(newQuestion));

@@ -36,8 +36,7 @@ export const fetchQuestionsThunk = async (
 					: ['True', 'False'],
 			timer: 0,
 			modifiers: {
-				timed: false,
-				rapidfire: false
+				timed: false
 			}
 		};
 	});
