@@ -13,6 +13,7 @@ import { Root, ButtonContainer, CreateButton } from './miniQuestionsStyles';
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.quiz.questions);
+	const modalShown = useSelector((state: RootState) => state.modal.modalShown);
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const onButtonClick = (): void => {
@@ -47,7 +48,7 @@ export const WrappedComponent: React.FC = () => {
 			</Modal>
 			{questions.map((q, i) => (
 				<QuestionItem
-					disabled={modalOpen}
+					disabled={modalShown}
 					question={q}
 					type="random"
 					index={i}
