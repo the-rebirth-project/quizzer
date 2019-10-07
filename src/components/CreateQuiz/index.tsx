@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { animated, useTransition } from 'react-spring';
 import { arrayMove } from '../../helpers';
 import { SortEnd } from 'react-sortable-hoc';
+import { Link } from 'react-router-dom';
 import { MiniQuestions } from './MiniQuestions';
 import { sortQuestion } from '../../actions/createQuizActions';
 import { RootState } from '../../types';
@@ -38,6 +39,7 @@ export const CreateQuiz: React.FC = () => {
 				<animated.div key={key} style={props}>
 					<Root>
 						<TitleContainer>
+							<Link to="/">Home</Link>
 							<CreateTitle>Create</CreateTitle>
 						</TitleContainer>
 						<ConfigContainer>
