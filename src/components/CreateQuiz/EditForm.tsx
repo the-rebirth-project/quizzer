@@ -3,6 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import { saveEditedQuestion } from '../../actions';
 import { Question } from '../../types';
+import {
+	StyledLabel,
+	StyledInputField,
+	StyledSelect,
+	FieldContainer
+} from './formStyles';
 
 interface EditFormProps {
 	question: Question;
@@ -40,7 +46,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			correct_answer: getNewCorrectAnswer(),
 			timer: values.timer,
 			modifiers: {
-				timed: values.timed,
+				timed: values.timed
 			}
 		};
 		dispatch(saveEditedQuestion(newQuestion));
@@ -73,75 +79,88 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			onSubmit={onFormSubmit}
 			render={({ handleSubmit, form, submitting, values }) => (
 				<form onSubmit={handleSubmit}>
-					<Field name="question">
-						{({ input, meta }) => (
-							<div>
-								<label>Question: </label>
-								<input
-									{...input}
-									type="text"
-									placeholder="Enter New Question"
-									required
-								/>
-							</div>
-						)}
-					</Field>
+					<FieldContainer>
+						<StyledLabel>
+							Question{' '}
+							<StyledInputField
+								name="question"
+								component="input"
+								type="text"
+								placeholder="Enter New Question"
+							/>
+						</StyledLabel>
+					</FieldContainer>
 					<Field name="difficulty">
 						{({ input, meta }) => (
-							<div>
-								<label>Difficulty: </label>
-								<select {...input}>
+							<StyledLabel>
+								Difficulty{' '}
+								<StyledSelect {...input}>
 									<option value="easy">Easy</option>
 									<option value="medium">Medium</option>
 									<option value="hard">Hard</option>
-								</select>
-							</div>
+								</StyledSelect>
+							</StyledLabel>
 						)}
 					</Field>
-					<div>
-						<label>Option 1</label>
-						<Field name="o1" component="input" type="text" />
-						<Field name="checked" component="input" type="radio" value="o1" />
-					</div>
-					<div>
-						<label>Option 2</label>
-						<Field name="o2" component="input" type="text" />
-						<Field name="checked" component="input" type="radio" value="o2" />
-					</div>
+					<FieldContainer>
+						<StyledLabel>
+							<Field name="checked" component="input" type="radio" value="o1" />
+							Option 1{' '}
+							<StyledInputField name="o1" component="input" type="text" />
+						</StyledLabel>
+					</FieldContainer>
+
+					<FieldContainer>
+						<StyledLabel>
+							<Field name="checked" component="input" type="radio" value="o2" />
+							Option 2{' '}
+							<StyledInputField name="o2" component="input" type="text" />
+						</StyledLabel>
+					</FieldContainer>
+
 					{question.type !== 'boolean' && (
 						<>
-							<div>
-								<label>Option 3</label>
-								<Field name="o3" component="input" type="text" />
-								<Field
-									name="checked"
-									component="input"
-									type="radio"
-									value="o3"
-								/>
-							</div>
-							<div>
-								<label>Option 4</label>
-								<Field name="o4" component="input" type="text" />
-								<Field
-									name="checked"
-									component="input"
-									type="radio"
-									value="o4"
-								/>
-							</div>
+							<FieldContainer>
+								<StyledLabel>
+									<Field
+										name="checked"
+										component="input"
+										type="radio"
+										value="o3"
+									/>
+									Option 3{' '}
+									<StyledInputField name="o3" component="input" type="text" />
+								</StyledLabel>
+							</FieldContainer>
+
+							<FieldContainer>
+								<StyledLabel>
+									<Field
+										name="checked"
+										component="input"
+										type="radio"
+										value="o4"
+									/>
+									Option 4
+									<StyledInputField name="o4" component="input" type="text" />
+								</StyledLabel>
+							</FieldContainer>
 						</>
 					)}
-					<div>
-						<label htmlFor="timer">Timer: </label>
-						<Field
-							name="timer"
-							component="input"
-							type="number"
-							disabled={!values.timed}
-						/>
-						<Field name="timed" component="input" type="checkbox" />
-					</div>
+					<FieldContainer>
+						<StyledLabel>
+							<Field name="timed" component="input" type="checkbox" />
+							Timer
+							<StyledInputField
+								name="timer"
+								component="input"
+								type="number"
+								min="1"
+								disabled={!values.timed}
+							/>
+						</StyledLabel>
+					</FieldContainer>
+
 					<button type="submit">Save!</button>
 				</form>
 			)}
