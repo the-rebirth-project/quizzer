@@ -34,7 +34,7 @@ export const fetchQuestionsThunk = async (
 							he.decode(q.correct_answer)
 					  ])
 					: ['True', 'False'],
-			timer: 0,
+			timer: 1,
 			modifiers: {
 				timed: false
 			}

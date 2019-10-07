@@ -148,6 +148,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 							name="timer"
 							component="input"
 							type="number"
+							min="1"
 							disabled={!values.timed}
 						/>
 						<Field name="timed" component="input" type="checkbox" />
