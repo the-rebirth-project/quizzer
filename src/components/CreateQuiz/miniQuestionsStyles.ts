@@ -16,6 +16,11 @@ export const CreateButton = styled(Button)`
 	font-family: inherit;
 	text-transform: uppercase;
 	padding: 1rem 0.5rem;
+	box-shadow: 3px 3px 6px rgba(var(--primary-rgb-color), 0.2);
+
+	:hover {
+		box-shadow: 3px 3px 6px rgba(var(--primary-rgb-color), 0.25);
+	}
 `;
 
 export const ButtonContainer = styled.div`
