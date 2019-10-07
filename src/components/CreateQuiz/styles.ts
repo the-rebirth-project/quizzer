@@ -36,6 +36,7 @@ export const TitleContainer = styled.div`
 	top: 0;
 	background-color: ${props => props.theme.colors.primary};
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 `;
