@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import uuid from 'uuid/v4';
 import { shuffleArray } from '../../helpers';
-import { createCustomQuestion } from '../../actions';
+import { createCustomQuestion, showModal } from '../../actions';
 interface FormValues {
 	question: string;
 	difficulty: string;
@@ -79,6 +79,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 			]);
 
 		dispatch(createCustomQuestion(customQuestion));
+		dispatch(showModal());
 		setCreateModalOpen(false);
 	};
 
