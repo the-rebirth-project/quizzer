@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 import { rootReducer } from '../reducers';
@@ -12,7 +12,7 @@ declare module 'typesafe-actions' {
 	}
 }
 
-export const history = createBrowserHistory();
+export const history = createHashHistory();
 
 const middleware = [thunk, routerMiddleware(history)];
 
