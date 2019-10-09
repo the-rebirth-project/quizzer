@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Countdown from 'react-countdown-now';
 import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootState } from '../../types';
 import { validateChoice, rehydrateState } from '../../actions';
 import { useTransition } from 'react-spring';
@@ -109,6 +110,17 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		<div>
 			{transitions.map(({ props, key }) => (
 				<Root key={key} style={props}>
+					<Link
+						to="/"
+						style={{
+							position: 'absolute',
+							top: '10%',
+							right: '10%',
+							zIndex: 40
+						}}
+					>
+						Home
+					</Link>
 					<QuestionWrapper started={started}>
 						{renderQuestion()}
 					</QuestionWrapper>
