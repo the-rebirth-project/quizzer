@@ -12,6 +12,8 @@
 /build
 /dist
 
+# sfx
+/src/sfx
 # misc
 .DS_Store
 .env.local
