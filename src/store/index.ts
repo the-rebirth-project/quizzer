@@ -12,7 +12,10 @@ declare module 'typesafe-actions' {
 	}
 }
 
-export const history = createHashHistory();
+export const history = createHashHistory({
+	basename: '',
+	hashType: 'noslash'
+});
 
 const middleware = [thunk, routerMiddleware(history)];
 
