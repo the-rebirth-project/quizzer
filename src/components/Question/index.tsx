@@ -92,7 +92,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 			setTimeout(() => {
 				// if all the questions are exhausted, user is forced back to menu
-				if (questionNum > questions.length - 1) {
+				if (questionNum >= questions.length - 1) {
 					dispatch(push('/'));
 				} else {
 					dispatch(push(`/start/q/${questionNum + 1}`));
