@@ -124,7 +124,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		dispatch(validateChoice({ choice: 'timeout', correctAnswer: '' }));
 		setTimeout(() => {
 			dispatch(push(`/start/q/${questionNum + 1}`));
-		}, 2000);
+		}, 2500);
 	};
 
 	const timerRenderer = ({
