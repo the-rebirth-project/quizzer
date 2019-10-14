@@ -9,6 +9,10 @@ interface TimerProps {
 	completed: boolean;
 }
 
+interface FeedbackContainerProps {
+	choiceValid: boolean | null;
+}
+
 export const Root = styled(animated.div)`
 	height: 100vh;
 	width: 100vw;
@@ -47,6 +51,8 @@ export const OptionsWrapper = styled.div<StartedProps>`
 OptionsWrapper.displayName = 'OptionsWrapper';
 
 export const Option = styled.button`
+	position: relative;
+	z-index: 5;
 	padding: 2rem;
 	border-radius: 10px;
 	box-shadow: 3px 5px 6px rgba(46, 46, 46, 0.25);
@@ -79,6 +85,23 @@ export const Option = styled.button`
 `;
 
 Option.displayName = 'Options';
+
+export const FeedbackContainer = styled(animated.div)<FeedbackContainerProps>`
+	/* Have the origin point be centered on the option container */
+	position: relative;
+	transform: translate(-50%, -50%);
+	height: 100vh;
+	width: 100vw;
+	z-index: 25;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: ${props =>
+		props.choiceValid ? props.theme.colors.primary : '#ff0000'};
+	color: ${props => props.theme.colors.secondary};
+	font-size: 30rem;
+	transform-origin: center;
+`;
 
 export const Qnum = styled.span`
 	display: inline-block;
@@ -115,7 +138,7 @@ export const TimeoutOverlay = styled.div<TimerProps>`
 	z-index: 100;
 	background-color: #ff0000;
 	transform: ${props => (props.completed ? 'scale(1)' : 'scale(0)')};
-	transition: transform 0.5s;
+	transition: transform 0.3s;
 	font-size: 12rem;
 	text-transform: uppercase;
 	letter-spacing: 5px;
