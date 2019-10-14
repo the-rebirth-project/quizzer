@@ -25,7 +25,7 @@ export const Menu: React.FC = () => {
 			{transitions.map(({ props, key }) => (
 				<Root key={key} style={props}>
 					<Left>
-						<Title>Trivia Quiz</Title>
+						<Title>Quizzer</Title>
 						<SubText>An app for designing and participating in quizzes</SubText>
 					</Left>
 
