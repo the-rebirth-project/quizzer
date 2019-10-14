@@ -68,12 +68,37 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	};
 
 	const onOptionClick = (option: string): void => {
-		dispatch(
-			validateChoice({ choice: option, correctAnswer: qData.correct_answer })
-		);
+		// a small delay for validating choice here to provide a sense of tension
 		setTimeout(() => {
-			dispatch(push(`/start/q/${questionNum + 1}`));
-		}, 1500);
+			dispatch(
+				validateChoice({ choice: option, correctAnswer: qData.correct_answer })
+			);
+
+			if (option === qData.correct_answer) {
+				const correctSfx = require('../../sfx/correctsfx.mp3');
+				const correct = new UIfx(correctSfx, {
+					volume: 1,
+					throttleMs: 100
+				});
+				correct.play();
+			} else {
+				const incorrectSfx = require('../../sfx/incorrectsfx.mp3');
+				const incorrect = new UIfx(incorrectSfx, {
+					volume: 1,
+					throttleMs: 100
+				});
+				incorrect.play();
+			}
+
+			setTimeout(() => {
+				// if all the questions are exhausted, user is forced back to menu
+				if (questionNum > questions.length - 1) {
+					dispatch(push('/'));
+				} else {
+					dispatch(push(`/start/q/${questionNum + 1}`));
+				}
+			}, 1500);
+		}, 500);
 	};
 
 	// If any of the options are undefined, simply return false i.e we don't return anything.
