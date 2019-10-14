@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Countdown from 'react-countdown-now';
 import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTransition } from 'react-spring';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import UIfx from 'uifx';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../types';
 import { validateChoice, rehydrateState } from '../../actions';
-import { useTransition } from 'react-spring';
 import {
 	Root,
 	QuestionWrapper,
@@ -13,7 +16,8 @@ import {
 	Option,
 	Qnum,
 	Timer,
-	TimeoutOverlay
+	TimeoutOverlay,
+	FeedbackContainer
 } from './styles';
 import uuid from 'uuid/v4';
 import { push } from 'connected-react-router';
@@ -44,6 +48,14 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
 		enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
 		leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
+	});
+
+	const feedbackContainerTransition = useTransition(choiceValid, null, {
+		initial: { opacity: 0 },
+		from: { transform: 'scale(0)' },
+		enter: { transform: 'scale(1)' },
+		leave: { opacity: 0, transform: 'scale(0)' },
+		config: { tension: 250 }
 	});
 
 	const renderQuestion = (): JSX.Element => {
