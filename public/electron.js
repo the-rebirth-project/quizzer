@@ -6,34 +6,25 @@ const {
 const path = require('path');
 const isDev = require('electron-is-dev');
 
-let mainWindow = null;
-app.on('ready', createWindow);
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
-});
-app.on('activate', () => {
-	if (mainWindow === null) {
-		createWindow();
-	}
-});
+let mainWindow;
 
 function createWindow() {
 	mainWindow = new BrowserWindow({
-		title: 'Trivia Quiz v0.3',
-		width: 1024,
-		height: 1024,
+		title: 'Quizzer v0.3',
+		width: 1366,
+		height: 768,
 		frame: false,
-		titleBarStyle: 'hidden',
-		backgroundColor: '#FFF',
 		webPreferences: {
 			nodeIntegration: true,
 			webSecurity: !isDev,
 			devTools: isDev
 		}
 	});
-	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+	mainWindow.loadURL(
+		isDev ?
+		'http://localhost:3000' :
+		`file://${path.join(__dirname, '../build/index.html')}`
+	);
 	if (isDev) {
 		const {
 			default: installExtension,
@@ -70,9 +61,21 @@ function createWindow() {
 			responseHeaders: {
 				...details.responseHeaders,
 				'Content-Security-Policy': [
-					"script-src 'self' https://opentdb.com/api.php; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
+					"script-src 'self' https://opentdb.com/api.php https://kit.fontawesome.com/4c134e46f3.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
 				]
 			}
 		});
 	});
 }
+
+app.on('ready', createWindow);
+app.on('window-all-closed', () => {
+	if (process.platform !== 'darwin') {
+		app.quit();
+	}
+});
+app.on('activate', () => {
+	if (mainWindow === null) {
+		createWindow();
+	}
+});
