@@ -171,15 +171,21 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 							zIndex: 20
 						}}
 					>
-						{!timedOut && (
-							<div>
-								{choiceValid && choiceValid !== null && (
-									<h1>Correct Answer!</h1>
-								)}
-								{!choiceValid && choiceValid !== null && (
-									<h1>Incorrect Answer!</h1>
-								)}
-							</div>
+						{feedbackContainerTransition.map(
+							({ item, props, key }) =>
+								item !== null && (
+									<FeedbackContainer
+										key={key}
+										style={props}
+										choiceValid={choiceValid}
+									>
+										{choiceValid ? (
+											<FontAwesomeIcon icon={faCheck} />
+										) : (
+											<FontAwesomeIcon icon={faTimes} />
+										)}
+									</FeedbackContainer>
+								)
 						)}
 						{qData.modifiers.timed && (
 							<>
