@@ -8,6 +8,7 @@ import { RootState } from '../types';
 const Background = styled(animated.div)`
 	--primary-rgb-color: 38, 188, 99; /* rgb version of our primary green color */
 	--secondary-rgb-color: 242, 243, 229;
+	--grey-rgb-color: 46, 46, 46;
 	height: 100vh;
 `;
 
