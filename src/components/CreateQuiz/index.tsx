@@ -5,13 +5,14 @@ import { arrayMove } from '../../helpers';
 import { SortEnd } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import { MiniQuestions } from './MiniQuestions';
+import { Toolbar } from './Toolbar';
 import { sortQuestion } from '../../actions/createQuizActions';
 import { RootState } from '../../types';
 import {
 	GreyBG,
 	GlobalStyle,
 	Root,
-	TitleContainer,
+	Sidebar,
 	CreateTitle,
 	ConfigContainer
 } from './styles';
@@ -38,10 +39,11 @@ export const CreateQuiz: React.FC = () => {
 			{transitions.map(({ props, key }) => (
 				<animated.div key={key} style={props}>
 					<Root>
-						<TitleContainer>
+						<Sidebar>
+							<Toolbar />
 							<Link to="/">Home</Link>
 							<CreateTitle>Create</CreateTitle>
-						</TitleContainer>
+						</Sidebar>
 						<ConfigContainer>
 							<MiniQuestions
 								distance={3}
