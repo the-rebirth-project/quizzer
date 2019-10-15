@@ -1,14 +1,14 @@
 {
-  "name": "quiz_app",
-  "version": "0.3.0",
+  "name": "quizzer",
+  "version": "0.8.4",
   "private": true,
   "main": "public/electron.js",
   "author": "SKP-000",
   "description": "App for designing and participating in quizzes",
   "homepage": "./",
   "build": {
-    "appId": "com.electron.quiz_app",
-    "productName": "Trivia Quiz App",
+    "appId": "com.electron.quizzer",
+    "productName": "Quizzer",
     "files": [
       "build/**/*",
       "node_modules/**/*",
