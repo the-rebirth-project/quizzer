@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import { Field } from 'react-final-form';
 
+interface SInputProps {
+	checked: string;
+}
+
+interface OptionLabelProps extends SInputProps {
+	name: string;
+}
+
 export const StyledSelect = styled.select`
 	background-color: ${props => props.theme.colors.grey};
 	border-radius: 1rem;
@@ -26,6 +34,14 @@ export const StyledLabel = styled.label`
 	width: 100%;
 `;
 
+export const OptionLabel = styled.span<OptionLabelProps>`
+	cursor: pointer;
+	color: ${props =>
+		props.name === props.checked
+			? props.theme.colors.primary
+			: props.theme.colors.grey};
+`;
+
 export const StyledInput = styled.input`
 	background-color: ${props => props.theme.colors.grey};
 	border-radius: 1rem;
@@ -41,8 +57,11 @@ export const StyledInput = styled.input`
 `;
 
 // WORKAROUND TO FIX INITIAL VALUES NOT APPEARING. IMPLEMENT A BETTER SOLUTION
-export const StyledInputField = styled(Field)`
-	background-color: ${props => props.theme.colors.grey};
+export const StyledInputField = styled(Field)<SInputProps>`
+	background-color: ${props =>
+		props.name === props.checked
+			? props.theme.colors.primary
+			: props.theme.colors.grey};
 	border-radius: 1rem;
 	color: ${props => props.theme.colors.secondary};
 	padding: 0.5rem 0.8rem;

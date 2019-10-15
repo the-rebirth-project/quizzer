@@ -7,7 +7,8 @@ import {
 	StyledLabel,
 	StyledInputField,
 	StyledSelect,
-	FieldContainer
+	FieldContainer,
+	OptionLabel
 } from './formStyles';
 
 interface EditFormProps {
@@ -104,17 +105,43 @@ export const EditForm: React.FC<EditFormProps> = props => {
 					</Field>
 					<FieldContainer>
 						<StyledLabel>
-							<Field name="checked" component="input" type="radio" value="o1" />
-							Option 1{' '}
-							<StyledInputField name="o1" component="input" type="text" />
+							<Field
+								name="checked"
+								component="input"
+								type="radio"
+								value="o1"
+								style={{ opacity: 0 }}
+							/>
+							<OptionLabel name="o1" checked={values.checked}>
+								Option 1
+							</OptionLabel>
+							<StyledInputField
+								name="o1"
+								component="input"
+								type="text"
+								checked={values.checked}
+							/>
 						</StyledLabel>
 					</FieldContainer>
 
 					<FieldContainer>
 						<StyledLabel>
-							<Field name="checked" component="input" type="radio" value="o2" />
-							Option 2{' '}
-							<StyledInputField name="o2" component="input" type="text" />
+							<Field
+								name="checked"
+								component="input"
+								type="radio"
+								value="o2"
+								style={{ opacity: 0 }}
+							/>
+							<OptionLabel name="o2" checked={values.checked}>
+								Option 2
+							</OptionLabel>
+							<StyledInputField
+								name="o2"
+								component="input"
+								type="text"
+								checked={values.checked}
+							/>
 						</StyledLabel>
 					</FieldContainer>
 
@@ -127,9 +154,17 @@ export const EditForm: React.FC<EditFormProps> = props => {
 										component="input"
 										type="radio"
 										value="o3"
+										style={{ opacity: 0 }}
 									/>
-									Option 3{' '}
-									<StyledInputField name="o3" component="input" type="text" />
+									<OptionLabel name="o3" checked={values.checked}>
+										Option 3
+									</OptionLabel>
+									<StyledInputField
+										name="o3"
+										component="input"
+										type="text"
+										checked={values.checked}
+									/>
 								</StyledLabel>
 							</FieldContainer>
 
@@ -140,9 +175,17 @@ export const EditForm: React.FC<EditFormProps> = props => {
 										component="input"
 										type="radio"
 										value="o4"
+										style={{ opacity: 0 }}
 									/>
-									Option 4
-									<StyledInputField name="o4" component="input" type="text" />
+									<OptionLabel name="o4" checked={values.checked}>
+										Option 4
+									</OptionLabel>
+									<StyledInputField
+										name="o4"
+										component="input"
+										type="text"
+										checked={values.checked}
+									/>
 								</StyledLabel>
 							</FieldContainer>
 						</>
