@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SortableContainer } from 'react-sortable-hoc';
-import uuid from 'uuid/v4';
+// import uuid from 'uuid/v4';
 import { fetchQuestionsThunk } from '../../actions';
 import { QuestionItem } from './QuestionItem';
-import { CreateForm } from './CreateForm';
-import { Modal } from '../Modal';
-import { showModal } from '../../actions';
+// import { CreateForm } from './CreateForm';
+// import { Modal } from '../Modal';
+// import { showModal } from '../../actions';
 import { RootState } from '../../types';
 import { Root, ButtonContainer, CreateButton } from './miniQuestionsStyles';
 
@@ -14,7 +14,7 @@ export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const modalShown = useSelector((state: RootState) => state.modal.modalShown);
-	const [modalOpen, setModalOpen] = useState(false);
+	// const [modalOpen, setModalOpen] = useState(false);
 
 	const onButtonClick = (): void => {
 		const fetchRandomQuestions = async () => {
@@ -23,10 +23,10 @@ export const WrappedComponent: React.FC = () => {
 		fetchRandomQuestions();
 	};
 
-	const onCreateBtnClick = (): void => {
-		setModalOpen(true);
-		dispatch(showModal());
-	};
+	// const onCreateBtnClick = (): void => {
+	// 	setModalOpen(true);
+	// 	dispatch(showModal());
+	// };
 
 	return (
 		<Root>
@@ -34,18 +34,18 @@ export const WrappedComponent: React.FC = () => {
 				<CreateButton onClick={onButtonClick} primary>
 					Fetch Question
 				</CreateButton>
-				<CreateButton onClick={onCreateBtnClick} primary>
+				{/* <CreateButton onClick={onCreateBtnClick} primary>
 					Create Question
-				</CreateButton>
+				</CreateButton> */}
 			</ButtonContainer>
-			<Modal
+			{/* <Modal
 				open={modalOpen}
 				setModalOpen={setModalOpen}
 				aria-label="Create Question"
 				key={uuid()}
 			>
 				<CreateForm setCreateModalOpen={setModalOpen} />
-			</Modal>
+			</Modal> */}
 			{questions.map((q, i) => (
 				<QuestionItem
 					disabled={modalShown}
