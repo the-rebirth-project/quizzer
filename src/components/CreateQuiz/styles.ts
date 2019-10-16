@@ -28,7 +28,7 @@ export const Root = styled.div`
 	display: flex;
 `;
 
-export const TitleContainer = styled.div`
+export const Sidebar = styled.div`
 	height: 100vh;
 	width: 30vw;
 	position: fixed;
@@ -52,7 +52,7 @@ export const CreateTitle = styled(Title)`
 
 export const ConfigContainer = styled.div`
 	font-size: 3rem;
-	box-shadow: -5px 0px 6px rgba(46, 46, 46, 0.2);
+	box-shadow: -5px 0px 6px rgba(46, 46, 46, 0.08);
 	color: ${props => props.theme.colors.secondary};
 	background-color: ${props => props.theme.colors.grey};
 	height: 100vh;
