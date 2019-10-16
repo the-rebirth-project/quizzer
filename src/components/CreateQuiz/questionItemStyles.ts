@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Root = styled.div`
+export const Root = styled.div``;
+
+export const QuestionContainer = styled.div`
 	padding: 0.5rem 1rem;
 	border-radius: 15px;
 	background-color: ${props => props.theme.colors.secondary};
@@ -11,4 +13,5 @@ export const Root = styled.div`
 	font-size: 3rem;
 	font-weight: 300;
 	text-transform: uppercase;
+	cursor: pointer;
 `;
