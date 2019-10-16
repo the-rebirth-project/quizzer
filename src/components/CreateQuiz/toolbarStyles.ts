@@ -16,10 +16,15 @@ export const Root = styled.div`
 `;
 
 const Tool = styled(FontAwesomeIcon)`
-	color: rgba(var(--grey-rgb-color), 0.6);
 	font-size: 3rem;
-	transition: all 0.2s;
+`;
+
+export const ToolContainer = styled.div`
+	color: rgba(var(--grey-rgb-color), 0.6);
+	height: 3rem;
+	width: 3rem;
 	cursor: pointer;
+	transition: all 0.2s;
 
 	:hover {
 		color: rgba(var(--grey-rgb-color), 1);
@@ -31,5 +36,5 @@ const Tool = styled(FontAwesomeIcon)`
 	}
 `;
 
-// for better semantic meaning
+// for better semantics
 export const EditTool = styled(Tool)``;
