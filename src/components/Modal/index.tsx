@@ -1,8 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { showModal, editMode } from '../../actions';
-import { RootState } from '../../types';
+import { showModal } from '../../actions';
 import { useTransition } from 'react-spring';
 import { Root, Background, Content } from './styles';
 
@@ -17,15 +15,11 @@ export const Modal: React.FC<ModalProps> = ({
 	setModalOpen
 }) => {
 	const dispatch = useDispatch();
-	const editModeState = useSelector(
-		(state: RootState) => state.toolbar.editMode
-	);
 	const onClickOutside = (): void => {
 		setModalOpen(false);
 		dispatch(showModal());
 		// turn edit mode off if edit mode is turned on in the first place
 		// this is probably a bad way of doing things because as the number of tools increase, we would have to turn off each mode separately. maybe we could do a check of all the modes that are set to true and turn off that specific mode to false
-		if (editModeState) dispatch(editMode('OFF'));
 	};
 
 	const transitions = useTransition(open, null, {
