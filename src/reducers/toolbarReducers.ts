@@ -1,18 +1,23 @@
 import { createReducer } from 'typesafe-actions';
-import { editMode } from '../actions';
+import { editMode, deleteMode } from '../actions';
 
 interface IState {
-	readonly editMode: boolean;
+	readonly editModeState: boolean;
+	readonly deleteModeState: boolean;
 }
 
 const initialState: IState = {
-	editMode: false
+	editModeState: false,
+	deleteModeState: false
 };
 
-export const toolbarReducer = createReducer(initialState).handleAction(
-	editMode,
-	(state, action) => ({
-		...state,
-		editMode: action.payload === 'ON' ? true : false
-	})
-);
+// code may get messy as the toolbar scales to more tools. might want to find a better solution for this one
+export const toolbarReducer = createReducer(initialState)
+	.handleAction(editMode, (state, action) => ({
+		deleteModeState: action.payload === 'ON' ? false : state.deleteModeState,
+		editModeState: action.payload === 'ON' ? true : false
+	}))
+	.handleAction(deleteMode, (state, action) => ({
+		editModeState: action.payload === 'ON' ? false : state.editModeState,
+		deleteModeState: action.payload === 'ON' ? true : false
+	}));

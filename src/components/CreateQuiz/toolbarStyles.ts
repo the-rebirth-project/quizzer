@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+interface ToolProps {
+	modeOn: boolean;
+}
+
 export const Root = styled.div`
 	position: fixed;
 	top: 0;
@@ -17,6 +21,7 @@ export const Root = styled.div`
 
 const Tool = styled(FontAwesomeIcon)`
 	font-size: 3rem;
+	transition: all 0.25s;
 `;
 
 export const ToolContainer = styled.div`
@@ -37,4 +42,10 @@ export const ToolContainer = styled.div`
 `;
 
 // for better semantics
-export const EditTool = styled(Tool)``;
+export const EditTool = styled(Tool)<ToolProps>`
+	color: ${props => (props.modeOn ? props.theme.colors.primary : '')};
+`;
+
+export const DeleteTool = styled(Tool)<ToolProps>`
+	color: ${props => (props.modeOn ? props.theme.colors.primary : '')};
+`;

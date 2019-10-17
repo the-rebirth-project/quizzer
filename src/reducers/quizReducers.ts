@@ -5,7 +5,8 @@ import {
 	startQuiz,
 	sortQuestion,
 	createCustomQuestion,
-	saveEditedQuestion
+	saveEditedQuestion,
+	deleteQuestion
 } from '../actions';
 import { Question } from '../types';
 
@@ -61,4 +62,8 @@ export const quizReducer = createReducer(initialState)
 				q.qId === action.payload.qId ? newQuestion : q
 			)
 		};
-	});
+	})
+	.handleAction(deleteQuestion, (state, action) => ({
+		...state,
+		questions: state.questions.filter(q => q.qId !== action.payload)
+	}));
