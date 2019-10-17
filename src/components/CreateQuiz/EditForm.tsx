@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
-import { saveEditedQuestion, showModal, editMode } from '../../actions';
+import { saveEditedQuestion, showModal } from '../../actions';
 import { Question } from '../../types';
 import {
 	StyledLabel,
@@ -53,7 +53,6 @@ export const EditForm: React.FC<EditFormProps> = props => {
 		dispatch(saveEditedQuestion(newQuestion));
 		setModalOpen(false);
 		dispatch(showModal());
-		dispatch(editMode('OFF'));
 	};
 
 	const getCheckedValue = (): string => {
