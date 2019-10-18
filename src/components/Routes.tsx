@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu } from './Menu';
 import { Question } from './Question';
 import { CreateQuiz } from './CreateQuiz';
+import { Scoreboard } from './Scoreboard';
 import { history } from '../store';
 import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
@@ -23,6 +24,11 @@ export const Routes: React.FC = () => {
 					/>
 				)}
 				<Route exact path="/create" render={() => <CreateQuiz />} />
+				<Route
+					exact
+					path="/q/:qId/scoreboard"
+					render={routeProps => <Scoreboard {...routeProps} />}
+				/>
 			</Switch>
 		</ConnectedRouter>
 	);
