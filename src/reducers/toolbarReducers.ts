@@ -17,11 +17,10 @@ const initialState: IState = {
 const disableOtherTools = (state: IState): void => {
 	// eslint-disable-next-line
 	Object.keys(state).map(key => {
-		if (state[key] === true) state[key] = false;
+		if (state[key]) state[key] = false;
 	});
 };
 
-// code may get messy as the toolbar scales to more tools. might want to find a better solution for this one
 export const toolbarReducer = createReducer(initialState)
 	.handleAction(editMode, (state, action) => {
 		disableOtherTools(state);

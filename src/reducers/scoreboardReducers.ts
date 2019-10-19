@@ -24,7 +24,7 @@ export const scoreboardReducer = createReducer(initialState).handleAction(
 				? {
 						id: t.id,
 						tName: t.tName,
-						score: action.payload.newScore
+						score: t.score + action.payload.newScore
 				  }
 				: t
 		)
