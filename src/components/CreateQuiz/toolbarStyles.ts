@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ToolProps {
-	modeOn: boolean;
+	modeOn: number | undefined;
 }
 
 export const Root = styled.div`

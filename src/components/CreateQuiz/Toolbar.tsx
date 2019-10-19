@@ -29,10 +29,13 @@ export const Toolbar: React.FC = () => {
 	return (
 		<Root>
 			<ToolContainer onClick={onEditClick}>
-				<EditTool modeOn={editModeState} icon={faEdit} />
+				<EditTool modeOn={editModeState ? 1 : undefined} icon={faEdit} />
 			</ToolContainer>
 			<ToolContainer onClick={onDeleteClick}>
-				<DeleteTool modeOn={deleteModeState} icon={faTrashAlt}></DeleteTool>
+				<DeleteTool
+					modeOn={deleteModeState ? 1 : undefined}
+					icon={faTrashAlt}
+				></DeleteTool>
 			</ToolContainer>
 		</Root>
 	);
