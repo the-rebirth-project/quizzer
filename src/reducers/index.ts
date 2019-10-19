@@ -4,6 +4,7 @@ import { quizReducer } from './quizReducers';
 import { questionReducer } from './questionReducers';
 import { modalReducer } from './modalReducers';
 import { toolbarReducer } from './toolbarReducers';
+import { scoreboardReducer } from './scoreboardReducers';
 
 export const rootReducer = (history: any) =>
 	combineReducers({
@@ -11,5 +12,6 @@ export const rootReducer = (history: any) =>
 		quiz: quizReducer,
 		question: questionReducer,
 		modal: modalReducer,
-		toolbar: toolbarReducer
+		toolbar: toolbarReducer,
+		scoreboard: scoreboardReducer
 	});
