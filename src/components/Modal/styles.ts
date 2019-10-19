@@ -32,8 +32,8 @@ export const Content = styled(animated.div)`
 	position: relative;
 	z-index: 200;
 	background-color: ${props => props.theme.colors.secondary};
-	min-width: 50%;
-	height: 70%;
+	width: 68.3rem;
+	height: 53.7rem;
 	padding: 2rem;
 	border-radius: 20px;
 `;
