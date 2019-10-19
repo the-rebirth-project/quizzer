@@ -8,7 +8,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import UIfx from 'uifx';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../types';
-import { validateChoice, rehydrateState } from '../../actions';
+import { validateChoice, rehydrateState, updateScore } from '../../actions';
 import {
 	Root,
 	QuestionWrapper,
@@ -67,6 +67,16 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		);
 	};
 
+	const handleUpdateScore = (): void => {
+		// questionNum is the index of the question in the array
+		const qPos = questionNum + 1;
+		if (qPos % 2 !== 0) {
+			dispatch(updateScore({ newScore: 3, id: 0 }));
+		} else {
+			dispatch(updateScore({ newScore: 3, id: 1 }));
+		}
+	};
+
 	const onOptionClick = (option: string): void => {
 		// a small delay for validating choice here to provide a sense of tension
 		setTimeout(() => {
@@ -75,6 +85,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			);
 
 			if (option === qData.correct_answer) {
+				handleUpdateScore();
 				const correctSfx = require('../../sfx/correctsfx.mp3');
 				const correct = new UIfx(correctSfx, {
 					volume: 1,
@@ -177,7 +188,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 									<FeedbackContainer
 										key={key}
 										style={props}
-										choiceValid={choiceValid}
+										choiceValid={choiceValid ? 1 : undefined}
 									>
 										{choiceValid ? (
 											<FontAwesomeIcon icon={faCheck} />
