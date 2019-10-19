@@ -10,7 +10,7 @@ interface TimerProps {
 }
 
 interface FeedbackContainerProps {
-	choiceValid: boolean | null;
+	choiceValid: number | undefined;
 }
 
 export const Root = styled(animated.div)`
