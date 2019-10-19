@@ -5,6 +5,7 @@ import { saveEditedQuestion, showModal } from '../../actions';
 import { Question } from '../../types';
 import {
 	StyledLabel,
+	LabelText,
 	StyledInputField,
 	StyledSelect,
 	FieldContainer,
@@ -83,7 +84,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 				<form onSubmit={handleSubmit}>
 					<FieldContainer>
 						<StyledLabel>
-							Question{' '}
+							<LabelText>Question</LabelText>
 							<StyledInputField
 								name="question"
 								component="input"
@@ -95,7 +96,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 					<Field name="difficulty">
 						{({ input, meta }) => (
 							<StyledLabel>
-								Difficulty{' '}
+								<LabelText>Difficulty</LabelText>
 								<StyledSelect {...input}>
 									<option value="easy">Easy</option>
 									<option value="medium">Medium</option>
@@ -193,8 +194,13 @@ export const EditForm: React.FC<EditFormProps> = props => {
 					)}
 					<FieldContainer>
 						<StyledLabel>
-							<Field name="timed" component="input" type="checkbox" />
-							Timer
+							<Field
+								name="timed"
+								component="input"
+								type="checkbox"
+								style={{ opacity: 0 }}
+							/>
+							<LabelText>Timer</LabelText>
 							<StyledInputField
 								name="timer"
 								component="input"

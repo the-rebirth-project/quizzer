@@ -34,7 +34,11 @@ export const StyledLabel = styled.label`
 	width: 100%;
 `;
 
-export const OptionLabel = styled.span<OptionLabelProps>`
+export const LabelText = styled.span`
+	text-transform: uppercase;
+`;
+
+export const OptionLabel = styled(LabelText)<OptionLabelProps>`
 	cursor: pointer;
 	color: ${props =>
 		props.name === props.checked
