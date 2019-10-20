@@ -74,6 +74,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 			correct_answer,
 			options,
 			timer: values.timer,
+			team: { id: 0, tName: '', score: 0 },
 			modifiers: {
 				timed: values.timed,
 				rapidfire: false
