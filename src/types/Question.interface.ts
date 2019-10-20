@@ -1,3 +1,5 @@
+import { Team } from './Team.interface';
+
 export interface Question {
 	qId: string;
 	category: string;
@@ -8,6 +10,7 @@ export interface Question {
 	correct_answer: string;
 	options: string[];
 	timer: number;
+	team: Team;
 	modifiers: {
 		timed: boolean;
 	};
