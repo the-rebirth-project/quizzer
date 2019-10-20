@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Countdown from 'react-countdown-now';
 import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useTransition } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import UIfx from 'uifx';
 import { Link } from 'react-router-dom';
+import { Scoreboard } from './Scoreboard';
 import { RootState } from '../../types';
 import { validateChoice, rehydrateState, updateScore } from '../../actions';
 import {
@@ -17,6 +18,7 @@ import {
 	Qnum,
 	Timer,
 	TimeoutOverlay,
+	CenterContainer,
 	FeedbackContainer
 } from './styles';
 import uuid from 'uuid/v4';
@@ -29,9 +31,11 @@ interface RouteParams {
 export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const dispatch = useDispatch();
 	const [timedOut, setTimedOut] = useState(false);
+	const [scoreboardShown, setScoreboardShown] = useState(false);
 	const choiceValid = useSelector(
 		(state: RootState) => state.question.choiceValid
 	);
+	const teams = useSelector((state: RootState) => state.scoreboard.teams);
 	const questionNum = parseInt(props.match.params.qId);
 	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const started = useSelector((state: RootState) => state.quiz.started);
@@ -40,14 +44,48 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 	useEffect(() => {
 		setTimedOut(false);
+		setScoreboardShown(false);
 		dispatch(rehydrateState()); // sets choiceValid back to null after each question
 	}, [dispatch, questionNum]);
+
+	useEffect(() => {
+		questions.map((q, i) => {
+			// NOTE: THIS CODE BREAKS IF NUMBER OF TEAMS EXCEEDS 4. MIN NUMBER OF TEAMS IS 2
+			const prevQuestion = questions[i - 1];
+			let teamI: number = 0;
+			if (prevQuestion) teamI = teams.indexOf(questions[i - 1].team);
+			const numOfIndices = teams.length - 1;
+			// we're brute handling all edge cases here. maybe try implementing a better solution?
+			if (!prevQuestion) {
+				q.team = teams[0];
+			} else if (numOfIndices - teamI === 1) {
+				q.team = teams[numOfIndices];
+			} else if (teamI === 0) {
+				q.team = teams[teamI + 1];
+			} else {
+				q.team = teams[numOfIndices - teamI];
+			}
+
+			return {
+				...q
+			};
+		});
+		// eslint-disable-next-line
+	}, [questions, teams]);
 
 	const transitions = useTransition(questionNum, p => p, {
 		initial: { opacity: 0 },
 		from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
 		enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
 		leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
+	});
+
+	const scoreboardTransition = useTransition(scoreboardShown, null, {
+		initial: { opacity: 0 },
+		from: { opacity: 0 },
+		enter: { opacity: 1 },
+		leave: { opacity: 0 },
+		config: { duration: 0 }
 	});
 
 	const feedbackContainerTransition = useTransition(choiceValid, null, {
@@ -67,16 +105,6 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		);
 	};
 
-	const handleUpdateScore = (): void => {
-		// questionNum is the index of the question in the array
-		const qPos = questionNum + 1;
-		if (qPos % 2 !== 0) {
-			dispatch(updateScore({ newScore: 3, id: 0 }));
-		} else {
-			dispatch(updateScore({ newScore: 3, id: 1 }));
-		}
-	};
-
 	const onOptionClick = (option: string): void => {
 		// a small delay for validating choice here to provide a sense of tension
 		setTimeout(() => {
@@ -85,7 +113,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			);
 
 			if (option === qData.correct_answer) {
-				handleUpdateScore();
+				dispatch(updateScore({ score: 3, id: qData.team.id }));
 				const correctSfx = require('../../sfx/correctsfx.mp3');
 				const correct = new UIfx(correctSfx, {
 					volume: 1,
@@ -93,6 +121,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 				});
 				correct.play();
 			} else {
+				dispatch(updateScore({ score: -1, id: qData.team.id }));
 				const incorrectSfx = require('../../sfx/incorrectsfx.mp3');
 				const incorrect = new UIfx(incorrectSfx, {
 					volume: 1,
@@ -100,7 +129,9 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 				});
 				incorrect.play();
 			}
-
+			setTimeout(() => {
+				setScoreboardShown(true);
+			}, 2500);
 			setTimeout(() => {
 				// if all the questions are exhausted, user is forced back to menu
 				if (questionNum >= questions.length - 1) {
@@ -108,7 +139,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 				} else {
 					dispatch(push(`/start/q/${questionNum + 1}`));
 				}
-			}, 1500);
+			}, 7500);
 		}, 500);
 	};
 
@@ -173,18 +204,19 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 						{renderQuestion()}
 					</QuestionWrapper>
 					<OptionsWrapper started={started}>{renderOptions()}</OptionsWrapper>
-					<div
-						style={{
-							position: 'absolute',
-							top: '50%',
-							left: '50%',
-							transform: 'translate(-50%, -50%)',
-							zIndex: 20
-						}}
-					>
+					<CenterContainer>
+						{scoreboardTransition.map(
+							({ item, props, key }) =>
+								item && (
+									<animated.div key={key} style={props}>
+										<Scoreboard />
+									</animated.div>
+								)
+						)}
 						{feedbackContainerTransition.map(
 							({ item, props, key }) =>
-								item !== null && (
+								item !== null &&
+								!scoreboardShown && (
 									<FeedbackContainer
 										key={key}
 										style={props}
@@ -212,7 +244,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 								)}
 							</>
 						)}
-					</div>
+					</CenterContainer>
 				</Root>
 			))}
 		</div>
