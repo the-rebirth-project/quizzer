@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Field } from 'react-final-form';
 
 interface SInputProps {
-	checked: string;
+	checked?: string;
 }
 
 interface OptionLabelProps extends SInputProps {
@@ -23,7 +23,7 @@ export const StyledSelect = styled.select`
 	font-family: inherit;
 `;
 
-export const StyledLabel = styled.label`
+export const FieldContainer = styled.label`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -35,11 +35,14 @@ export const StyledLabel = styled.label`
 `;
 
 export const LabelText = styled.span`
+	font-size: 3rem;
+	color: ${props => props.theme.colors.grey};
 	text-transform: uppercase;
 `;
 
 export const OptionLabel = styled(LabelText)<OptionLabelProps>`
 	cursor: pointer;
+	text-transform: uppercase;
 	color: ${props =>
 		props.name === props.checked
 			? props.theme.colors.primary
@@ -62,8 +65,9 @@ export const StyledInput = styled.input`
 
 // WORKAROUND TO FIX INITIAL VALUES NOT APPEARING. IMPLEMENT A BETTER SOLUTION
 export const StyledInputField = styled(Field)<SInputProps>`
+	background-color: ${props => props.theme.colors.grey};
 	background-color: ${props =>
-		props.name === props.checked
+		props.checked && props.name === props.checked
 			? props.theme.colors.primary
 			: props.theme.colors.grey};
 	border-radius: 1rem;
@@ -75,9 +79,4 @@ export const StyledInputField = styled(Field)<SInputProps>`
 	flex: 0 0 70%;
 	margin-left: 1rem;
 	font-family: inherit;
-`;
-
-export const FieldContainer = styled.div`
-	display: flex;
-	align-items: center;
 `;

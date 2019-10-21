@@ -4,11 +4,10 @@ import { Form, Field } from 'react-final-form';
 import { saveEditedQuestion, showModal } from '../../actions';
 import { Question } from '../../types';
 import {
-	StyledLabel,
+	FieldContainer,
 	LabelText,
 	StyledInputField,
 	StyledSelect,
-	FieldContainer,
 	OptionLabel
 } from './formStyles';
 
@@ -83,132 +82,124 @@ export const EditForm: React.FC<EditFormProps> = props => {
 			render={({ handleSubmit, form, submitting, values }) => (
 				<form onSubmit={handleSubmit}>
 					<FieldContainer>
-						<StyledLabel>
-							<LabelText>Question</LabelText>
-							<StyledInputField
-								name="question"
-								component="input"
-								type="text"
-								placeholder="Enter New Question"
-							/>
-						</StyledLabel>
-					</FieldContainer>
-					<Field name="difficulty">
-						{({ input, meta }) => (
-							<StyledLabel>
-								<LabelText>Difficulty</LabelText>
-								<StyledSelect {...input}>
-									<option value="easy">Easy</option>
-									<option value="medium">Medium</option>
-									<option value="hard">Hard</option>
-								</StyledSelect>
-							</StyledLabel>
-						)}
-					</Field>
-					<FieldContainer>
-						<StyledLabel>
-							<Field
-								name="checked"
-								component="input"
-								type="radio"
-								value="o1"
-								style={{ opacity: 0 }}
-							/>
-							<OptionLabel name="o1" checked={values.checked}>
-								Option 1
-							</OptionLabel>
-							<StyledInputField
-								name="o1"
-								component="input"
-								type="text"
-								checked={values.checked}
-							/>
-						</StyledLabel>
+						<LabelText>Question</LabelText>
+						<StyledInputField
+							name="question"
+							component="input"
+							type="text"
+							placeholder="Enter New Question"
+						/>
 					</FieldContainer>
 
 					<FieldContainer>
-						<StyledLabel>
-							<Field
-								name="checked"
-								component="input"
-								type="radio"
-								value="o2"
-								style={{ opacity: 0 }}
-							/>
-							<OptionLabel name="o2" checked={values.checked}>
-								Option 2
-							</OptionLabel>
-							<StyledInputField
-								name="o2"
-								component="input"
-								type="text"
-								checked={values.checked}
-							/>
-						</StyledLabel>
+						<Field name="difficulty">
+							{({ input, meta }) => (
+								<>
+									<LabelText>Difficulty</LabelText>
+									<StyledSelect {...input}>
+										<option value="easy">Easy</option>
+										<option value="medium">Medium</option>
+										<option value="hard">Hard</option>
+									</StyledSelect>
+								</>
+							)}
+						</Field>
+					</FieldContainer>
+
+					<FieldContainer>
+						<Field
+							name="checked"
+							component="input"
+							type="radio"
+							value="o1"
+							style={{ opacity: 0 }}
+						/>
+						<OptionLabel name="o1" checked={values.checked}>
+							Option 1
+						</OptionLabel>
+						<StyledInputField
+							name="o1"
+							component="input"
+							type="text"
+							checked={values.checked}
+						/>
+					</FieldContainer>
+
+					<FieldContainer>
+						<Field
+							name="checked"
+							component="input"
+							type="radio"
+							value="o2"
+							style={{ opacity: 0 }}
+						/>
+						<OptionLabel name="o2" checked={values.checked}>
+							Option 2
+						</OptionLabel>
+						<StyledInputField
+							name="o2"
+							component="input"
+							type="text"
+							checked={values.checked}
+						/>
 					</FieldContainer>
 
 					{question.type !== 'boolean' && (
 						<>
 							<FieldContainer>
-								<StyledLabel>
-									<Field
-										name="checked"
-										component="input"
-										type="radio"
-										value="o3"
-										style={{ opacity: 0 }}
-									/>
-									<OptionLabel name="o3" checked={values.checked}>
-										Option 3
-									</OptionLabel>
-									<StyledInputField
-										name="o3"
-										component="input"
-										type="text"
-										checked={values.checked}
-									/>
-								</StyledLabel>
+								<Field
+									name="checked"
+									component="input"
+									type="radio"
+									value="o3"
+									style={{ opacity: 0 }}
+								/>
+								<OptionLabel name="o3" checked={values.checked}>
+									Option 3
+								</OptionLabel>
+								<StyledInputField
+									name="o3"
+									component="input"
+									type="text"
+									checked={values.checked}
+								/>
 							</FieldContainer>
 
 							<FieldContainer>
-								<StyledLabel>
-									<Field
-										name="checked"
-										component="input"
-										type="radio"
-										value="o4"
-										style={{ opacity: 0 }}
-									/>
-									<OptionLabel name="o4" checked={values.checked}>
-										Option 4
-									</OptionLabel>
-									<StyledInputField
-										name="o4"
-										component="input"
-										type="text"
-										checked={values.checked}
-									/>
-								</StyledLabel>
+								<Field
+									name="checked"
+									component="input"
+									type="radio"
+									value="o4"
+									style={{ opacity: 0 }}
+								/>
+								<OptionLabel name="o4" checked={values.checked}>
+									Option 4
+								</OptionLabel>
+								<StyledInputField
+									name="o4"
+									component="input"
+									type="text"
+									checked={values.checked}
+								/>
 							</FieldContainer>
 						</>
 					)}
 					<FieldContainer>
-						<StyledLabel>
-							<Field
-								name="timed"
-								component="input"
-								type="checkbox"
-								style={{ opacity: 0 }}
-							/>
-							<LabelText>Timer</LabelText>
-							<StyledInputField
-								name="timer"
-								component="input"
-								type="number"
-								min="1"
-								disabled={!values.timed}
-							/>
-						</StyledLabel>
+						<Field
+							name="timed"
+							component="input"
+							type="checkbox"
+							style={{ opacity: 0 }}
+						/>
+						<LabelText>Timer</LabelText>
+						<StyledInputField
+							name="timer"
+							component="input"
+							type="number"
+							min="1"
+							disabled={!values.timed}
+						/>
 					</FieldContainer>
 
 					<button type="submit">Save!</button>
