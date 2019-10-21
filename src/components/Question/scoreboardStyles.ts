@@ -15,8 +15,8 @@ export const Root = styled.div`
 	background-image: linear-gradient(
 		90deg,
 		#2ac46a 0%,
-		#2ac46a 50%,
-		#fcfcf3 50%
+		#2ac46a 30%,
+		#fcfcf3 30%
 	);
 `;
 
@@ -24,27 +24,30 @@ export const LeftContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 50vw;
+	width: 30vw;
 	height: 100vh;
 `;
 
 // RightContainer will contain the respective scores
 export const RightContainer = styled.div`
 	display: flex;
-	width: 50vw;
+	width: 70vw;
 	height: 100vh;
 	justify-content: space-around;
-	align-items: center;
+	align-items: flex-start;
 	flex-direction: column;
 	padding: 3rem 0rem;
+	padding-left: 4rem;
 `;
 
 export const ScoreboardTitle = styled(Title)`
-	font-size: 7rem;
+	letter-spacing: 1rem;
+	font-size: 3.4rem;
 `;
 
 export const Score = styled.div<ScoreProps>`
-	font-size: 8rem;
+	font-weight: 300;
+	font-size: 12rem;
 	text-transform: uppercase;
 	${props => {
 		if (props.first) {
@@ -61,4 +64,8 @@ export const Score = styled.div<ScoreProps>`
 			`;
 		}
 	}}
+`;
+
+export const Points = styled.span`
+	font-weight: 700;
 `;
