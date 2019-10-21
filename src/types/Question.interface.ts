@@ -1,4 +1,4 @@
-import { Team } from './Team.interface';
+import { Player } from './Player.interface';
 
 export interface Question {
 	qId: string;
@@ -10,7 +10,7 @@ export interface Question {
 	correct_answer: string;
 	options: string[];
 	timer: number;
-	team: Team;
+	player: Player;
 	modifiers: {
 		timed: boolean;
 	};
