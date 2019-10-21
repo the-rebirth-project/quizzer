@@ -45,7 +45,6 @@ export const quizReducer = createReducer(initialState)
 		questions: [...state.questions, action.payload]
 	}))
 	.handleAction(saveEditedQuestion, (state, action) => {
-		// filter out the question that was edited
 		const editedQuestion = state.questions.filter(
 			q => q.qId === action.payload.qId
 		)[0];
