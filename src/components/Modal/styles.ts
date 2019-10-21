@@ -29,6 +29,8 @@ export const Background = styled.div<{ open: boolean }>`
 `;
 
 export const Content = styled(animated.div)`
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	z-index: 200;
 	background-color: ${props => props.theme.colors.secondary};
