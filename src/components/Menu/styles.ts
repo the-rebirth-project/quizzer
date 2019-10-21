@@ -67,8 +67,9 @@ export const Button = styled.button<ButtonProps>`
 	border: none;
 	font-size: inherit;
 	font-family: inherit;
-	width: 20.5rem;
+	min-width: 20.5rem;
 	padding: 1.3rem;
+	font-size: 2.5rem;
 	background-color: ${props =>
 		props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
 	${props =>

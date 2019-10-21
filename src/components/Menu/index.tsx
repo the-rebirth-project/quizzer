@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTransition } from 'react-spring';
-import { Root, Title, SubText, Left, Right, Button } from './styles';
+import { ConfigForm } from '../ConfigForm';
+import { Modal } from '../Modal';
 import { Link } from 'react-router-dom';
 import { startQuiz } from '../../actions';
 import { RootState } from '../../types';
+import { Root, Title, SubText, Left, Right, Button } from './styles';
+import { push } from 'connected-react-router';
 
 export const Menu: React.FC = () => {
 	const dispatch = useDispatch();
@@ -15,9 +18,15 @@ export const Menu: React.FC = () => {
 		enter: { opacity: 1, transform: 'translate(0%,0)' },
 		leave: { opacity: 0, transform: 'translate(-50%,0)' }
 	});
+	const [modalOpen, setModalOpen] = useState(false);
 
-	const onButtonClick = (): void => {
+	const onThinkBtnClick = (): void => {
+		setModalOpen(true);
+	};
+
+	const handleConfigFormSubmit = (): void => {
 		dispatch(startQuiz());
+		dispatch(push('/start/q/0'));
 	};
 
 	return (
@@ -30,17 +39,19 @@ export const Menu: React.FC = () => {
 					</Left>
 
 					<Right>
-						<Link to="/start/q/0">
-							<Button primary onClick={onButtonClick}>
-								Think
-							</Button>
-						</Link>
+						<Button primary onClick={onThinkBtnClick}>
+							Think
+						</Button>
 						<Link to="/create">
 							<Button>Create</Button>
 						</Link>
 						<Button>Explore</Button>
 						<Button>About</Button>
 					</Right>
+
+					<Modal open={modalOpen} setModalOpen={setModalOpen}>
+						<ConfigForm onFormSubmit={handleConfigFormSubmit} />
+					</Modal>
 				</Root>
 			))}
 		</>
