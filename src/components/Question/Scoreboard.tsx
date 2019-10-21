@@ -6,27 +6,28 @@ import {
 	ScoreboardTitle,
 	LeftContainer,
 	RightContainer,
-	Score
+	Score,
+	Points
 } from './scoreboardStyles';
 
 /** RULES
- * Provide props to component describing how many teams are participating
+ * Provide props to component describing how many players are participating
  * +3 points for every correct answer (possibly implement a solution where points are awarded based on completion time)
  * -1 points for every incorrect answer or time out
  */
 
 export const Scoreboard: React.FC = () => {
-	const teams = useSelector((state: RootState) => state.scoreboard.teams);
-	const firstTeam = teams.reduce((prevTeam, team) => {
-		return prevTeam.score > team.score ? prevTeam : team;
+	const players = useSelector((state: RootState) => state.scoreboard.players);
+	const firstPlayer = players.reduce((prevPlayer, team) => {
+		return prevPlayer.score > team.score ? prevPlayer : team;
 	});
-	const lastTeam = teams.reduce((prevTeam, team) => {
-		return prevTeam.score < team.score ? prevTeam : team;
+	const lastPlayer = players.reduce((prevPlayer, team) => {
+		return prevPlayer.score < team.score ? prevPlayer : team;
 	});
-	const sortedTeams = [
-		firstTeam,
-		...teams.filter(t => t !== firstTeam && t !== lastTeam),
-		lastTeam
+	const sortedPlayers = [
+		firstPlayer,
+		...players.filter(t => t !== firstPlayer && t !== lastPlayer),
+		lastPlayer
 	];
 
 	return (
@@ -36,26 +37,26 @@ export const Scoreboard: React.FC = () => {
 			</LeftContainer>
 
 			<RightContainer>
-				{sortedTeams.map((t, i) => {
+				{sortedPlayers.map((t, i) => {
 					// if index is 0
 					if (i === 0) {
 						return (
 							<Score first>
-								{t.tName}: {t.score}
+								{t.pName}: <Points>{t.score}</Points>
 							</Score>
 						);
-					} else if (i === sortedTeams.length - 1) {
+					} else if (i === sortedPlayers.length - 1) {
 						// if last index
 						return (
 							<Score last>
-								{t.tName}: {t.score}
+								{t.pName}: <Points>{t.score}</Points>
 							</Score>
 						);
 					} else {
 						// if any indices between first and last
 						return (
 							<Score>
-								{t.tName}: {t.score}
+								{t.pName}: <Points>{t.score}</Points>
 							</Score>
 						);
 					}

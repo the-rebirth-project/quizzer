@@ -35,7 +35,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const choiceValid = useSelector(
 		(state: RootState) => state.question.choiceValid
 	);
-	const teams = useSelector((state: RootState) => state.scoreboard.teams);
+	const players = useSelector((state: RootState) => state.scoreboard.players);
 	const questionNum = parseInt(props.match.params.qId);
 	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const started = useSelector((state: RootState) => state.quiz.started);
@@ -50,20 +50,20 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 	useEffect(() => {
 		questions.map((q, i) => {
-			// NOTE: THIS CODE BREAKS IF NUMBER OF TEAMS EXCEEDS 4. MIN NUMBER OF TEAMS IS 2
+			// NOTE: THIS CODE BREAKS IF NUMBER OF PLAYERS EXCEEDS 4. MIN NUMBER OF TEAMS IS 2
 			const prevQuestion = questions[i - 1];
-			let teamI: number = 0;
-			if (prevQuestion) teamI = teams.indexOf(questions[i - 1].team);
-			const numOfIndices = teams.length - 1;
+			let playerI: number = 0;
+			if (prevQuestion) playerI = players.indexOf(questions[i - 1].player);
+			const numOfIndices = players.length - 1;
 			// we're brute handling all edge cases here. maybe try implementing a better solution?
 			if (!prevQuestion) {
-				q.team = teams[0];
-			} else if (numOfIndices - teamI === 1) {
-				q.team = teams[numOfIndices];
-			} else if (teamI === 0) {
-				q.team = teams[teamI + 1];
+				q.player = players[0];
+			} else if (numOfIndices - playerI === 1) {
+				q.player = players[numOfIndices];
+			} else if (playerI === 0) {
+				q.player = players[playerI + 1];
 			} else {
-				q.team = teams[numOfIndices - teamI];
+				q.player = players[numOfIndices - playerI];
 			}
 
 			return {
@@ -71,7 +71,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			};
 		});
 		// eslint-disable-next-line
-	}, [questions, teams]);
+	}, [questions, players]);
 
 	const transitions = useTransition(questionNum, p => p, {
 		initial: { opacity: 0 },
@@ -113,7 +113,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			);
 
 			if (option === qData.correct_answer) {
-				dispatch(updateScore({ score: 3, id: qData.team.id }));
+				dispatch(updateScore({ score: 3, id: qData.player.id }));
 				const correctSfx = require('../../sfx/correctsfx.mp3');
 				const correct = new UIfx(correctSfx, {
 					volume: 1,
@@ -121,7 +121,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 				});
 				correct.play();
 			} else {
-				dispatch(updateScore({ score: -1, id: qData.team.id }));
+				dispatch(updateScore({ score: -1, id: qData.player.id }));
 				const incorrectSfx = require('../../sfx/incorrectsfx.mp3');
 				const incorrect = new UIfx(incorrectSfx, {
 					volume: 1,
