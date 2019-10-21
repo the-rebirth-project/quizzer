@@ -11,7 +11,7 @@ export const Root = styled.div`
 	flex-direction: column;
 `;
 
-export const CreateButton = styled(Button)`
+export const CreateQuizBtn = styled(Button)`
 	font-size: 1.5rem;
 	font-family: inherit;
 	text-transform: uppercase;
@@ -24,9 +24,10 @@ export const CreateButton = styled(Button)`
 `;
 
 export const ButtonContainer = styled.div`
-	width: 44rem;
+	width: 70rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 3rem;
+	margin-left: -2rem;
 `;

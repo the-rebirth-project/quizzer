@@ -8,7 +8,7 @@ import { CreateForm } from './CreateForm';
 import { Modal } from '../Modal';
 import { showModal } from '../../actions';
 import { RootState } from '../../types';
-import { Root, ButtonContainer, CreateButton } from './miniQuestionsStyles';
+import { Root, ButtonContainer, CreateQuizBtn } from './miniQuestionsStyles';
 
 export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
@@ -31,12 +31,13 @@ export const WrappedComponent: React.FC = () => {
 	return (
 		<Root>
 			<ButtonContainer>
-				<CreateButton onClick={onButtonClick} primary>
+				<CreateQuizBtn onClick={onButtonClick} primary>
 					Fetch Question
-				</CreateButton>
-				<CreateButton onClick={onCreateBtnClick} primary>
+				</CreateQuizBtn>
+				<CreateQuizBtn onClick={onCreateBtnClick} primary>
 					Create Question
-				</CreateButton>
+				</CreateQuizBtn>
+				<CreateQuizBtn primary>Save</CreateQuizBtn>
 			</ButtonContainer>
 			<Modal
 				open={modalOpen}
