@@ -43,7 +43,7 @@ export const Sidebar = styled.div`
 
 /* The parent flex container (Root) is behaving a bit weird here. had to resort to using margins*/
 export const CreateTitle = styled(Title)`
-	letter-spacing: 15px;
+	letter-spacing: 1.5rem;
 	font-size: 8rem;
 	width: 30vw;
 	margin-left: 2.3rem;
