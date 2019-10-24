@@ -1,6 +1,7 @@
 import { Question } from './Question.interface';
 
 export interface QuizPreset {
-	quizId: string;
+	id: string;
+	presetName: string;
 	questions: Question[];
 }
