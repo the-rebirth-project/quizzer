@@ -15,3 +15,9 @@ export const QuestionContainer = styled.div`
 	text-transform: uppercase;
 	cursor: pointer;
 `;
+
+export const QuestionNum = styled.span`
+	font-size: 3rem;
+	font-weight: 700;
+	color: ${props => props.theme.colors.primary};
+`;

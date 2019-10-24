@@ -6,14 +6,19 @@ import { Modal } from '../Modal';
 import { showModal, deleteQuestion } from '../../actions';
 import { EditForm } from './EditForm';
 import { Question, RootState } from '../../types';
-import { Root, QuestionContainer } from './questionItemStyles';
+import { Root, QuestionContainer, QuestionNum } from './questionItemStyles';
 
 interface QuestionItemProps {
 	question: Question;
 	type: string;
+	qPos: number;
 }
 
-const WrappedComponent: React.FC<QuestionItemProps> = ({ type, question }) => {
+const WrappedComponent: React.FC<QuestionItemProps> = ({
+	type,
+	question,
+	qPos
+}) => {
 	const dispatch = useDispatch();
 	const toolbarSt = useSelector((state: RootState) => state.toolbar);
 	const { editModeState, deleteModeState } = toolbarSt;
@@ -38,6 +43,7 @@ const WrappedComponent: React.FC<QuestionItemProps> = ({ type, question }) => {
 	return (
 		<Root>
 			<QuestionContainer onClick={onQuestionClick}>
+				<QuestionNum>{qPos}. </QuestionNum>
 				{question.question}
 			</QuestionContainer>
 			<Modal

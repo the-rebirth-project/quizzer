@@ -5,7 +5,7 @@ export const Root = styled.div`
 	width: 90%;
 	height: fit-content;
 	color: ${props => props.theme.colors.grey};
-	padding: 2rem;
+	padding: 2rem 0rem;
 	z-index: 100;
 	display: flex;
 	flex-direction: column;
@@ -29,5 +29,4 @@ export const ButtonContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 3rem;
-	margin-left: -2rem;
 `;
