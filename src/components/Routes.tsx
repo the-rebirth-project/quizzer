@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../types';
+import { Config } from './Config';
 
 export const Routes: React.FC = () => {
 	const started = useSelector((state: RootState) => state.quiz.started);
@@ -22,6 +23,7 @@ export const Routes: React.FC = () => {
 					/>
 				)}
 				<Route exact path="/create" render={() => <CreateQuiz />} />
+				<Route exact path="/configure" render={() => <Config />} />
 			</Switch>
 		</ConnectedRouter>
 	);
