@@ -1,6 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 import he from 'he';
-import { FETCH_QUESTIONS, START_QUIZ } from '../types';
+import { FETCH_QUESTIONS, START_QUIZ, SET_PRESET_ID } from '../types';
 import { Question } from '../types';
 import axios from 'axios';
 import { Dispatch } from 'redux';
@@ -43,4 +43,6 @@ export const fetchQuestionsThunk = async (
 	dispatch(fetchQuestions(newData));
 };
 
-export const startQuiz = createStandardAction(START_QUIZ)<undefined>();
+// takes in an id as argument to find the required preset
+export const startQuiz = createStandardAction(START_QUIZ)();
+export const setPresetId = createStandardAction(SET_PRESET_ID)<string>();

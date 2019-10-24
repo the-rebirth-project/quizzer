@@ -37,7 +37,12 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	);
 	const players = useSelector((state: RootState) => state.scoreboard.players);
 	const questionNum = parseInt(props.match.params.qId);
-	const questions = useSelector((state: RootState) => state.quiz.questions);
+	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
+	// gets the chosen preset id from config form
+	const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
+	// selects the appropriate preset based on chosen id
+	const curPreset = quizPresets.filter(p => p.id === curPresetId)[0];
+	const { questions } = curPreset;
 	const started = useSelector((state: RootState) => state.quiz.started);
 	const qData = questions[questionNum];
 	const { question, options } = qData;

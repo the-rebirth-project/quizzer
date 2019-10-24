@@ -42,6 +42,10 @@ export const quizReducer = createReducer(initialState)
 		...state,
 		started: true
 	}))
+	.handleAction(setPresetId, (state, action) => ({
+		...state,
+		curPresetId: action.payload
+	}))
 	.handleAction(sortQuestion, (state, action) => ({
 		...state,
 		questions: action.payload

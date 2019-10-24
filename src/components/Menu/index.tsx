@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTransition } from 'react-spring';
-import { ConfigForm } from '../ConfigForm';
-import { Modal } from '../Modal';
 import { Link } from 'react-router-dom';
-import { startQuiz } from '../../actions';
+import { push } from 'connected-react-router';
+import { startQuiz, setPresetId } from '../../actions';
 import { RootState } from '../../types';
 import { Root, Title, SubText, Left, Right, Button } from './styles';
-import { push } from 'connected-react-router';
 
 export const Menu: React.FC = () => {
 	const dispatch = useDispatch();
@@ -18,14 +16,16 @@ export const Menu: React.FC = () => {
 		enter: { opacity: 1, transform: 'translate(0%,0)' },
 		leave: { opacity: 0, transform: 'translate(-50%,0)' }
 	});
-	const [modalOpen, setModalOpen] = useState(false);
+	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
+	const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
 
 	const onThinkBtnClick = (): void => {
-		setModalOpen(true);
-	};
-
-	const handleConfigFormSubmit = (): void => {
-		dispatch(startQuiz());
+		if (!curPresetId) {
+			dispatch(setPresetId(quizPresets[0].id));
+			dispatch(startQuiz());
+		} else {
+			dispatch(startQuiz());
+		}
 		dispatch(push('/start/q/0'));
 	};
 
@@ -45,13 +45,11 @@ export const Menu: React.FC = () => {
 						<Link to="/create">
 							<Button>Create</Button>
 						</Link>
+						<Link to="/configure">
+							<Button>Configure</Button>
+						</Link>
 						<Button>Explore</Button>
-						<Button>About</Button>
 					</Right>
-
-					<Modal open={modalOpen} setModalOpen={setModalOpen}>
-						<ConfigForm onFormSubmit={handleConfigFormSubmit} />
-					</Modal>
 				</Root>
 			))}
 		</>
