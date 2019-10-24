@@ -29,9 +29,9 @@ export const Modal: React.FC<ModalProps> = ({
 		config: (item, state) => {
 			switch (state) {
 				case 'enter':
-					return { tension: 80, friction: 10 };
+					return { tension: 300, friction: 26 };
 				case 'leave':
-					return { tension: 170, friction: 26 };
+					return { tension: 310, friction: 26 };
 				default:
 					return { tension: 170, friction: 26 };
 			}
