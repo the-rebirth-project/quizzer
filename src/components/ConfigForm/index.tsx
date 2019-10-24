@@ -1,11 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Form, Field } from 'react-final-form';
+import { RootState } from '../../types';
 import {
 	FieldContainer,
 	StyledSelect,
 	LabelText
 } from '../CreateQuiz/formStyles';
-import { SubmitBtn } from './styles';
+import { SubmitBtn } from '../CreateQuiz/formStyles';
 
 /**
  * Fields for:
@@ -14,25 +16,31 @@ import { SubmitBtn } from './styles';
  * -
  */
 
+// should refrain from using any as type for our argument here
 interface ConfigFormProps {
-	onFormSubmit: () => void;
+	onFormSubmit: (arg0: any) => void;
 }
 
 export const ConfigForm: React.FC<ConfigFormProps> = ({ onFormSubmit }) => {
+	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
+	const initialFormValues = {
+		presetId: quizPresets[0].id
+	};
 	return (
 		<Form
 			onSubmit={onFormSubmit}
+			initialValues={initialFormValues}
 			render={({ handleSubmit, form, submitting, values }) => (
 				<form onSubmit={handleSubmit}>
 					<FieldContainer>
-						<Field name="quizName">
+						<Field name="presetId">
 							{({ input, meta }) => (
 								<>
-									<LabelText>Quiz Name</LabelText>
+									<LabelText>Select Preset</LabelText>
 									<StyledSelect {...input}>
-										<option value="quiz1">Quiz 1</option>
-										<option value="quiz2">Quiz 2</option>
-										<option value="quiz3">Quiz 3</option>
+										{quizPresets.map(p => (
+											<option value={p.id}>{p.presetName}</option>
+										))}
 									</StyledSelect>
 								</>
 							)}
