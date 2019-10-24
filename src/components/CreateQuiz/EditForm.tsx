@@ -17,7 +17,7 @@ interface EditFormProps {
 }
 
 export const EditForm: React.FC<EditFormProps> = props => {
-	interface Values {
+	interface FormValues {
 		question: string;
 		difficulty: string;
 		o1: string;
@@ -32,7 +32,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 	const { question, setModalOpen } = props;
 	const dispatch = useDispatch();
 
-	const onFormSubmit = (values: Values) => {
+	const onFormSubmit = (values: FormValues) => {
 		const options = [values.o1, values.o2, values.o3, values.o4];
 		const getNewCorrectAnswer = (): string => {
 			const index = parseInt(values.checked.slice(1)) - 1;
