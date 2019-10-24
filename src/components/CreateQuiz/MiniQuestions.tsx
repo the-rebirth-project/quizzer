@@ -5,6 +5,7 @@ import uuid from 'uuid/v4';
 import { fetchQuestionsThunk } from '../../actions';
 import { QuestionItem } from './QuestionItem';
 import { CreateForm } from './CreateForm';
+import { SaveForm } from './SaveForm';
 import { Modal } from '../Modal';
 import { showModal } from '../../actions';
 import { RootState } from '../../types';
@@ -14,9 +15,10 @@ export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const modalShown = useSelector((state: RootState) => state.modal.modalShown);
-	const [modalOpen, setModalOpen] = useState(false);
+	const [createModalOpen, setCreateModalOpen] = useState(false);
+	const [saveModalOpen, setSaveModalOpen] = useState(false);
 
-	const onButtonClick = (): void => {
+	const onFetchBtnClick = (): void => {
 		const fetchRandomQuestions = async () => {
 			await fetchQuestionsThunk(dispatch, 1);
 		};
@@ -24,38 +26,54 @@ export const WrappedComponent: React.FC = () => {
 	};
 
 	const onCreateBtnClick = (): void => {
-		setModalOpen(true);
+		setCreateModalOpen(true);
+		dispatch(showModal());
+	};
+
+	const onSaveBtnClick = (): void => {
+		setSaveModalOpen(true);
 		dispatch(showModal());
 	};
 
 	return (
 		<Root>
 			<ButtonContainer>
-				<CreateQuizBtn onClick={onButtonClick} primary>
+				<CreateQuizBtn onClick={onFetchBtnClick} primary>
 					Fetch Question
 				</CreateQuizBtn>
 				<CreateQuizBtn onClick={onCreateBtnClick} primary>
 					Create Question
 				</CreateQuizBtn>
-				<CreateQuizBtn primary>Save</CreateQuizBtn>
+				<CreateQuizBtn primary onClick={onSaveBtnClick}>
+					Save
+				</CreateQuizBtn>
 			</ButtonContainer>
-			<Modal
-				open={modalOpen}
-				setModalOpen={setModalOpen}
-				aria-label="Create Question"
-				key={uuid()}
-			>
-				<CreateForm setCreateModalOpen={setModalOpen} />
-			</Modal>
 			{questions.map((q, i) => (
 				<QuestionItem
 					disabled={modalShown}
 					question={q}
 					type="random"
 					index={i}
+					qPos={i + 1}
 					key={q.qId}
 				/>
 			))}
+			<Modal
+				open={createModalOpen}
+				setModalOpen={setCreateModalOpen}
+				aria-label="Create Question"
+				key={uuid()}
+			>
+				<CreateForm setCreateModalOpen={setCreateModalOpen} />
+			</Modal>
+			<Modal
+				open={saveModalOpen}
+				setModalOpen={setSaveModalOpen}
+				aria-label="Save Questions"
+				key={uuid()}
+			>
+				<SaveForm setSaveModalOpen={setSaveModalOpen} />
+			</Modal>
 		</Root>
 	);
 };

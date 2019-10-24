@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../Menu/styles';
 import { Field } from 'react-final-form';
 
 interface SInputProps {
@@ -79,4 +80,21 @@ export const StyledInputField = styled(Field)<SInputProps>`
 	flex: 0 0 70%;
 	margin-left: 1rem;
 	font-family: inherit;
+`;
+
+export const SubmitBtn = styled(Button)`
+	font-size: 2.2rem;
+	margin-bottom: 3rem;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+
+	:hover {
+		transform: translate(-50%, -3px);
+	}
+
+	:active {
+		transform: translate(-50%, -1px);
+	}
 `;
