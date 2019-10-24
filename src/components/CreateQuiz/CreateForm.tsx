@@ -12,23 +12,23 @@ import {
 	LabelText
 } from './formStyles';
 
-interface FormValues {
-	question: string;
-	difficulty: string;
-	o1: string;
-	o2: string;
-	o3: string;
-	o4: string;
-	checked: string;
-	timer: number;
-	timed: boolean;
-}
-
 interface CreateFormProps {
 	setCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CreateForm: React.FC<CreateFormProps> = props => {
+	interface FormValues {
+		question: string;
+		difficulty: string;
+		o1: string;
+		o2: string;
+		o3: string;
+		o4: string;
+		checked: string;
+		timer: number;
+		timed: boolean;
+	}
+
 	const dispatch = useDispatch();
 	const { setCreateModalOpen } = props;
 
