@@ -1,6 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
+import { push } from 'connected-react-router';
+import { setPresetId } from '../../actions';
 import { RootState } from '../../types';
 import {
 	FieldContainer,
@@ -16,15 +18,20 @@ import { SubmitBtn } from '../CreateQuiz/formStyles';
  * -
  */
 
-// should refrain from using any as type for our argument here
-interface ConfigFormProps {
-	onFormSubmit: (arg0: any) => void;
-}
+export const ConfigForm: React.FC = () => {
+	interface ConfigFormValues {
+		presetId: string;
+	}
 
-export const ConfigForm: React.FC<ConfigFormProps> = ({ onFormSubmit }) => {
+	const dispatch = useDispatch();
 	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
 	const initialFormValues = {
 		presetId: quizPresets[0].id
+	};
+
+	const onFormSubmit = (values: ConfigFormValues): void => {
+		dispatch(setPresetId(values.presetId));
+		dispatch(push('/'));
 	};
 	return (
 		<Form
@@ -48,7 +55,7 @@ export const ConfigForm: React.FC<ConfigFormProps> = ({ onFormSubmit }) => {
 					</FieldContainer>
 
 					<SubmitBtn primary type="submit">
-						Start
+						Save
 					</SubmitBtn>
 				</form>
 			)}
