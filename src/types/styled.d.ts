@@ -15,6 +15,8 @@ declare module 'styled-components' {
 			grey: string;
 			lightGrey: string;
 			mediumGrey: string;
+			amethyst: string;
+			pinkRed: string;
 		};
 	}
 }
