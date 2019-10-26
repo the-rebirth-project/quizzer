@@ -10,6 +10,8 @@ export const mainTheme: DefaultTheme = {
 		tertiaryDark: '#05668D',
 		grey: '#333',
 		lightGrey: '#f7f7f7',
-		mediumGrey: '#eee'
+		mediumGrey: '#eee',
+		amethyst: '#6e00fe',
+		pinkRed: '#f10b4a'
 	}
 };
