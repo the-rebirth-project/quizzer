@@ -52,7 +52,7 @@ export const Score = styled.div<ScoreProps>`
 	${props => {
 		if (props.first) {
 			return css`
-				color: #6e00fe;
+				color: ${props => props.theme.colors.amethyst};
 			`;
 		} else if (!props.first && !props.last) {
 			return css`
@@ -60,7 +60,7 @@ export const Score = styled.div<ScoreProps>`
 			`;
 		} else {
 			return css`
-				color: #f10b4a;
+				color: ${props => props.theme.colors.pinkRed};
 			`;
 		}
 	}}
