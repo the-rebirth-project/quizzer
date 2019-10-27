@@ -34,15 +34,15 @@ export const fetchQuestionsThunk = async (
 							he.decode(q.correct_answer)
 					  ])
 					: ['True', 'False'],
-			timer: 1,
+			timer: 200,
 			modifiers: {
-				timed: false
+				timed: true
 			}
 		};
 	});
 	dispatch(fetchQuestions(newData));
 };
 
-// takes in an id as argument to find the required preset
 export const startQuiz = createStandardAction(START_QUIZ)();
+// sets the chosen preset id
 export const setPresetId = createStandardAction(SET_PRESET_ID)<string>();
