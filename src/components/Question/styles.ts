@@ -10,7 +10,7 @@ interface TimerProps {
 }
 
 interface FeedbackContainerProps {
-	choiceValid: number | undefined;
+	choiceValid?: number | undefined;
 }
 
 export const Root = styled(animated.div)`
@@ -124,7 +124,8 @@ export const Timer = styled.div`
 	z-index: 20;
 	border-radius: 50%;
 	background-color: ${props => props.theme.colors.grey};
-	color: ${props => props.theme.colors.secondary};
+	color: ${props => props.theme.colors.pinkRed};
+	font-weight: 700;
 	padding: 0.8rem;
 	display: flex;
 	align-items: center;
@@ -136,19 +137,6 @@ export const Timer = styled.div`
 
 Timer.displayName = 'Timer';
 
-export const TimeoutOverlay = styled.div<TimerProps>`
-	height: 100vh;
-	width: 100vw;
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 100;
-	background-color: #ff0000;
-	transform: ${props => (props.completed ? 'scale(1)' : 'scale(0)')};
-	transition: transform 0.3s;
-	font-size: 12rem;
-	text-transform: uppercase;
-	letter-spacing: 5px;
-	color: ${props => props.theme.colors.secondary};
+export const TimeoutOverlay = styled(FeedbackContainer)<TimerProps>`
+	background-color: ${props => props.theme.colors.pinkRed};
 `;
