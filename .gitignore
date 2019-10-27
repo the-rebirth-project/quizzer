@@ -11,10 +11,6 @@
 # production
 /dist
 
-# assets
-/src/sfx
-/src/svgs
-
 # misc
 .DS_Store
 .env.local
