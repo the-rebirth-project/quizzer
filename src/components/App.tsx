@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes } from './Routes';
 import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPresetId } from '../actions';
 import { RootState } from '../types';
 
 const Background = styled(animated.div)`
 	--primary-rgb-color: 38, 188, 99; /* rgb version of our primary green color */
 	--secondary-rgb-color: 242, 243, 229;
+	--amethyst-rgb-color: 101, 0, 246;
 	--grey-rgb-color: 46, 46, 46;
 	height: 100vh;
 `;
 
 export const App: React.FC = () => {
+	const dispatch = useDispatch();
 	// using both location.pathname and the started boolean in order to determine if we should flip the background. maybe there's a better solution?
 	const { location } = useSelector((state: RootState) => state.router);
 	const started = useSelector((state: RootState) => state.quiz.started);
+	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
+
+	useEffect(() => {
+		quizPresets[0] && dispatch(setPresetId(quizPresets[0].id));
+	}, []);
 
 	// animates when the Question component renders
 	const animProps = useSpring({
