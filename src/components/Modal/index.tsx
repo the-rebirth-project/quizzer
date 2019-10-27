@@ -26,16 +26,7 @@ export const Modal: React.FC<ModalProps> = ({
 		from: { opacity: 0, transform: 'scale(0)' },
 		enter: { opacity: 1, transform: 'scale(1)' },
 		leave: { opacity: 0, transform: 'scale(0)' },
-		config: (item, state) => {
-			switch (state) {
-				case 'enter':
-					return { tension: 300, friction: 26 };
-				case 'leave':
-					return { tension: 310, friction: 26 };
-				default:
-					return { tension: 170, friction: 26 };
-			}
-		}
+		config: { tension: 300, friction: 26 }
 	});
 
 	return (
