@@ -44,7 +44,10 @@ export const quizReducer = createReducer(initialState)
 	}))
 	.handleAction(setPresetId, (state, action) => ({
 		...state,
-		curPresetId: action.payload
+		curPresetId: action.payload,
+		questions: [
+			...state.presets.filter(p => p.id === action.payload)[0].questions
+		]
 	}))
 	.handleAction(sortQuestion, (state, action) => ({
 		...state,
