@@ -32,6 +32,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const dispatch = useDispatch();
 	const [timedOut, setTimedOut] = useState(false);
 	const [scoreboardShown, setScoreboardShown] = useState(false);
+	const [countdownPaused, setCountdownPaused] = useState(false);
 	const choiceValid = useSelector(
 		(state: RootState) => state.question.choiceValid
 	);
@@ -110,7 +111,20 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		);
 	};
 
+	const goToNext = (): void => {
+		setTimeout(() => {
+			// if all the questions are exhausted, user is forced back to menu
+			if (questionNum >= questions.length - 1) {
+				dispatch(push('/'));
+			} else {
+				dispatch(push(`/start/q/${questionNum + 1}`));
+			}
+			setScoreboardShown(false);
+		}, 7500);
+	};
+
 	const onOptionClick = (option: string): void => {
+		setCountdownPaused(true);
 		// a small delay for validating choice here to provide a sense of tension
 		setTimeout(() => {
 			dispatch(
@@ -137,23 +151,16 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			setTimeout(() => {
 				setScoreboardShown(true);
 			}, 2500);
-			setTimeout(() => {
-				// if all the questions are exhausted, user is forced back to menu
-				if (questionNum >= questions.length - 1) {
-					dispatch(push('/'));
-				} else {
-					dispatch(push(`/start/q/${questionNum + 1}`));
-				}
-			}, 7500);
+			goToNext();
 		}, 500);
 	};
 
-	// If any of the options are undefined, simply return false i.e we don't return anything.
+	// If any of the options are a falsey value, don't return anything
 	// This is to prevent blank options being rendered when the question does not have exactly 4 or 2 options as expected
-	const renderOptions = (): (JSX.Element | false)[] => {
+	const renderOptions = (): (JSX.Element | '')[] => {
 		return options.map(
 			option =>
-				option !== undefined && (
+				option && (
 					<Option
 						disabled={choiceValid !== null}
 						key={uuid()}
@@ -169,9 +176,11 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		setTimedOut(true);
 		// validateChoice would always return false here. kind of a hacky way of doing it
 		dispatch(validateChoice({ choice: 'timeout', correctAnswer: '' }));
+		dispatch(updateScore({ score: -1, id: qData.player.id }));
 		setTimeout(() => {
-			dispatch(push(`/start/q/${questionNum + 1}`));
+			setScoreboardShown(true);
 		}, 2500);
+		goToNext();
 	};
 
 	const timerRenderer = ({
@@ -184,9 +193,9 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		completed: boolean;
 	}): JSX.Element => {
 		if (completed) {
-			return <TimeoutOverlay completed={completed}>Time Out!</TimeoutOverlay>;
+			return <div></div>;
 		} else {
-			return <Timer>{`${minutes}: ${seconds}`}</Timer>;
+			return <Timer>{`${minutes ? minutes * 60 + seconds : seconds}`}</Timer>;
 		}
 	};
 
@@ -221,7 +230,8 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 						{feedbackContainerTransition.map(
 							({ item, props, key }) =>
 								item !== null &&
-								!scoreboardShown && (
+								!scoreboardShown &&
+								!timedOut && (
 									<FeedbackContainer
 										key={key}
 										style={props}
@@ -240,12 +250,21 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 								<Countdown
 									date={Date.now() + qData.timer * 1000}
 									renderer={timerRenderer}
-									onComplete={onTimeout}
+									onComplete={countdownPaused ? undefined : onTimeout}
 								/>
-								{timedOut && (
-									<TimeoutOverlay completed={timedOut}>
-										Time out!
-									</TimeoutOverlay>
+								{feedbackContainerTransition.map(
+									({ item, props, key }) =>
+										item !== null &&
+										timedOut &&
+										!scoreboardShown && (
+											<TimeoutOverlay
+												key={key}
+												style={props}
+												completed={timedOut}
+											>
+												Time out!
+											</TimeoutOverlay>
+										)
 								)}
 							</>
 						)}
