@@ -14,7 +14,7 @@ import {
 	Root,
 	Sidebar,
 	CreateTitle,
-	ConfigContainer
+	MiniQuestionsContainer
 } from './styles';
 
 export const CreateQuiz: React.FC = () => {
@@ -44,14 +44,14 @@ export const CreateQuiz: React.FC = () => {
 							<Link to="/">Home</Link>
 							<CreateTitle>Create</CreateTitle>
 						</Sidebar>
-						<ConfigContainer>
+						<MiniQuestionsContainer>
 							<MiniQuestions
 								distance={3}
 								axis="y"
 								lockAxis="y"
 								onSortEnd={handleOnSortEnd}
 							/>
-						</ConfigContainer>
+						</MiniQuestionsContainer>
 					</Root>
 				</animated.div>
 			))}

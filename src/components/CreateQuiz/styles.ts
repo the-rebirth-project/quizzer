@@ -50,7 +50,7 @@ export const CreateTitle = styled(Title)`
 	text-align: center;
 `;
 
-export const ConfigContainer = styled.div`
+export const MiniQuestionsContainer = styled.div`
 	font-size: 3rem;
 	box-shadow: -5px 0px 6px rgba(46, 46, 46, 0.08);
 	color: ${props => props.theme.colors.secondary};
