@@ -41,7 +41,7 @@ export const SaveForm: React.FC<SaveFormProps> = ({ setSaveModalOpen }) => {
 			render={({ handleSubmit, form, submitting, values }) => (
 				<form onSubmit={handleSubmit}>
 					<FieldContainer>
-						<LabelText>Question</LabelText>
+						<LabelText>Name</LabelText>
 						<StyledInputField
 							name="presetName"
 							component="input"
