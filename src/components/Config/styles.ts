@@ -1,18 +1,13 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 import { Title } from '../Menu/styles';
 
-export const Root = styled.div`
+export const Root = styled(animated.div)`
 	display: flex;
 	position: relative;
 	z-index: 1000;
 	height: 100vh;
 	width: 100vw;
-	background-image: linear-gradient(
-		90deg,
-		#2ac46a 0%,
-		#2ac46a 30%,
-		#fcfcf3 30%
-	);
 `;
 
 export const LeftContainer = styled.div`
@@ -52,7 +47,8 @@ export const SectionHeading = styled.h2`
 	font-weight: 300;
 	margin-bottom: 2.3rem;
 	padding-bottom: 0.5rem;
-	border-bottom: 0.5rem solid ${props => props.theme.colors.primary};
+	letter-spacing: 2rem;
+	text-align: center;
 `;
 
 export const SectionContainer = styled.section`
