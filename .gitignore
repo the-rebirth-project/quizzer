@@ -12,9 +12,6 @@
 /build
 /dist
 
-# assets
-/src/svgs
-
 # misc
 .DS_Store
 .env.local
