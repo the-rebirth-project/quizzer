@@ -23,7 +23,18 @@ export const App: React.FC = () => {
 
 	useEffect(() => {
 		quizPresets[0] && dispatch(setPresetId(quizPresets[0].id));
-	}, []);
+	}, [dispatch, quizPresets]);
+
+	const getBG = () => {
+		switch (true) {
+			case location.pathname.includes('/start/q/') && started:
+				return 'linear-gradient(180deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)';
+			case location.pathname.includes('/configure'):
+				return 'linear-gradient(90deg, #2ac46a 0%, #2ac46a 30%, #fcfcf3 30%)';
+			default:
+				return 'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)';
+		}
+	};
 
 	// animates when the Question component renders
 	const animProps = useSpring({
@@ -32,10 +43,7 @@ export const App: React.FC = () => {
 				'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)'
 		},
 		to: {
-			backgroundImage:
-				location.pathname.includes('/start/q/') && started
-					? 'linear-gradient(180deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)'
-					: 'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)'
+			backgroundImage: getBG()
 		}
 	});
 
