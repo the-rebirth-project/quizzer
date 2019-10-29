@@ -23,7 +23,11 @@ export const Routes: React.FC = () => {
 					/>
 				)}
 				<Route exact path="/create" render={() => <CreateQuiz />} />
-				<Route exact path="/configure" render={() => <Config />} />
+				<Route
+					exact
+					path="/configure/:pageNum"
+					render={routeProps => <Config {...routeProps} />}
+				/>
 			</Switch>
 		</ConnectedRouter>
 	);
