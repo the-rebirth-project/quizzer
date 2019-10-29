@@ -17,10 +17,12 @@ export const LeftContainer = styled.div`
 	justify-content: center;
 	width: 30vw;
 	height: 100vh;
+	position: relative;
+	z-index: 1000;
 `;
 
 // RightContainer will contain the respective scores
-export const RightContainer = styled.div`
+export const RightContainer = styled(animated.div)`
 	::-webkit-scrollbar {
 		width: 0 !important;
 	}
@@ -30,9 +32,8 @@ export const RightContainer = styled.div`
 	height: 100vh;
 	align-items: flex-start;
 	flex-direction: column;
-	padding: 3rem 0rem;
-	padding-left: 4rem;
 	overflow-y: scroll;
+	position: relative;
 `;
 
 export const ConfigTitle = styled(Title)`
@@ -51,8 +52,22 @@ export const SectionHeading = styled.h2`
 	text-align: center;
 `;
 
-export const SectionContainer = styled.section`
+export const SectionContainer = styled(animated.section)`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	padding: 3rem 0rem;
+	padding-left: 4rem;
+	align-content: flex-start;
+	display: inline-block;
+	overflow: visible;
+`;
+
+export const NavBtnContainer = styled.nav`
+	align-self: flex-end;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding: 0rem 1rem;
+	align-items: center;
 `;
