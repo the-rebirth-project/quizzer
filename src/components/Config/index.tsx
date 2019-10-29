@@ -1,6 +1,5 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { animated } from 'react-spring';
 import { push } from 'connected-react-router';
 import { useTransition } from 'react-spring';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,12 +31,12 @@ export const Config: React.FC<RouteComponentProps<RouteParams>> = props => {
 		enter: { transform: 'translate(0%,0)' },
 		leave: { transform: 'translate(-50%,0)' }
 	});
-	const sectionTransition = useTransition(pageNum, p => p, {
-		initial: { opacity: 0 },
-		from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-		enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-		leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
-	});
+	// const sectionTransition = useTransition(pageNum, p => p, {
+	// 	initial: { opacity: 0 },
+	// 	from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+	// 	enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+	// 	leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
+	// });
 
 	const goLeft = (): void => {
 		pageNum - 1 >= minPageNum
