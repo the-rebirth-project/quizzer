@@ -38,7 +38,7 @@ export const Menu: React.FC = () => {
 						<Link to="/create">
 							<Button>Create</Button>
 						</Link>
-						<Link to="/configure">
+						<Link to="/configure/1">
 							<Button>Configure</Button>
 						</Link>
 						<Button>Explore</Button>
