@@ -17,6 +17,7 @@ declare module 'styled-components' {
 			mediumGrey: string;
 			amethyst: string;
 			pinkRed: string;
+			teal: string;
 		};
 	}
 }

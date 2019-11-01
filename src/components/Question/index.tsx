@@ -56,7 +56,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 	useEffect(() => {
 		questions.map((q, i) => {
-			// NOTE: THIS CODE BREAKS IF NUMBER OF PLAYERS EXCEEDS 4. MIN NUMBER OF TEAMS IS 2
+			// NOTE: THIS CODE BREAKS IF NUMBER OF PLAYERS EXCEEDS 4.
 			const prevQuestion = questions[i - 1];
 			let playerI: number = 0;
 			if (prevQuestion) playerI = players.indexOf(questions[i - 1].player);
