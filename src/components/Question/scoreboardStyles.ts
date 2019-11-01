@@ -46,6 +46,7 @@ export const ScoreboardTitle = styled(Title)`
 `;
 
 export const Score = styled.div<ScoreProps>`
+	letter-spacing: 0.5rem;
 	font-weight: 300;
 	font-size: 12rem;
 	text-transform: uppercase;
