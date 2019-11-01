@@ -16,16 +16,18 @@ export const Root = styled.div<RootProps>`
 	${props =>
 		props.active
 			? css`
-					background-size: 200%;
+					background-size: 100%;
+					background-color: transparent;
 					box-shadow: 0rem 0.3rem 0.6rem rgba(var(--amethyst-rgb-color), 0.25);
 			  `
 			: css`
 					background-size: 5000%;
+					background-color: ${props => props.theme.colors.grey};
 					box-shadow: 0rem 0.3rem 0.6rem rgba(var(--teal-rgb-color), 0.25);
 			  `}
 	border-radius: 1rem;
-	transition-property: background-size, box-shadow, transform;
-	transition-duration: 0.7s, 0.7s, 0.3s;
+	transition-property: background-size, background-color, box-shadow, transform;
+	transition-duration: 0.7s, 0.7s, 0.7s, 0.3s;
 	transition-timing-function: ease-in-out;
 
 	:hover {
