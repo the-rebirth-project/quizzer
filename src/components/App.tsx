@@ -11,6 +11,7 @@ const Background = styled(animated.div)`
 	--secondary-rgb-color: 242, 243, 229;
 	--amethyst-rgb-color: 101, 0, 246;
 	--grey-rgb-color: 46, 46, 46;
+	--teal-rgb-color: 26, 172, 172;
 	height: 100vh;
 `;
 
