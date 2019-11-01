@@ -12,6 +12,7 @@ export const mainTheme: DefaultTheme = {
 		lightGrey: '#f7f7f7',
 		mediumGrey: '#eee',
 		amethyst: '#6e00fe',
-		pinkRed: '#f10b4a'
+		pinkRed: '#f10b4a',
+		teal: '#1aacac'
 	}
 };
