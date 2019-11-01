@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import { useTransition } from 'react-spring';
 import { useSelector, useDispatch } from 'react-redux';
 import { MiniPresets } from './MiniPresets';
+import { PlayerCardList } from './PlayerCardList';
 import { RootState } from '../../types';
 import {
 	Root,
@@ -72,7 +73,7 @@ export const Config: React.FC<RouteComponentProps<RouteParams>> = props => {
 						{pageNum === 2 && (
 							<SectionContainer>
 								<SectionHeading>Select Players</SectionHeading>
-								{/* A component called PlayerCards */}
+								<PlayerCardList />
 							</SectionContainer>
 						)}
 					</RightContainer>

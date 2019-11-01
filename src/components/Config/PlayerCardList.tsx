@@ -9,11 +9,11 @@ export const PlayerCardList: React.FC = () => {
 	const players = useSelector((state: RootState) => state.scoreboard.players);
 	return (
 		<Root>
-			{numPlayers.map((n, i) => (
+			{numPlayers.map(n => (
 				<PlayerCard
 					pNum={n}
-					active={players[i] ? true : false}
-					playerData={players[i]}
+					active={players.filter(p => p.id === n)[0] ? true : false}
+					playerData={players.filter(p => p.id === n)[0]}
 				/>
 			))}
 		</Root>
