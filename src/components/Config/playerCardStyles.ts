@@ -16,9 +16,9 @@ export const Root = styled.div<RootProps>`
 	${props =>
 		props.active
 			? css`
-					background-size: 100%;
+					background-size: 400%;
 					background-color: transparent;
-					box-shadow: 0rem 0.3rem 0.6rem rgba(var(--amethyst-rgb-color), 0.25);
+					box-shadow: 0rem 0.3rem 0.6rem rgba(26, 130, 330, 0.25);
 			  `
 			: css`
 					background-size: 5000%;
@@ -46,7 +46,7 @@ export const Root = styled.div<RootProps>`
 
 export const PlayerName = styled.span`
 	font-size: 2.5rem;
-	letter-spacing: 0.8rem;
-	font-weight: 300;
+	letter-spacing: 0.3rem;
+	font-weight: 400;
 	text-transform: uppercase;
 `;

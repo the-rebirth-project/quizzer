@@ -13,12 +13,25 @@ export const fetchQuestions = createStandardAction(FETCH_QUESTIONS)<
 // thunk action
 export const fetchQuestionsThunk = async (
 	dispatch: Dispatch,
-	numOfQuestions: number
+	numOfQuestions: number,
+	category: string,
+	difficulty: string,
+	type: string,
+	timer?: number
 ): Promise<void> => {
+	const formUrl = (property: string, value: string): string => {
+		if (value === 'any') {
+			return '';
+		} else {
+			return `${property}=${value}`;
+		}
+	};
 	const response = await axios.get(
-		`https://opentdb.com/api.php?amount=${numOfQuestions}`
+		`https://opentdb.com/api.php?amount=${numOfQuestions}&${formUrl(
+			'category',
+			category
+		)}&${formUrl('difficulty', difficulty)}&${formUrl('type', type)}`
 	);
-	console.log(response);
 	// passes on response.data.results (an array of Question objects) to fetchQuestions action creator as payload
 	const data: Question[] = response.data.results;
 	const newData = data.map(q => {
@@ -34,9 +47,9 @@ export const fetchQuestionsThunk = async (
 							he.decode(q.correct_answer)
 					  ])
 					: ['True', 'False'],
-			timer: 200,
+			timer: timer ? timer : 0,
 			modifiers: {
-				timed: true
+				timed: timer ? true : false
 			}
 		};
 	});

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SortableContainer } from 'react-sortable-hoc';
 import uuid from 'uuid/v4';
-import { fetchQuestionsThunk } from '../../actions';
+// import { fetchQuestionsThunk } from '../../actions';
 import { QuestionItem } from './QuestionItem';
 import { CreateForm } from './CreateForm';
 import { SaveForm } from './SaveForm';
+import { FetchForm } from './FetchForm';
 import { Modal } from '../Modal';
 import { showModal } from '../../actions';
 import { RootState } from '../../types';
@@ -17,12 +18,11 @@ export const WrappedComponent: React.FC = () => {
 	const modalShown = useSelector((state: RootState) => state.modal.modalShown);
 	const [createModalOpen, setCreateModalOpen] = useState(false);
 	const [saveModalOpen, setSaveModalOpen] = useState(false);
+	const [fetchModalOpen, setFetchModalOpen] = useState(false);
 
 	const onFetchBtnClick = (): void => {
-		const fetchRandomQuestions = async () => {
-			await fetchQuestionsThunk(dispatch, 1);
-		};
-		fetchRandomQuestions();
+		setFetchModalOpen(true);
+		dispatch(showModal());
 	};
 
 	const onCreateBtnClick = (): void => {
@@ -73,6 +73,14 @@ export const WrappedComponent: React.FC = () => {
 				key={uuid()}
 			>
 				<SaveForm setSaveModalOpen={setSaveModalOpen} />
+			</Modal>
+			<Modal
+				open={fetchModalOpen}
+				setModalOpen={setFetchModalOpen}
+				aria-label="Fetch Questions"
+				key={uuid()}
+			>
+				<FetchForm setFetchModalOpen={setFetchModalOpen} />
 			</Modal>
 		</Root>
 	);

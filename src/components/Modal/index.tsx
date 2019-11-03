@@ -7,12 +7,16 @@ import { Root, Background, Content } from './styles';
 interface ModalProps {
 	open: boolean;
 	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	widthRem?: number; // in rem units
+	heightRem?: number; // in rem units
 }
 
 export const Modal: React.FC<ModalProps> = ({
 	children,
 	open,
-	setModalOpen
+	setModalOpen,
+	widthRem,
+	heightRem
 }) => {
 	const dispatch = useDispatch();
 	const onClickOutside = (): void => {
@@ -36,7 +40,12 @@ export const Modal: React.FC<ModalProps> = ({
 					item && (
 						<Root>
 							<Background open={open} onClick={onClickOutside} />
-							<Content key={key} style={props}>
+							<Content
+								key={key}
+								style={props}
+								width={widthRem}
+								height={heightRem}
+							>
 								{children}
 							</Content>
 						</Root>
