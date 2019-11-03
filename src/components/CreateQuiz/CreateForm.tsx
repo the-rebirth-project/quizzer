@@ -6,10 +6,11 @@ import { shuffleArray } from '../../helpers';
 import { createCustomQuestion, showModal } from '../../actions';
 import {
 	StyledInputField,
-	StyledSelect,
 	FieldContainer,
 	OptionLabel,
-	LabelText
+	LabelText,
+	TimerLabel,
+	SubmitBtn
 } from './formStyles';
 
 interface CreateFormProps {
@@ -109,7 +110,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 					</FieldContainer>
 
 					<FieldContainer>
-						<Field name="difficulty">
+						{/* <Field name="difficulty">
 							{({ input, meta }) => (
 								<>
 									<LabelText>Difficulty</LabelText>
@@ -120,7 +121,13 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 									</StyledSelect>
 								</>
 							)}
-						</Field>
+						</Field> */}
+						<LabelText>Difficulty</LabelText>
+						<StyledInputField name="difficulty" component="select">
+							<option value="easy">Easy</option>
+							<option value="medium">Medium</option>
+							<option value="hard">Hard</option>
+						</StyledInputField>
 					</FieldContainer>
 
 					<FieldContainer>
@@ -139,6 +146,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 							component="input"
 							type="text"
 							checked={values.checked}
+							required
 						/>
 					</FieldContainer>
 
@@ -158,6 +166,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 							component="input"
 							type="text"
 							checked={values.checked}
+							required
 						/>
 					</FieldContainer>
 
@@ -200,8 +209,13 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 					</FieldContainer>
 
 					<FieldContainer>
-						<Field name="timed" component="input" type="checkbox" />
-						<LabelText>Timer</LabelText>
+						<Field
+							name="timed"
+							component="input"
+							type="checkbox"
+							style={{ opacity: 0 }}
+						/>
+						<TimerLabel checked={values.timed}>Timer</TimerLabel>
 						<StyledInputField
 							name="timer"
 							component="input"
@@ -211,7 +225,9 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
 						/>
 					</FieldContainer>
 
-					<button type="submit">Add</button>
+					<SubmitBtn type="submit" primary>
+						Add
+					</SubmitBtn>
 				</form>
 			)}
 		/>
