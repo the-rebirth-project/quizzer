@@ -7,8 +7,9 @@ import {
 	FieldContainer,
 	LabelText,
 	StyledInputField,
-	StyledSelect,
-	OptionLabel
+	OptionLabel,
+	TimerLabel,
+	SubmitBtn
 } from './formStyles';
 
 interface EditFormProps {
@@ -92,18 +93,12 @@ export const EditForm: React.FC<EditFormProps> = props => {
 					</FieldContainer>
 
 					<FieldContainer>
-						<Field name="difficulty">
-							{({ input, meta }) => (
-								<>
-									<LabelText>Difficulty</LabelText>
-									<StyledSelect {...input}>
-										<option value="easy">Easy</option>
-										<option value="medium">Medium</option>
-										<option value="hard">Hard</option>
-									</StyledSelect>
-								</>
-							)}
-						</Field>
+						<LabelText>Difficulty</LabelText>
+						<StyledInputField name="difficulty" component="select">
+							<option value="easy">Easy</option>
+							<option value="medium">Medium</option>
+							<option value="hard">Hard</option>
+						</StyledInputField>
 					</FieldContainer>
 
 					<FieldContainer>
@@ -122,6 +117,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 							component="input"
 							type="text"
 							checked={values.checked}
+							required
 						/>
 					</FieldContainer>
 
@@ -141,6 +137,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 							component="input"
 							type="text"
 							checked={values.checked}
+							required
 						/>
 					</FieldContainer>
 
@@ -192,7 +189,7 @@ export const EditForm: React.FC<EditFormProps> = props => {
 							type="checkbox"
 							style={{ opacity: 0 }}
 						/>
-						<LabelText>Timer</LabelText>
+						<TimerLabel checked={values.timed}>Timer</TimerLabel>
 						<StyledInputField
 							name="timer"
 							component="input"
@@ -202,7 +199,9 @@ export const EditForm: React.FC<EditFormProps> = props => {
 						/>
 					</FieldContainer>
 
-					<button type="submit">Save!</button>
+					<SubmitBtn type="submit" primary>
+						Save
+					</SubmitBtn>
 				</form>
 			)}
 		/>
