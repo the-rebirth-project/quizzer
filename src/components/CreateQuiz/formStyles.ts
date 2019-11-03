@@ -39,15 +39,22 @@ export const LabelText = styled.span`
 	font-size: 3rem;
 	color: ${props => props.theme.colors.grey};
 	text-transform: uppercase;
+	user-select: none;
 `;
 
 export const OptionLabel = styled(LabelText)<OptionLabelProps>`
+	font-size: 3rem;
 	cursor: pointer;
 	text-transform: uppercase;
 	color: ${props =>
 		props.name === props.checked
 			? props.theme.colors.primary
 			: props.theme.colors.grey};
+`;
+
+export const TimerLabel = styled(LabelText)<{ checked?: boolean }>`
+	cursor: pointer;
+	opacity: ${props => (props.checked ? 1 : 0.5)};
 `;
 
 export const StyledInput = styled.input`
@@ -80,6 +87,10 @@ export const StyledInputField = styled(Field)<SInputProps>`
 	flex: 0 0 70%;
 	margin-left: 1rem;
 	font-family: inherit;
+
+	:disabled {
+		opacity: 0.5;
+	}
 `;
 
 export const SubmitBtn = styled(Button)`
