@@ -1,6 +1,11 @@
 import { createStandardAction } from 'typesafe-actions';
 import he from 'he';
-import { FETCH_QUESTIONS, START_QUIZ, SET_PRESET_ID } from '../types';
+import {
+	FETCH_QUESTIONS,
+	START_QUIZ,
+	SET_PRESET_ID,
+	CHANGE_PRESET_NAME
+} from '../types';
 import { Question } from '../types';
 import axios from 'axios';
 import { Dispatch } from 'redux';
@@ -19,7 +24,7 @@ export const fetchQuestionsThunk = async (
 	type: string,
 	timer?: number
 ): Promise<void> => {
-	const formUrl = (property: string, value: string): string => {
+	const formApiUrl = (property: string, value: string): string => {
 		if (value === 'any') {
 			return '';
 		} else {
@@ -27,10 +32,10 @@ export const fetchQuestionsThunk = async (
 		}
 	};
 	const response = await axios.get(
-		`https://opentdb.com/api.php?amount=${numOfQuestions}&${formUrl(
+		`https://opentdb.com/api.php?amount=${numOfQuestions}&${formApiUrl(
 			'category',
 			category
-		)}&${formUrl('difficulty', difficulty)}&${formUrl('type', type)}`
+		)}&${formApiUrl('difficulty', difficulty)}&${formApiUrl('type', type)}`
 	);
 	// passes on response.data.results (an array of Question objects) to fetchQuestions action creator as payload
 	const data: Question[] = response.data.results;
@@ -57,5 +62,8 @@ export const fetchQuestionsThunk = async (
 };
 
 export const startQuiz = createStandardAction(START_QUIZ)();
-// sets the chosen preset id
 export const setPresetId = createStandardAction(SET_PRESET_ID)<string>();
+export const changePresetName = createStandardAction(CHANGE_PRESET_NAME)<{
+	id: string;
+	newName: string;
+}>();
