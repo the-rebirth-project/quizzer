@@ -8,7 +8,8 @@ import {
 	createCustomQuestion,
 	saveEditedQuestion,
 	deleteQuestion,
-	savePreset
+	savePreset,
+	changePresetName
 } from '../actions';
 import { Question, QuizPreset } from '../types';
 
@@ -91,4 +92,19 @@ export const quizReducer = createReducer(initialState)
 			...state,
 			presets: newPresets
 		};
-	});
+	})
+	.handleAction(changePresetName, (state, action) => ({
+		...state,
+		presets: [
+			...state.presets.map(p => {
+				if (action.payload.id === p.id) {
+					return {
+						...p,
+						presetName: action.payload.newName
+					};
+				} else {
+					return p;
+				}
+			})
+		]
+	}));
