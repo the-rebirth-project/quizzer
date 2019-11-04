@@ -56,7 +56,7 @@ export const SectionContainer = styled(animated.section)`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 3rem 0rem;
+	padding: 1rem 0rem;
 	padding-left: 4rem;
 	align-content: flex-start;
 	display: inline-block;
