@@ -8,6 +8,8 @@ import {
 	createCustomQuestion,
 	saveEditedQuestion,
 	deleteQuestion,
+	addPreset,
+	removePreset,
 	savePreset,
 	changePresetName
 } from '../actions';
@@ -20,10 +22,25 @@ interface IState {
 	readonly curPresetId: string;
 }
 
+const initialPresets = [
+	{
+		id: uuid(),
+		presetName: 'New Preset',
+		questions: []
+	},
+	{
+		id: uuid(),
+		presetName: 'New Preset',
+		questions: []
+	}
+];
+
 const initialState: IState = {
 	questions: [],
 	started: false,
-	presets: JSON.parse(window.localStorage.getItem('quizPresets') || '[]'),
+	presets: JSON.parse(
+		window.localStorage.getItem('quizPresets') || JSON.stringify(initialPresets)
+	),
 	curPresetId: ''
 };
 
@@ -80,7 +97,7 @@ export const quizReducer = createReducer(initialState)
 		...state,
 		questions: state.questions.filter(q => q.qId !== action.payload)
 	}))
-	.handleAction(savePreset, (state, action) => {
+	.handleAction(addPreset, (state, action) => {
 		/**
 		 * Info about Quiz Presets:
 		 * - A quiz preset describes the id by which the preset will be identified and an array of questions 		 		 which the user specified in the create section
@@ -93,6 +110,18 @@ export const quizReducer = createReducer(initialState)
 			presets: newPresets
 		};
 	})
+	.handleAction(removePreset, (state, action) => ({
+		...state,
+		presets: state.presets.filter(p => p.id !== action.payload)
+	}))
+	.handleAction(savePreset, (state, action) => ({
+		...state,
+		presets: [
+			...state.presets.map(p =>
+				p.id === action.payload.id ? action.payload.newPresetData : p
+			)
+		]
+	}))
 	.handleAction(changePresetName, (state, action) => ({
 		...state,
 		presets: [
