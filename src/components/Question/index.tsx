@@ -72,6 +72,8 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 				q.player = players[numOfIndices - playerI];
 			}
 
+			if (players.length === 1) q.player = players[0];
+
 			return {
 				...q
 			};
