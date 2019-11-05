@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import uuid from 'uuid/v4';
-import { showModal, savePreset, setPresetId } from '../../actions';
+import { showModal, addPreset, setPresetId } from '../../actions';
 import { RootState, QuizPreset } from '../../types';
 import {
 	FieldContainer,
@@ -31,7 +31,7 @@ export const SaveForm: React.FC<SaveFormProps> = ({ setSaveModalOpen }) => {
 			presetName: values.presetName,
 			questions: questions
 		};
-		dispatch(savePreset(preset));
+		dispatch(addPreset(preset));
 		dispatch(setPresetId(preset.id));
 	};
 
@@ -47,6 +47,7 @@ export const SaveForm: React.FC<SaveFormProps> = ({ setSaveModalOpen }) => {
 							component="input"
 							type="text"
 							placeholder="Enter a name for your quiz preset"
+							maxLength={25}
 						/>
 					</FieldContainer>
 
