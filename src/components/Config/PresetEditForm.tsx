@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import { changePresetName } from '../../actions';
-import { FieldContainer } from '../CreateQuiz/formStyles';
 import { PresetNameField } from './presetEditFormStyles';
 
 interface PresetEditFormProps {
@@ -40,16 +39,15 @@ export const PresetEditForm: React.FC<PresetEditFormProps> = ({
 			initialValues={initialValues}
 			onSubmit={onFormSubmit}
 			render={({ handleSubmit, form, submitting, values }) => (
-				<form onSubmit={handleSubmit}>
-					<FieldContainer>
-						<PresetNameField
-							name="presetName"
-							component="input"
-							type="text"
-							autoFocus
-							maxLength={25}
-						/>
-					</FieldContainer>
+				<form onSubmit={handleSubmit} style={{ width: '90%' }}>
+					<PresetNameField
+						name="presetName"
+						component="input"
+						type="text"
+						autoFocus
+						maxLength={25}
+						required
+					/>
 				</form>
 			)}
 		/>
