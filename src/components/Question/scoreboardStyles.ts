@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Title } from '../Menu/styles';
+import { Title } from '../MainMenu/styles';
 
 interface ScoreProps {
 	first?: boolean;
