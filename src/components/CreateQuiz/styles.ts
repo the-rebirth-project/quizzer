@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { Title } from '../Menu/styles';
+import { Title } from '../MainMenu/styles';
 
 interface BlurBGProps {
 	modalShown: boolean;

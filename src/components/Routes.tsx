@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from './Menu';
+import { Menu } from './MainMenu';
 import { Question } from './Question';
 import { CreateQuiz } from './CreateQuiz';
 import { history } from '../store';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../Menu/styles';
+import { Button } from '../MainMenu/styles';
 import { Field } from 'react-final-form';
 
 interface SInputProps {

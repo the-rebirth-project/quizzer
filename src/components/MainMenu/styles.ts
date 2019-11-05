@@ -57,6 +57,7 @@ export const Right = styled.div`
 	text-transform: uppercase;
 	font-size: 2.5rem;
 	height: 28.4rem;
+	transform: translateY(-15%);
 `;
 
 Right.displayName = 'Right';

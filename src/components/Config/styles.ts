@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { Title } from '../Menu/styles';
+import { Title } from '../MainMenu/styles';
 
 export const Root = styled(animated.div)`
 	display: flex;
@@ -56,7 +56,7 @@ export const SectionContainer = styled(animated.section)`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 3rem 0rem;
+	padding: 1rem 0rem;
 	padding-left: 4rem;
 	align-content: flex-start;
 	display: inline-block;

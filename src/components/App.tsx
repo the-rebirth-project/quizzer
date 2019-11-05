@@ -7,7 +7,7 @@ import { setPresetId } from '../actions';
 import { RootState } from '../types';
 
 const Background = styled(animated.div)`
-	--primary-rgb-color: 38, 188, 99; /* rgb version of our primary green color */
+	--primary-rgb-color: 38, 188, 99;
 	--secondary-rgb-color: 242, 243, 229;
 	--amethyst-rgb-color: 101, 0, 246;
 	--grey-rgb-color: 46, 46, 46;
@@ -24,7 +24,8 @@ export const App: React.FC = () => {
 
 	useEffect(() => {
 		quizPresets[0] && dispatch(setPresetId(quizPresets[0].id));
-	}, [dispatch, quizPresets]);
+		// eslint-disable-next-line
+	}, []);
 
 	const getBG = () => {
 		switch (true) {
