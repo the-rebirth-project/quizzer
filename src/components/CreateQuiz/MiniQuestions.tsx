@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SortableContainer } from 'react-sortable-hoc';
 import uuid from 'uuid/v4';
-// import { fetchQuestionsThunk } from '../../actions';
 import { QuestionItem } from './QuestionItem';
 import { CreateForm } from './CreateForm';
-import { SaveForm } from './SaveForm';
 import { FetchForm } from './FetchForm';
 import { Modal } from '../Modal';
-import { showModal } from '../../actions';
+import { showModal, savePreset } from '../../actions';
 import { RootState } from '../../types';
 import { Root, ButtonContainer, CreateQuizBtn } from './miniQuestionsStyles';
 
@@ -16,8 +14,11 @@ export const WrappedComponent: React.FC = () => {
 	const dispatch = useDispatch();
 	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const modalShown = useSelector((state: RootState) => state.modal.modalShown);
+	const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
+	const curPresetData = useSelector(
+		(state: RootState) => state.quiz.presets
+	).filter(p => p.id === curPresetId)[0];
 	const [createModalOpen, setCreateModalOpen] = useState(false);
-	const [saveModalOpen, setSaveModalOpen] = useState(false);
 	const [fetchModalOpen, setFetchModalOpen] = useState(false);
 
 	const onFetchBtnClick = (): void => {
@@ -31,8 +32,16 @@ export const WrappedComponent: React.FC = () => {
 	};
 
 	const onSaveBtnClick = (): void => {
-		setSaveModalOpen(true);
-		dispatch(showModal());
+		const newPresetData = {
+			...curPresetData,
+			questions
+		};
+		dispatch(
+			savePreset({
+				id: curPresetId,
+				newPresetData
+			})
+		);
 	};
 
 	return (
@@ -65,14 +74,6 @@ export const WrappedComponent: React.FC = () => {
 				key={uuid()}
 			>
 				<CreateForm setCreateModalOpen={setCreateModalOpen} />
-			</Modal>
-			<Modal
-				open={saveModalOpen}
-				setModalOpen={setSaveModalOpen}
-				aria-label="Save Questions"
-				key={uuid()}
-			>
-				<SaveForm setSaveModalOpen={setSaveModalOpen} />
 			</Modal>
 			<Modal
 				open={fetchModalOpen}
