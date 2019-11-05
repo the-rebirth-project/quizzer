@@ -56,6 +56,23 @@ export const PresetItem: React.FC<PresetItemProps> = props => {
 		setFormOpen(true);
 	};
 
+	const deletePreset = (e: SyntheticEvent): void => {
+		e.stopPropagation();
+		const nextPresetItem = presets[presetIds.indexOf(presetData.id) + 1];
+		// if no next element exists, add on a new preset
+		if (nextPresetItem) {
+			dispatch(setPresetId(nextPresetItem.id));
+		} else {
+			handlePresetAdd(presets.length <= 3);
+			if (presets.length < 3) {
+				handlePresetAdd();
+			} else {
+				dispatch(setPresetId(presets[presets.length - 2].id));
+			}
+		}
+		dispatch(removePreset(props.id));
+	};
+
 	return (
 		<Root onClick={onPresetClick} selected={props.selected}>
 			{formOpen && (
