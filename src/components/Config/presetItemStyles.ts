@@ -43,16 +43,21 @@ export const PresetName = styled.h2`
 	font-weight: 300;
 `;
 
-export const EditIcon = styled(FontAwesomeIcon)<{ selected: boolean }>`
+export const FaIcon = styled(FontAwesomeIcon)<{ selected: boolean }>`
 	transition: all 0.1s ease-in;
 	font-size: 3rem;
-	color: ${props =>
-		props.selected ? props.theme.colors.secondary : props.theme.colors.grey};
+	color: ${props => props.theme.colors.secondary};
 
 	:hover {
-		color: ${props =>
-			props.selected ? props.theme.colors.grey : props.theme.colors.amethyst};
+		color: ${props => props.theme.colors.grey};
 	}
+`;
+
+export const IconsContainer = styled.div`
+	display: flex;
+	flex: 0 0 13%;
+	justify-content: space-between;
+	align-items: center;
 `;
 
 export const IconContainer = styled.div`

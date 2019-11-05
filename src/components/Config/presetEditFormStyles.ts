@@ -6,6 +6,7 @@ export const PresetNameField = styled(StyledInputField)`
 	border-radius: 5px;
 	text-transform: uppercase;
 	font-weight: 300;
-	margin-bottom: -1rem;
 	margin-left: -0.8rem;
+	flex: 0 0 70%;
+	width: 100%;
 `;
