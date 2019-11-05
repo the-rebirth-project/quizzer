@@ -85,9 +85,16 @@ export const PresetItem: React.FC<PresetItemProps> = props => {
 			{!formOpen && (
 				<>
 					<PresetName>{props.presetName}</PresetName>
-					<IconContainer onClick={enableEditForm}>
-						<EditIcon icon={faEdit} selected={props.selected} />
-					</IconContainer>
+					{props.selected && (
+						<IconsContainer>
+							<IconContainer onClick={enableEditForm}>
+								<FaIcon icon={faEdit} selected={props.selected} />
+							</IconContainer>
+							<IconContainer onClick={deletePreset}>
+								<FaIcon icon={faTrashAlt} selected={props.selected} />
+							</IconContainer>
+						</IconsContainer>
+					)}
 				</>
 			)}
 		</Root>
