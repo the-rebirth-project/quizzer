@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { Title } from '../Menu/styles';
+import { Title } from '../MainMenu/styles';
 
 export const Root = styled(animated.div)`
 	display: flex;
