@@ -9,4 +9,5 @@ export const PresetNameField = styled(StyledInputField)`
 	margin-left: -0.8rem;
 	flex: 0 0 70%;
 	width: 100%;
+	background-color: ${props => props.theme.colors.amethyst};
 `;
