@@ -5,3 +5,4 @@ export * from './questionFormActions';
 export * from './modalActions';
 export * from './toolbarActions';
 export * from './scoreboardActions';
+export * from './logActions';
