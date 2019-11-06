@@ -5,6 +5,7 @@ import { questionReducer } from './questionReducers';
 import { modalReducer } from './modalReducers';
 import { toolbarReducer } from './toolbarReducers';
 import { scoreboardReducer } from './scoreboardReducers';
+import { logReducer } from './logReducers';
 
 export const rootReducer = (history: any) =>
 	combineReducers({
@@ -13,5 +14,6 @@ export const rootReducer = (history: any) =>
 		question: questionReducer,
 		modal: modalReducer,
 		toolbar: toolbarReducer,
-		scoreboard: scoreboardReducer
+		scoreboard: scoreboardReducer,
+		log: logReducer
 	});
