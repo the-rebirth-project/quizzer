@@ -9,7 +9,12 @@ import UIfx from 'uifx';
 import { Link } from 'react-router-dom';
 import { Scoreboard } from './Scoreboard';
 import { RootState } from '../../types';
-import { validateChoice, rehydrateState, updateScore } from '../../actions';
+import {
+	validateChoice,
+	rehydrateState,
+	updateScore,
+	logUserChoice
+} from '../../actions';
 import {
 	Root,
 	QuestionWrapper,
@@ -127,6 +132,12 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 
 	const onOptionClick = (option: string): void => {
 		setCountdownPaused(true);
+		const logUserChoicePayload = {
+			...qData,
+			userChoice: option
+		};
+		// as you can guess, this action logs stuff for later use in the log component
+		dispatch(logUserChoice(logUserChoicePayload));
 		// a small delay for validating choice here to provide a sense of tension
 		setTimeout(() => {
 			dispatch(
