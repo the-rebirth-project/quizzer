@@ -31,7 +31,8 @@ export const App: React.FC = () => {
 		switch (true) {
 			case location.pathname.includes('/start/q/') && started:
 				return 'linear-gradient(180deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)';
-			case location.pathname.includes('/configure'):
+			case location.pathname.includes('/configure') ||
+				location.pathname.includes('/log'):
 				return 'linear-gradient(90deg, #2ac46a 0%, #2ac46a 30%, #fcfcf3 30%)';
 			default:
 				return 'linear-gradient(120deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)';
