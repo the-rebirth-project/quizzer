@@ -1,13 +1,6 @@
 import { createReducer } from 'typesafe-actions';
 import { logUserChoice } from '../actions';
-
-interface QuestionLog {
-	qId: string;
-	question: string;
-	userChoice: string;
-	choiceValid: boolean;
-	correctAnswer: string;
-}
+import { QuestionLog } from '../types';
 
 interface IState {
 	readonly sessionLog: QuestionLog[];
