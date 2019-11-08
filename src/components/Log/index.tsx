@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Layout } from '../Layout';
+import { LogItemList } from './LogItemList';
 import {
 	MainTitle,
 	LeftContainer,
@@ -32,7 +33,9 @@ export const Log: React.FC = () => {
 				</NavBtnContainer>
 			</LeftContainer>
 
-			<RightContainer>Log here</RightContainer>
+			<RightContainer>
+				<LogItemList />
+			</RightContainer>
 		</Layout>
 	);
 };
