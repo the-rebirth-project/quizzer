@@ -134,6 +134,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		setCountdownPaused(true);
 		const logUserChoicePayload = {
 			...qData,
+			qNum: questionNum + 1,
 			userChoice: option
 		};
 		// as you can guess, this action logs stuff for later use in the log component
