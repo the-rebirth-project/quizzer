@@ -61,6 +61,7 @@ export const SectionContainer = styled(animated.section)`
 	align-content: flex-start;
 	display: inline-block;
 	overflow: visible;
+	height: 100vh;
 `;
 
 export const NavBtnContainer = styled.nav`
