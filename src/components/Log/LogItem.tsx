@@ -1,5 +1,12 @@
 import React from 'react';
-import { Root, QContainer, OptionContainer } from './logItemStyles';
+import {
+	Root,
+	QContainer,
+	OptionContainer,
+	ScoreResult,
+	OptionContainerSpan
+} from './logItemStyles';
+import { QuestionNum } from '../CreateQuiz/questionItemStyles';
 import { QuestionLog } from '../../types';
 
 interface LogItemProps {
@@ -10,13 +17,21 @@ export const LogItem: React.FC<LogItemProps> = ({ log }) => {
 	return (
 		<Root>
 			<QContainer>
-				{log.qNum}. {log.question}
+				<QuestionNum>{log.qNum}.</QuestionNum> {log.question}
 			</QContainer>
 
 			<OptionContainer userChoice>
-				Chosen option: {log.userChoice}
+				<OptionContainerSpan>Chosen option: </OptionContainerSpan>
+				{log.userChoice}
 			</OptionContainer>
-			<OptionContainer>Correct option: {log.correctAnswer}</OptionContainer>
+			<OptionContainer>
+				<OptionContainerSpan>Correct option: </OptionContainerSpan>
+				{log.correctAnswer}
+			</OptionContainer>
+
+			<ScoreResult correctChoice={log.choiceValid}>
+				{log.calculatedScore} points
+			</ScoreResult>
 		</Root>
 	);
 };
