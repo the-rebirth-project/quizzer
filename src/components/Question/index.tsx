@@ -135,7 +135,8 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		const logUserChoicePayload = {
 			...qData,
 			qNum: questionNum + 1,
-			userChoice: option
+			userChoice: option,
+			calculatedScore: option === qData.correct_answer ? +3 : -1
 		};
 		// as you can guess, this action logs stuff for later use in the log component
 		dispatch(logUserChoice(logUserChoicePayload));
