@@ -36,7 +36,7 @@ export const RightContainer = styled(animated.div)`
 	position: relative;
 `;
 
-export const ConfigTitle = styled(Title)`
+export const MainTitle = styled(Title)`
 	letter-spacing: 0.9rem;
 	font-size: 8rem;
 `;
@@ -50,18 +50,6 @@ export const SectionHeading = styled.h2`
 	padding-bottom: 0.5rem;
 	letter-spacing: 2rem;
 	text-align: center;
-`;
-
-export const SectionContainer = styled(animated.section)`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 1rem 0rem;
-	padding-left: 4rem;
-	align-content: flex-start;
-	display: inline-block;
-	overflow: visible;
-	height: 100vh;
 `;
 
 export const NavBtnContainer = styled.nav`

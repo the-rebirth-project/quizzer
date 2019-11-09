@@ -4,3 +4,4 @@ export * from './rootTypes'; // exports types for our RootState and RootAction a
 export * from './Question.interface';
 export * from './Player.interface';
 export * from './QuizPreset.interface';
+export * from './QuestionLog.interface';
