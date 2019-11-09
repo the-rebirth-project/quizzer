@@ -27,6 +27,10 @@ export const App: React.FC = () => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		window.localStorage.setItem('quizPresets', JSON.stringify(quizPresets));
+	}, [quizPresets]);
+
 	const getBG = () => {
 		switch (true) {
 			case location.pathname.includes('/start/q/') && started:
