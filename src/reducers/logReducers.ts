@@ -13,14 +13,22 @@ const initialState: IState = {
 export const logReducer = createReducer(initialState).handleAction(
 	logUserChoice,
 	(state, action) => {
-		const { qId, question, userChoice, correct_answer, qNum } = action.payload;
+		const {
+			qId,
+			question,
+			userChoice,
+			correct_answer,
+			qNum,
+			calculatedScore
+		} = action.payload;
 		const questionLog: QuestionLog = {
 			qNum,
 			qId,
 			question,
 			userChoice,
 			choiceValid: userChoice === correct_answer ? true : false,
-			correctAnswer: correct_answer
+			correctAnswer: correct_answer,
+			calculatedScore
 		};
 		return {
 			...state,
