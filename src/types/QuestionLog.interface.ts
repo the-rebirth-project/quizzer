@@ -5,4 +5,5 @@ export interface QuestionLog {
 	userChoice: string;
 	choiceValid: boolean;
 	correctAnswer: string;
+	calculatedScore: number;
 }
