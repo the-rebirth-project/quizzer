@@ -3,7 +3,8 @@ import {
 	updateScore,
 	updatePlayerName,
 	addPlayer,
-	removePlayer
+	removePlayer,
+	resetScore
 } from '../actions';
 import { Player } from '../types';
 
@@ -48,4 +49,11 @@ export const scoreboardReducer = createReducer(initialState)
 	.handleAction(removePlayer, (state, action) => ({
 		...state,
 		players: state.players.filter(p => p.id !== action.payload)
+	}))
+	.handleAction(resetScore, (state, _) => ({
+		...state,
+		players: state.players.map(p => {
+			p.score = 0;
+			return p;
+		})
 	}));
