@@ -90,8 +90,8 @@ export const ButtonContainer = styled.div<ButtonContainerProps>`
 
 	:hover {
 		color: ${props => props.theme.colors.grey};
-		transform: ${props => (props.left ? 'translateX(-5px)' : '')};
-		transform: ${props => (props.right ? 'translateX(5px)' : '')};
+		transform: ${props => (props.left ? 'translateX(-3px)' : '')};
+		transform: ${props => (props.right ? 'translateX(3px)' : '')};
 	}
 `;
 
