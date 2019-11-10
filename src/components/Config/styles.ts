@@ -64,7 +64,7 @@ export const SectionContainer = styled(animated.section)`
 	height: 100vh;
 `;
 
-export const NavBtnContainer = styled.nav`
+export const NavBtnsContainer = styled.nav`
 	align-self: flex-end;
 	width: 100%;
 	display: flex;
