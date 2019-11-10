@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { logUserChoice } from '../actions';
+import { logUserChoice, clearLog } from '../actions';
 import { QuestionLog } from '../types';
 
 interface IState {
@@ -10,9 +10,8 @@ const initialState: IState = {
 	sessionLog: []
 };
 
-export const logReducer = createReducer(initialState).handleAction(
-	logUserChoice,
-	(state, action) => {
+export const logReducer = createReducer(initialState)
+	.handleAction(logUserChoice, (state, action) => {
 		const {
 			qId,
 			question,
@@ -34,5 +33,8 @@ export const logReducer = createReducer(initialState).handleAction(
 			...state,
 			sessionLog: [...state.sessionLog, questionLog]
 		};
-	}
-);
+	})
+	.handleAction(clearLog, (state, _) => ({
+		...state,
+		sessionLog: []
+	}));
