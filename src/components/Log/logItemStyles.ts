@@ -23,6 +23,7 @@ export const Root = styled.div`
 	flex-wrap: wrap;
 	background-color: ${props => props.theme.colors.grey};
 	margin-left: 1rem;
+
 	&:not(:first-child) {
 		margin: 4rem 0rem;
 		margin-left: 1rem;
