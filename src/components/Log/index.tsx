@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { Layout } from '../Layout';
+import { clearLog } from '../../actions';
 import { LogItemList } from './LogItemList';
 import {
 	MainTitle,
@@ -25,6 +26,7 @@ export const Log: React.FC = () => {
 
 	const goToMenu = (): void => {
 		dispatch(push('/'));
+		dispatch(clearLog());
 	};
 
 	return (
