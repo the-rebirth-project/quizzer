@@ -6,7 +6,6 @@ import { animated, useTransition } from 'react-spring';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import UIfx from 'uifx';
-import { Link } from 'react-router-dom';
 import { Scoreboard } from './Scoreboard';
 import { RootState } from '../../types';
 import {
@@ -218,7 +217,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		<div>
 			{transitions.map(({ props, key }) => (
 				<Root key={key} style={props}>
-					<Link
+					{/* <Link
 						to="/"
 						style={{
 							position: 'absolute',
@@ -228,7 +227,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 						}}
 					>
 						Home
-					</Link>
+					</Link> */}
 					<QuestionWrapper started={started}>
 						{renderQuestion()}
 					</QuestionWrapper>
