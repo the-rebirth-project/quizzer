@@ -1,5 +1,5 @@
 import { createStandardAction } from 'typesafe-actions';
-import { Question, LOG_USER_CHOICE } from '../types';
+import { Question, LOG_USER_CHOICE, CLEAR_LOG } from '../types';
 
 interface logUserChoicePayload extends Question {
 	qNum: number;
@@ -10,3 +10,5 @@ interface logUserChoicePayload extends Question {
 export const logUserChoice = createStandardAction(LOG_USER_CHOICE)<
 	logUserChoicePayload
 >();
+
+export const clearLog = createStandardAction(CLEAR_LOG)<undefined>();
