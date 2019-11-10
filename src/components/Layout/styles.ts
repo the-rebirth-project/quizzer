@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import { Title } from '../MainMenu/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+interface ButtonContainerProps {
+	left?: boolean;
+	right?: boolean;
+}
 
 export const Root = styled(animated.div)`
 	display: flex;
@@ -52,11 +58,43 @@ export const SectionHeading = styled.h2`
 	text-align: center;
 `;
 
-export const NavBtnContainer = styled.nav`
-	align-self: flex-end;
+export const SectionContainer = styled(animated.section)`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 1rem 0rem;
+	padding-left: 4rem;
+	align-content: flex-start;
+	display: inline-block;
+	overflow: visible;
+	height: 100vh;
+`;
+
+export const NavBtnsContainer = styled.nav`
+	position: absolute;
+	bottom: 2.5%;
+	left: 0;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	padding: 0rem 1rem;
+	padding: 0rem 3rem;
 	align-items: center;
+`;
+
+export const ButtonContainer = styled.div<ButtonContainerProps>`
+	height: 4rem;
+	width: 4rem;
+	cursor: pointer;
+	color: ${props => props.theme.colors.secondary};
+	transition: all 0.2s;
+
+	:hover {
+		color: ${props => props.theme.colors.grey};
+		transform: ${props => (props.left ? 'translateX(-5px)' : '')};
+		transform: ${props => (props.right ? 'translateX(5px)' : '')};
+	}
+`;
+
+export const NavBtn = styled(FontAwesomeIcon)`
+	font-size: 4rem;
 `;

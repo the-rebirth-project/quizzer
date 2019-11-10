@@ -1,13 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { Layout } from '../Layout';
 import { LogItemList } from './LogItemList';
 import {
 	MainTitle,
 	LeftContainer,
 	RightContainer,
-	NavBtnContainer
+	NavBtnsContainer,
+	NavBtn,
+	ButtonContainer
 } from '../Layout/styles';
 
 /**
@@ -20,7 +23,7 @@ import {
 export const Log: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const onHomeBtnClick = (): void => {
+	const goToMenu = (): void => {
 		dispatch(push('/'));
 	};
 
@@ -28,9 +31,11 @@ export const Log: React.FC = () => {
 		<Layout pageUrl="/log">
 			<LeftContainer>
 				<MainTitle>Log</MainTitle>
-				<NavBtnContainer>
-					<button onClick={onHomeBtnClick}>Home</button>
-				</NavBtnContainer>
+				<NavBtnsContainer>
+					<ButtonContainer onClick={goToMenu} left>
+						<NavBtn icon={faLongArrowAltLeft} />
+					</ButtonContainer>
+				</NavBtnsContainer>
 			</LeftContainer>
 
 			<RightContainer>

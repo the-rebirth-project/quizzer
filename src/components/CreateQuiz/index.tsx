@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { animated, useTransition } from 'react-spring';
 import { arrayMove } from '../../helpers';
 import { SortEnd } from 'react-sortable-hoc';
-import { Link } from 'react-router-dom';
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+import { push } from 'connected-react-router';
 import { MiniQuestions } from './MiniQuestions';
 import { Toolbar } from './Toolbar';
 import { sortQuestion } from '../../actions/createQuizActions';
 import { RootState } from '../../types';
+import { NavBtnsContainer, ButtonContainer, NavBtn } from '../Layout/styles';
 import {
 	GreyBG,
 	GlobalStyle,
@@ -33,6 +35,10 @@ export const CreateQuiz: React.FC = () => {
 		dispatch(sortQuestion(sortedQuestions));
 	};
 
+	const goLeft = (): void => {
+		dispatch(push('/'));
+	};
+
 	return (
 		<GreyBG>
 			<GlobalStyle />
@@ -41,8 +47,12 @@ export const CreateQuiz: React.FC = () => {
 					<Root>
 						<Sidebar>
 							<Toolbar />
-							<Link to="/">Home</Link>
 							<CreateTitle>Create</CreateTitle>
+							<NavBtnsContainer>
+								<ButtonContainer onClick={goLeft} left>
+									<NavBtn icon={faLongArrowAltLeft} />
+								</ButtonContainer>
+							</NavBtnsContainer>
 						</Sidebar>
 						<MiniQuestionsContainer>
 							<MiniQuestions
