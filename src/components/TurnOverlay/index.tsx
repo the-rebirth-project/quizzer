@@ -1,23 +1,45 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
+import { push } from 'connected-react-router';
+import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { RootState } from '../../types';
+import {
+	Root,
+	PlayerTurnText,
+	PositionedButtonContainer,
+	StyledNavBtn
+} from './styles';
 
 interface RouteParams {
-	curPlayerId: string;
+	playerId: string;
+	nextQuestionNum: string;
 }
 
 export const TurnOverlay: React.FC<
 	RouteComponentProps<RouteParams>
 > = props => {
-	const { curPlayerId } = props.match.params;
+	const dispatch = useDispatch();
+	const { playerId, nextQuestionNum } = props.match.params;
+	const questions = useSelector((state: RootState) => state.quiz.questions);
 	const curPlayer = useSelector(
 		(state: RootState) => state.scoreboard.players
-	).filter(p => p.id === parseInt(curPlayerId))[0];
+	).filter(p => p.id === parseInt(playerId))[0];
+
+	const goToNext = (): void => {
+		if (parseInt(nextQuestionNum) >= questions.length) {
+			dispatch(push('/log'));
+		} else {
+			dispatch(push(`/start/q/${nextQuestionNum}`));
+		}
+	};
 
 	return (
-		<div>
-			<h1>This overlay should show the which player's turn it is</h1>
-		</div>
+		<Root>
+			<PlayerTurnText>{curPlayer.pName}'s turn</PlayerTurnText>
+			<PositionedButtonContainer onClick={goToNext} right>
+				<StyledNavBtn icon={faLongArrowAltRight} />
+			</PositionedButtonContainer>
+		</Root>
 	);
 };
