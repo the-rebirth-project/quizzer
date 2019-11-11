@@ -40,7 +40,6 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 	const choiceValid = useSelector(
 		(state: RootState) => state.question.choiceValid
 	);
-	const players = useSelector((state: RootState) => state.scoreboard.players);
 	const questionNum = parseInt(props.match.params.qId);
 	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
 	// gets the chosen preset id from config form
@@ -57,33 +56,6 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 		setScoreboardShown(false);
 		dispatch(rehydrateState()); // sets choiceValid back to null after each question
 	}, [dispatch, questionNum]);
-
-	useEffect(() => {
-		questions.map((q, i) => {
-			// NOTE: THIS CODE BREAKS IF NUMBER OF PLAYERS EXCEEDS 4.
-			const prevQuestion = questions[i - 1];
-			let playerI: number = 0;
-			if (prevQuestion) playerI = players.indexOf(questions[i - 1].player);
-			const numOfIndices = players.length - 1;
-			// we're brute handling all edge cases here. maybe try implementing a better solution?
-			if (!prevQuestion) {
-				q.player = players[0];
-			} else if (numOfIndices - playerI === 1) {
-				q.player = players[numOfIndices];
-			} else if (playerI === 0) {
-				q.player = players[playerI + 1];
-			} else {
-				q.player = players[numOfIndices - playerI];
-			}
-
-			if (players.length === 1) q.player = players[0];
-
-			return {
-				...q
-			};
-		});
-		// eslint-disable-next-line
-	}, [questions, players]);
 
 	const transitions = useTransition(questionNum, p => p, {
 		initial: { opacity: 0 },
@@ -123,7 +95,10 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			if (questionNum >= questions.length - 1) {
 				dispatch(push('/log'));
 			} else {
-				dispatch(push(`/start/q/${questionNum + 1}`));
+				const nextQuestion = questions[questionNum + 1];
+				dispatch(
+					push(`/playerturn/${nextQuestion.player.id}/${questionNum + 1}`)
+				);
 			}
 			setScoreboardShown(false);
 		}, 7500);
@@ -137,7 +112,7 @@ export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
 			userChoice: option,
 			calculatedScore: option === qData.correct_answer ? +3 : -1
 		};
-		// as you can guess, this action logs stuff for later use in the log component
+		// Logs data to be used in the Log component
 		dispatch(logUserChoice(logUserChoicePayload));
 		// a small delay for validating choice here to provide a sense of tension
 		setTimeout(() => {
