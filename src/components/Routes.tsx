@@ -6,6 +6,7 @@ import { Menu } from './MainMenu';
 import { Question } from './Question';
 import { CreateQuiz } from './CreateQuiz';
 import { Config } from './Config';
+import { TurnOverlay } from './TurnOverlay';
 import { Log } from './Log';
 import { history } from '../store';
 import { RootState } from '../types';
@@ -17,11 +18,20 @@ export const Routes: React.FC = () => {
 		<ConnectedRouter history={history}>
 			<Switch>
 				<Route exact path="/" render={() => <Menu />} />
+				<Route exact path="/log" render={() => <Log />} />
 				{started && (
-					<Route
-						path="/start/q/:qId"
-						render={routeProps => <Question {...routeProps} />}
-					/>
+					<>
+						<Route
+							exact
+							path="/start/q/:qId"
+							render={routeProps => <Question {...routeProps} />}
+						/>
+						<Route
+							exact
+							path="/playerturn/:playerId/:nextQuestionNum"
+							render={routeProps => <TurnOverlay {...routeProps} />}
+						/>
+					</>
 				)}
 				<Route exact path="/create" render={() => <CreateQuiz />} />
 				<Route
@@ -29,7 +39,6 @@ export const Routes: React.FC = () => {
 					path="/configure/:pageNum"
 					render={routeProps => <Config {...routeProps} />}
 				/>
-				<Route exact path="/log" render={() => <Log />} />
 			</Switch>
 		</ConnectedRouter>
 	);
