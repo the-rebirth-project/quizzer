@@ -11,7 +11,7 @@ export const MiniPresets: React.FC = () => {
 	return (
 		<Root>
 			{quizPresets.map(p => (
-				<PresetItem selected={p.id === curPresetId} {...p} />
+				<PresetItem key={p.id} selected={p.id === curPresetId} {...p} />
 			))}
 		</Root>
 	);
