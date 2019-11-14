@@ -11,6 +11,7 @@ export const PlayerCardList: React.FC = () => {
 		<Root>
 			{numPlayers.map(n => (
 				<PlayerCard
+					key={n}
 					pNum={n}
 					active={players.filter(p => p.id === n)[0] ? true : false}
 					playerData={players.filter(p => p.id === n)[0]}
