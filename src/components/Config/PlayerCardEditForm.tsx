@@ -45,7 +45,7 @@ export const PlayerCardEditForm: React.FC<PlayerEditFormProps> = ({
 						component="input"
 						type="text"
 						autoFocus
-						maxLength={15}
+						maxLength={12}
 						required
 					/>
 				</form>
