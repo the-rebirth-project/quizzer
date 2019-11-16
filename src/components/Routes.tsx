@@ -6,6 +6,7 @@ import { Menu } from './MainMenu';
 import { Question } from './Question';
 import { CreateQuiz } from './CreateQuiz';
 import { Config } from './Config';
+import { Scoreboard } from './Scoreboard';
 import { TurnOverlay } from './TurnOverlay';
 import { WinOverlay } from './WinOverlay';
 import { Log } from './Log';
@@ -32,6 +33,11 @@ export const Routes: React.FC = () => {
               exact
               path="/playerturn/:playerId/:nextQuestionNum"
               render={routeProps => <TurnOverlay {...routeProps} />}
+            />
+            <Route
+              exact
+              path="/scoreboard/:nextQuestionNum"
+              render={routeProps => <Scoreboard {...routeProps} />}
             />
           </>
         )}
