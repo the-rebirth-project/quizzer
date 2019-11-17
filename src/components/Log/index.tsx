@@ -1,17 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
+import { useNavigation } from 'react-navi';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { Layout } from '../Layout';
-import { clearLog } from '../../actions';
+import { clearLog, setPlayerRanking } from '../../actions';
 import { LogItemList } from './LogItemList';
 import {
-	MainTitle,
-	LeftContainer,
-	RightContainer,
-	NavBtnsContainer,
-	NavBtn,
-	ButtonContainer
+  MainTitle,
+  LeftContainer,
+  RightContainer,
+  NavBtnsContainer,
+  NavBtn,
+  ButtonContainer
 } from '../Layout/styles';
 
 /**
@@ -22,27 +22,29 @@ import {
  */
 
 export const Log: React.FC = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
-	const goToMenu = (): void => {
-		dispatch(push('/'));
-		dispatch(clearLog());
-	};
+  const goToMenu = (): void => {
+    navigation.navigate('/');
+    dispatch(clearLog());
+    dispatch(setPlayerRanking([]));
+  };
 
-	return (
-		<Layout pageUrl="/log">
-			<LeftContainer>
-				<MainTitle>Log</MainTitle>
-				<NavBtnsContainer>
-					<ButtonContainer onClick={goToMenu} left>
-						<NavBtn icon={faLongArrowAltLeft} />
-					</ButtonContainer>
-				</NavBtnsContainer>
-			</LeftContainer>
+  return (
+    <Layout pageUrl="/log">
+      <LeftContainer>
+        <MainTitle>Log</MainTitle>
+        <NavBtnsContainer>
+          <ButtonContainer onClick={goToMenu} left>
+            <NavBtn icon={faLongArrowAltLeft} />
+          </ButtonContainer>
+        </NavBtnsContainer>
+      </LeftContainer>
 
-			<RightContainer>
-				<LogItemList />
-			</RightContainer>
-		</Layout>
-	);
+      <RightContainer>
+        <LogItemList />
+      </RightContainer>
+    </Layout>
+  );
 };
