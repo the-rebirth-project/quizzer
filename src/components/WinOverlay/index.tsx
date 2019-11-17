@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from 'react-navi';
+import { useSelector } from 'react-redux';
 import { Overlay } from '../Overlay';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
-import { push } from 'connected-react-router';
 import { RootState } from '../../types';
 import { NavBtn } from '../Layout/styles';
 import { PositionedButtonContainer } from '../Overlay/styles';
@@ -10,13 +10,13 @@ import { FinalPoints, WonText } from './styles';
 import { mainTheme } from '../../themes';
 
 export const WinOverlay: React.FC = () => {
-  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const firstPlayer = useSelector(
     (state: RootState) => state.scoreboard.playerRankingPositions
   )[0];
 
   const goToLog = (): void => {
-    dispatch(push('/log'));
+    navigation.navigate('/log');
   };
 
   return (
