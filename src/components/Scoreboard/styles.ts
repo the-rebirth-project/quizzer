@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { MainTitle } from '../Layout/styles';
+import { MainTitle, SectionContainer } from '../Layout/styles';
 
 // export const Root = styled.div`
 //   display: flex;
@@ -23,6 +23,7 @@ export const Score = styled.div<ScoreProps>`
   letter-spacing: 0.5rem;
   font-weight: 300;
   font-size: 8rem;
+  margin: 4rem 0rem;
   text-transform: uppercase;
   ${props => {
     if (props.first) {
@@ -43,4 +44,14 @@ export const Score = styled.div<ScoreProps>`
 
 export const Points = styled.span`
   font-weight: 700;
+`;
+
+export const ScoreboardContentContainer = styled(SectionContainer)`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 100%;
+  align-content: space-between;
+  justify-content: center;
 `;
