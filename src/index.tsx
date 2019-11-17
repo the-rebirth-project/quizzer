@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './components/App';
+import { MainMenu } from './components/MainMenu';
 import * as serviceWorker from './serviceWorker';
+import { Router } from 'react-navi';
+import { routes } from './routes';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createGlobalStyle } from 'styled-components';
@@ -30,13 +33,17 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-	<Provider store={store}>
-		<GlobalStyle />
-		<ThemeProvider theme={mainTheme}>
-			<App />
-		</ThemeProvider>
-	</Provider>,
-	document.getElementById('root')
+  <Router routes={routes}>
+    <Provider store={store}>
+      <GlobalStyle />
+      <ThemeProvider theme={mainTheme}>
+        <Suspense fallback={MainMenu}>
+          <App />
+        </Suspense>
+      </ThemeProvider>
+    </Provider>
+  </Router>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
