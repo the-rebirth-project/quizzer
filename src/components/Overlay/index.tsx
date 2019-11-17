@@ -6,8 +6,8 @@ interface OverlayProps {
 }
 
 export const Overlay: React.FC<OverlayProps> = ({
-  backgroundColor,
-  children
+  children,
+  backgroundColor
 }) => {
   return <Root backgroundColor={backgroundColor}>{children}</Root>;
 };

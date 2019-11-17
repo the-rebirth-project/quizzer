@@ -1,14 +1,15 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 import { ButtonContainer } from '../Layout/styles';
 
 interface RootProps {
   backgroundColor: string;
 }
 
-export const Root = styled.div<RootProps>`
+export const Root = styled(animated.div)<RootProps>`
   position: relative;
-  background-color: ${props => props.backgroundColor};
   color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.backgroundColor};
   display: flex;
   align-items: center;
   justify-content: center;
