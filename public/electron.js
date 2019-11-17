@@ -10,7 +10,7 @@ let mainWindow;
 
 function createWindow() {
 	mainWindow = new BrowserWindow({
-		title: 'Quizzer v0.3',
+		title: 'Quizzer v0.4.4',
 		width: 1366,
 		height: 768,
 		frame: false,
