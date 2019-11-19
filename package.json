@@ -1,6 +1,6 @@
 {
   "name": "quizzer",
-  "version": "0.4.5",
+  "version": "0.4.54",
   "private": true,
   "main": "public/electron.js",
   "author": "SKP-000",
@@ -23,7 +23,7 @@
     "win": {
       "target": "nsis"
     },
-    "buildVersion": "0.3.0"
+    "buildVersion": "0.4.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -49,14 +49,12 @@
     "final-form-arrays": "^3.0.1",
     "he": "^1.2.0",
     "js-base64": "^2.5.1",
-    "navi": "^0.13.6",
     "react": "^16.9.0",
     "react-countdown-now": "^2.1.1",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
     "react-final-form-arrays": "^3.1.1",
     "react-keyboard-event-handler": "^1.5.2",
-    "react-navi": "^0.13.6",
     "react-redux": "^7.1.1",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
