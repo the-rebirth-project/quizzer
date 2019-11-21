@@ -1,17 +1,25 @@
 import React from 'react';
-import { useNavigation } from 'react-navi';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-navi';
-import { startQuiz } from '../../actions';
+import { push } from 'connected-react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { SnackbarValidator } from '../SnackbarValidator';
+import { startQuiz, showSnackbar } from '../../actions';
+import { RootState } from '../../types';
 import { Root, Title, SubText, Left, Right, Button } from './styles';
 
 export const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const failedValidator = useSelector((state: RootState) => state.snackbar.failedValidator);
+  const questions = useSelector((state: RootState) => state.quiz.questions);
+  const players = useSelector((state: RootState) => state.scoreboard.players);
 
   const onThinkBtnClick = (): void => {
-    dispatch(startQuiz());
-    navigation.navigate('/start/q/0');
+    if (failedValidator) {
+      dispatch(showSnackbar());
+    } else {
+      dispatch(startQuiz());
+      dispatch(push('/start/q/0'));
+    }
   };
 
   return (
@@ -25,14 +33,16 @@ export const MainMenu: React.FC = () => {
         <Button primary onClick={onThinkBtnClick}>
           Think
         </Button>
-        <Link href="/create">
+        <Link to="/create">
           <Button>Create</Button>
         </Link>
-        <Link href="/configure/1">
+        <Link to="/configure">
           <Button>Configure</Button>
         </Link>
         <Button>Explore</Button>
       </Right>
+
+      <SnackbarValidator validators={[{validateCondition: questions.length % players.length === 0, errorMessage: 'Preset must have equal questions for each player'}]} />
     </Root>
   );
 };
