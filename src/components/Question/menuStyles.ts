@@ -17,7 +17,7 @@ export const Root = styled(animated.div)`
 
 export const MenuItem = styled.h1`
   cursor: pointer;
-  font-size: 5rem;
+  font-size: 4rem;
   letter-spacing: 1.5rem;
   text-transform: uppercase;
   background-image: ${props =>
