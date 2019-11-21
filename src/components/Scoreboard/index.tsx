@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Route } from 'navi';
-import { useCurrentRoute, useNavigation } from 'react-navi';
+import { push } from 'connected-react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from '../Layout';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
@@ -28,18 +28,12 @@ import {
 
 // HORRIBLE CODE. I KNOW.
 
-interface RouteData {
-  urlParams: {
-    nextQuestionNum: string;
-  };
+interface RouteParams {
+  nextQuestionNum: string;
 }
 
-export const Scoreboard: React.FC = () => {
-  const route: Route<RouteData> = useCurrentRoute();
-  const navigation = useNavigation();
-  const nextQuestionNum = route.data
-    ? parseInt(route.data.urlParams.nextQuestionNum)
-    : 0;
+export const Scoreboard: React.FC<RouteComponentProps<RouteParams>> = props => {
+  const nextQuestionNum = parseInt(props.match.params.nextQuestionNum);
   const dispatch = useDispatch();
   const players = useSelector((state: RootState) => state.scoreboard.players);
   const questions = useSelector((state: RootState) => state.quiz.questions);
@@ -62,11 +56,11 @@ export const Scoreboard: React.FC = () => {
   const goToNextQuestion = (): void => {
     const nextQuestion = questions[nextQuestionNum];
     if (players.length > 1) {
-      navigation.navigate(
-        `/playerturn/${nextQuestion.player.id}/${nextQuestionNum}`
+      dispatch(
+        push(`/playerturn/${nextQuestion.player.id}/${nextQuestionNum}`)
       );
     } else {
-      navigation.navigate(`/start/q/${nextQuestionNum}`);
+      dispatch(push(`/start/q/${nextQuestionNum}`));
     }
   };
 
