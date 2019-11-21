@@ -5,9 +5,10 @@ import {
   START_QUIZ,
   SET_PRESET_ID,
   CHANGE_PRESET_NAME,
-  SET_QUESTIONS
+  ASSIGN_PLAYER_TO_QUESTION
 } from '../types';
 import { Question } from '../types';
+import { Player } from '../types';
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { shuffleArray } from '../helpers';
@@ -68,4 +69,6 @@ export const changePresetName = createStandardAction(CHANGE_PRESET_NAME)<{
   id: string;
   newName: string;
 }>();
-export const setQuestions = createStandardAction(SET_QUESTIONS)<Question[]>();
+export const assignPlayerToQuestion = createStandardAction(
+  ASSIGN_PLAYER_TO_QUESTION
+)<Player[]>();
