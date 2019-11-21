@@ -5,3 +5,4 @@ export * from './Question.interface';
 export * from './Player.interface';
 export * from './QuizPreset.interface';
 export * from './QuestionLog.interface';
+export * from './Validator.interface';
