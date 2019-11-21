@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigation } from 'react-navi';
+import React, { useState, useEffect } from 'react';
+import { push } from 'connected-react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTransition, animated } from 'react-spring';
 import {
   faLongArrowAltLeft,
@@ -8,6 +9,8 @@ import {
 import { MiniPresets } from './MiniPresets';
 import { Layout } from '../Layout';
 import { PlayerCardList } from './PlayerCardList';
+import { assignPlayerToQuestion } from '../../actions';
+import { RootState } from '../../types';
 import {
   LeftContainer,
   RightContainer,
@@ -20,7 +23,8 @@ import {
 } from '../Layout/styles';
 
 export const Config: React.FC = () => {
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const players = useSelector((state: RootState) => state.scoreboard.players);
   const [pageNum, setPageNum] = useState(1);
   const maxPageNum = 2;
   const minPageNum = 1;
@@ -31,14 +35,16 @@ export const Config: React.FC = () => {
   });
 
   const goLeft = (): void => {
-    pageNum - 1 >= minPageNum
-      ? setPageNum(pageNum - 1)
-      : navigation.navigate('/');
+    pageNum - 1 >= minPageNum ? setPageNum(pageNum - 1) : dispatch(push('/'));
   };
 
   const goRight = (): void => {
     setPageNum(pageNum + 1);
   };
+
+  useEffect(() => {
+    dispatch(assignPlayerToQuestion(players));
+  }, [dispatch, players]);
 
   return (
     <Layout pageUrl="/configure">
