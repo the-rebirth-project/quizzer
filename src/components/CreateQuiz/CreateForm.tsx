@@ -1,9 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import uuid from 'uuid/v4';
 import { shuffleArray } from '../../helpers';
-import { createCustomQuestion, showModal } from '../../actions';
+import {
+  createCustomQuestion,
+  showModal,
+  assignPlayerToQuestion
+} from '../../actions';
+import { RootState } from '../../types';
 import {
   StyledInputField,
   FieldContainer,
@@ -31,6 +36,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
   }
 
   const dispatch = useDispatch();
+  const players = useSelector((state: RootState) => state.scoreboard.players);
   const { setCreateModalOpen } = props;
 
   const handleOnSubmit = (values: FormValues) => {
@@ -76,7 +82,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
       correct_answer,
       options,
       timer: values.timer,
-      player: { id: 0, pName: '', score: 0 },
+      player: players[0],
       modifiers: {
         timed: values.timed,
         rapidfire: false
@@ -90,6 +96,7 @@ export const CreateForm: React.FC<CreateFormProps> = props => {
       ]);
 
     dispatch(createCustomQuestion(customQuestion));
+    players.length > 1 && dispatch(assignPlayerToQuestion(players));
     dispatch(showModal());
     setCreateModalOpen(false);
   };
