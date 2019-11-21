@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from 'navi';
-import { useCurrentRoute, useNavigation } from 'react-navi';
 import Countdown from 'react-countdown-now';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useSelector, useDispatch } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import { useTransition } from 'react-spring';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -28,23 +29,19 @@ import {
   FeedbackContainer
 } from './styles';
 
-interface RouteData {
-  urlParams: {
-    qPos: string;
-  };
+interface RouteParams {
+  qPos: string;
 }
 
-export const Question: React.FC = () => {
+export const Question: React.FC<RouteComponentProps<RouteParams>> = props => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const route: Route<RouteData> = useCurrentRoute();
   const [timedOut, setTimedOut] = useState(false);
   const [countdownPaused, setCountdownPaused] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const choiceValid = useSelector(
     (state: RootState) => state.question.choiceValid
   );
-  const questionNum = route.data ? parseInt(route.data.urlParams.qPos) : 0;
+  const questionNum = parseInt(props.match.params.qPos);
   const quizPresets = useSelector((state: RootState) => state.quiz.presets);
   // gets the chosen preset id from config form
   const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
@@ -79,10 +76,13 @@ export const Question: React.FC = () => {
 
   const goToNext = (): void => {
     setTimeout(() => {
-      if (questionNum >= questions.length - 1) {
-        navigation.navigate('/finalresults');
+      // the check for questions array being of length 1 is temporary. ideally, you shouldn't be able to make a preset with only one question
+      if (questionNum >= questions.length - 1 && questions.length !== 1) {
+        dispatch(push('/finalresults'));
+      } else if (questions.length === 1) {
+        dispatch('/log');
       } else {
-        navigation.navigate(`/scoreboard/${questionNum + 1}`);
+        dispatch(push(`/scoreboard/${questionNum + 1}`));
       }
     }, 3000);
   };
@@ -165,19 +165,16 @@ export const Question: React.FC = () => {
     }
   };
 
+  const handleMenuOpen = (): void => {
+    menuOpen ? setMenuOpen(false) : setMenuOpen(true);
+  };
+
   return (
     <Root>
-      <div
-        onClick={() => setMenuOpen(true)}
-        style={{
-          position: 'absolute',
-          top: '10%',
-          right: '10%',
-          zIndex: 40
-        }}
-      >
-        Menu
-      </div>
+      <KeyboardEventHandler
+        handleKeys={['esc', 'm']}
+        onKeyEvent={handleMenuOpen}
+      />
       <QuestionWrapper started={started}>{renderQuestion()}</QuestionWrapper>
       <OptionsWrapper started={started}>{renderOptions()}</OptionsWrapper>
       <CenterContainer>
@@ -217,7 +214,7 @@ export const Question: React.FC = () => {
           </>
         )}
       </CenterContainer>
-      {menuOpen && <Menu open={menuOpen} setOpen={setMenuOpen} />}
+      <Menu open={menuOpen} setOpen={setMenuOpen} />
     </Root>
   );
 };
