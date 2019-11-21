@@ -5,14 +5,14 @@ import { RootState } from '../../types';
 import { Root } from './miniPresetsStyles';
 
 export const MiniPresets: React.FC = () => {
-	const quizPresets = useSelector((state: RootState) => state.quiz.presets);
-	const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
+  const quizPresets = useSelector((state: RootState) => state.quiz.presets);
+  const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
 
-	return (
-		<Root>
-			{quizPresets.map(p => (
-				<PresetItem key={p.id} selected={p.id === curPresetId} {...p} />
-			))}
-		</Root>
-	);
+  return (
+    <Root>
+      {quizPresets.map(p => (
+        <PresetItem key={p.id} selected={p.id === curPresetId} {...p} />
+      ))}
+    </Root>
+  );
 };
