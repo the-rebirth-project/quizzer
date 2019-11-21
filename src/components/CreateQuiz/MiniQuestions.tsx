@@ -6,7 +6,7 @@ import { QuestionItem } from './QuestionItem';
 import { CreateForm } from './CreateForm';
 import { FetchForm } from './FetchForm';
 import { Modal } from '../Modal';
-import { showModal, savePreset } from '../../actions';
+import { showModal, savePreset, showSnackbar } from '../../actions';
 import { RootState } from '../../types';
 import { Root, ButtonContainer, CreateQuizBtn } from './miniQuestionsStyles';
 
@@ -14,6 +14,7 @@ export const WrappedComponent: React.FC = () => {
   const dispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.quiz.questions);
   const modalShown = useSelector((state: RootState) => state.modal.modalShown);
+  const failedValidator = useSelector((state: RootState) => state.snackbar.failedValidator);
   const curPresetId = useSelector((state: RootState) => state.quiz.curPresetId);
   const curPresetData = useSelector(
     (state: RootState) => state.quiz.presets
@@ -32,16 +33,20 @@ export const WrappedComponent: React.FC = () => {
   };
 
   const onSaveBtnClick = (): void => {
-    const newPresetData = {
-      ...curPresetData,
-      questions
-    };
-    dispatch(
-      savePreset({
-        id: curPresetId,
-        newPresetData
-      })
-    );
+    const save = (): void => {
+      const newPresetData = {
+        ...curPresetData,
+        questions
+      };
+      dispatch(
+        savePreset({
+          id: curPresetId,
+          newPresetData
+        })
+      );
+    }
+    
+    failedValidator ? dispatch(showSnackbar()) : save();
   };
 
   return (
