@@ -28,6 +28,7 @@ const WrappedComponent: React.FC<QuestionItemProps> = ({
 }) => {
   const dispatch = useDispatch();
   const toolbarSt = useSelector((state: RootState) => state.toolbar);
+  const players = useSelector((state: RootState) => state.scoreboard.players);
   const { editModeState, deleteModeState } = toolbarSt;
   // have to use component state so that all of the modals don't open at once
   const [modalOpen, setModalOpen] = useState(false);
@@ -54,7 +55,7 @@ const WrappedComponent: React.FC<QuestionItemProps> = ({
           <QuestionNum>{qPos}. </QuestionNum>
           {question.question}
         </QuestionTextContainer>
-        {question.player && (
+        {players.length > 1 && question.player && (
           <MetadataContainer>
             <Metadata>Assigned Player: {question.player.pName}</Metadata>
             <Metadata>Difficulty: {question.difficulty}</Metadata>
