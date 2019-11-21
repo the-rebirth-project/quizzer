@@ -1,7 +1,7 @@
 import React from 'react';
-import { useNavigation, useCurrentRoute } from 'react-navi';
-import { Route } from 'navi';
-import { useSelector } from 'react-redux';
+import { push } from 'connected-react-router';
+import { RouteComponentProps } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Overlay } from '../Overlay';
 import { PositionedButtonContainer } from '../Overlay/styles';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
@@ -9,19 +9,16 @@ import { RootState } from '../../types';
 import { PlayerTurnText, StyledNavBtn } from './styles';
 import { mainTheme } from '../../themes';
 
-interface RouteData {
-  urlParams: {
-    playerId: string;
-    nextQuestionPos: string;
-  };
+interface RouteParams {
+  playerId: string;
+  nextQuestionPos: string;
 }
 
-export const TurnOverlay: React.FC = () => {
-  const navigation = useNavigation();
-  const route: Route<RouteData> = useCurrentRoute();
-  const { playerId, nextQuestionPos } = route.data
-    ? route.data.urlParams
-    : { playerId: '', nextQuestionPos: '' };
+export const TurnOverlay: React.FC<RouteComponentProps<
+  RouteParams
+>> = props => {
+  const dispatch = useDispatch();
+  const { playerId, nextQuestionPos } = props.match.params;
   const questions = useSelector((state: RootState) => state.quiz.questions);
   const curPlayer = useSelector(
     (state: RootState) => state.scoreboard.players
@@ -29,9 +26,9 @@ export const TurnOverlay: React.FC = () => {
 
   const goToNext = (): void => {
     if (parseInt(nextQuestionPos) >= questions.length) {
-      navigation.navigate('/log');
+      dispatch(push('/log'));
     } else {
-      navigation.navigate(`/start/q/${nextQuestionPos}`);
+      dispatch(push(`/start/q/${nextQuestionPos}`));
     }
   };
 
