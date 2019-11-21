@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from 'react-navi';
+import { push } from 'connected-react-router';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { Layout } from '../Layout';
 import { clearLog, setPlayerRanking } from '../../actions';
@@ -23,10 +23,9 @@ import {
 
 export const Log: React.FC = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const goToMenu = (): void => {
-    navigation.navigate('/');
+    dispatch(push('/'));
     dispatch(clearLog());
     dispatch(setPlayerRanking([]));
   };
