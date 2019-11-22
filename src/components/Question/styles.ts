@@ -136,4 +136,5 @@ Timer.displayName = 'Timer';
 
 export const TimeoutOverlay = styled(FeedbackContainer)<TimerProps>`
   background-color: ${props => props.theme.colors.pinkRed};
+  font-size: 20rem;
 `;
