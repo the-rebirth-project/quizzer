@@ -7,6 +7,7 @@ import { toolbarReducer } from './toolbarReducers';
 import { scoreboardReducer } from './scoreboardReducers';
 import { logReducer } from './logReducers';
 import { snackbarReducer } from './snackbarReducers';
+import { countdownReducer } from './countdownReducers';
 
 export const rootReducer = (history: any) =>
   combineReducers({
@@ -17,5 +18,6 @@ export const rootReducer = (history: any) =>
     toolbar: toolbarReducer,
     scoreboard: scoreboardReducer,
     log: logReducer,
-    snackbar: snackbarReducer
+    snackbar: snackbarReducer,
+    countdown: countdownReducer
   });
