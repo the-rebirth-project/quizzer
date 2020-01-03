@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes } from './Routes';
-import { setPresetId } from '../actions';
+import { setPresetId, assignPlayerToQuestion } from '../actions';
 import { RootState } from '../types';
 
 const Background = styled(animated.div)`
@@ -21,9 +21,11 @@ export const App: React.FC = () => {
   const { location } = useSelector((state: RootState) => state.router);
   const started = useSelector((state: RootState) => state.quiz.started);
   const quizPresets = useSelector((state: RootState) => state.quiz.presets);
+  const players = useSelector((state: RootState) => state.scoreboard.players);
 
   useEffect(() => {
     quizPresets[0] && dispatch(setPresetId(quizPresets[0].id));
+    dispatch(assignPlayerToQuestion(players));
     // eslint-disable-next-line
   }, []);
 
@@ -38,12 +40,11 @@ export const App: React.FC = () => {
       case location.pathname.includes('/configure') ||
         location.pathname.includes('/log') ||
         location.pathname.includes('/create') ||
-        location.pathname.includes('/scoreboard'):
+        location.pathname.includes('/scoreboard') ||
+        location.pathname.includes('finalresults'):
         return `linear-gradient(90deg, #2ac46a 0%, #2ac46a 30%, #fcfcf3 30%)`;
       case location.pathname.includes('/playerturn'):
         return `linear-gradient(90deg, #6e00fe 0%, #6e00fe 50%, #6e00fe 50%)`;
-      case location.pathname.includes('/finalresults'):
-        return `linear-gradient(90deg, #2ac46a 0%, #2ac46a 50%, #2ac46a 50%)`;
       default:
         return `linear-gradient(110deg, #2ac46a 0%, #2ac46a 50%, #fcfcf3 50%)`;
     }
