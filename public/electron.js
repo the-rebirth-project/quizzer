@@ -9,7 +9,7 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    title: 'Quizzer v0.4',
+    title: 'Quizzer v0.5.0',
     width: 1366,
     height: 768,
     frame: false,
@@ -56,7 +56,7 @@ function createWindow() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "script-src 'self' https://opentdb.com/api.php https://kit.fontawesome.com/4c134e46f3.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
+          "script-src 'self' https://opentdb.com/api.php https://kit.fontawesome.com/4c134e46f3.js 'https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
         ]
       }
     });
